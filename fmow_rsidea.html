@@ -214,7 +214,7 @@ code.language-yaml {
       <h1 class="mume-header" id="funcational-map-of-the-worldrsidea-whu">Funcational Map of the World@RSIDEA-WHU</h1>
 
 <blockquote>
-<p>update at 2017.12.27 18:40</p>
+<p>update at 2017.12.27 21:28 v0.2</p>
 </blockquote>
 <hr>
 <h2 class="mume-header" id="1-dataset">1. dataset</h2>
@@ -230,6 +230,7 @@ fmow_test<span class="token punctuation">:</span> <span class="token number">169
 
 <pre class="language-python">model<span class="token punctuation">:</span>resv2<span class="token number">-152</span>
 init_learning_rate<span class="token operator">=</span><span class="token number">1e</span><span class="token operator">-</span><span class="token number">2</span>
+learning_rate_decay_type <span class="token keyword">is</span> exponential
 trainable<span class="token operator">=</span>all <span class="token comment" spellcheck="true"># train all layers</span>
 input_size<span class="token operator">=</span><span class="token number">224</span>
 pretrain<span class="token punctuation">:</span>imagenet
@@ -273,6 +274,14 @@ score online <span class="token comment" spellcheck="true"># online judge</span>
 <td style="text-align:center">411484.51</td>
 </tr>
 <tr>
+<td style="text-align:center">(steps)61601</td>
+<td>64</td>
+<td>53.034</td>
+<td>79.791</td>
+<td>avg_vote</td>
+<td style="text-align:center">392390.15</td>
+</tr>
+<tr>
 <td style="text-align:center">(steps)72986</td>
 <td>64</td>
 <td>53.203</td>
@@ -291,59 +300,12 @@ score online <span class="token comment" spellcheck="true"># online judge</span>
 </tbody>
 </table>
 <hr>
-<pre class="language-python">init_learning_rate<span class="token operator">=</span><span class="token number">1e</span><span class="token operator">-</span><span class="token number">4</span>
-trainable<span class="token operator">=</span>logits <span class="token comment" spellcheck="true"># just train logits part of all network</span>
+<pre class="language-python">learning_rate<span class="token operator">=</span><span class="token number">1e</span><span class="token operator">-</span><span class="token number">4</span> <span class="token comment" spellcheck="true"># 0-4 epoches</span>
 input_size<span class="token operator">=</span><span class="token number">224</span>
 test<span class="token punctuation">(</span>acc<span class="token punctuation">,</span>recall5<span class="token punctuation">)</span> on val part
 score online
-</pre>
-<table>
-<thead>
-<tr>
-<th>model</th>
-<th>epoches</th>
-<th>batch_size</th>
-<th>acc(%)</th>
-<th>recall5(%)</th>
-<th style="text-align:center">postprocess</th>
-<th style="text-align:center">score</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>resv2_152</td>
-<td>10</td>
-<td>64</td>
-<td></td>
-<td></td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td>resv2_101</td>
-<td>10</td>
-<td>64</td>
-<td></td>
-<td></td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td>inception_res_v2</td>
-<td>10</td>
-<td>64</td>
-<td></td>
-<td></td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-</tbody>
-</table>
-<hr>
-<pre class="language-python">init_learning_rate<span class="token operator">=</span><span class="token number">1e</span><span class="token operator">-</span><span class="token number">4</span>
-input_size<span class="token operator">=</span><span class="token number">224</span>
-test<span class="token punctuation">(</span>acc<span class="token punctuation">,</span>recall5<span class="token punctuation">)</span> on val part
-score online
+Note that
+<span class="token operator">*</span> represents that its learning rate decay type <span class="token keyword">is</span> exponential  
 </pre>
 <table>
 <thead>
@@ -360,9 +322,49 @@ score online
 </thead>
 <tbody>
 <tr>
-<td>resv2_101</td>
+<td>resv2_152</td>
+<td>logits</td>
+<td>5+ ~(steps)29626</td>
+<td>64</td>
+<td>26.382</td>
+<td>54.200</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td>resv2_152</td>
 <td>block4,logits</td>
-<td>(steps)13085</td>
+<td>2</td>
+<td>64</td>
+<td>34.275</td>
+<td>63.136</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td>resv2_152</td>
+<td>block4,logits</td>
+<td>4</td>
+<td>64</td>
+<td></td>
+<td></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td>resv2_152</td>
+<td>block(3,4),logits</td>
+<td>4</td>
+<td>64</td>
+<td></td>
+<td></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td>*resv2_101</td>
+<td>block4,logits</td>
+<td>2+ ~(steps)13085</td>
 <td>64</td>
 <td>36.154</td>
 <td>65.177</td>
@@ -370,17 +372,41 @@ score online
 <td style="text-align:center"></td>
 </tr>
 <tr>
-<td>incep_resv2</td>
-<td>logits</td>
-<td>(steps)21815</td>
+<td>*resv2_101</td>
+<td>block4,logits</td>
+<td>7+ ~(steps)40412</td>
 <td>64</td>
-<td></td>
-<td></td>
+<td>43.544</td>
+<td>72.979</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td><s>incep_resv2</s></td>
+<td>logits</td>
+<td>3+ ~(steps)21815</td>
+<td>64</td>
+<td>17.892</td>
+<td>42.785</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td><s>incep_resv2</s></td>
+<td>mixed_7a,logits</td>
+<td>2</td>
+<td>64</td>
+<td>15.647</td>
+<td>37.490</td>
 <td style="text-align:center"></td>
 <td style="text-align:center"></td>
 </tr>
 </tbody>
 </table>
+<blockquote>
+<p>That training just <strong>logits part</strong> of all network causes model divergent.<br>
+<strong>Inception-resnet-v2 is unsuitable for this task.</strong></p>
+</blockquote>
 
       </div>
       <div class="md-sidebar-toc"><ul>
