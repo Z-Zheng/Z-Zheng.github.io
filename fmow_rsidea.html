@@ -214,7 +214,7 @@ code.language-yaml {
       <h1 class="mume-header" id="funcational-map-of-the-worldrsidea-whu">Funcational Map of the World@RSIDEA-WHU</h1>
 
 <blockquote>
-<p>update at 2017.12.27 21:28 v0.2</p>
+<p>update at 2017.12.27 11:57 v0.3</p>
 </blockquote>
 <hr>
 <h2 class="mume-header" id="1-dataset">1. dataset</h2>
@@ -262,7 +262,7 @@ score online <span class="token comment" spellcheck="true"># online judge</span>
 <td>64</td>
 <td>53.034</td>
 <td>79.791</td>
-<td>vote</td>
+<td>vote_top1</td>
 <td style="text-align:center">404453.49</td>
 </tr>
 <tr>
@@ -270,7 +270,7 @@ score online <span class="token comment" spellcheck="true"># online judge</span>
 <td>64</td>
 <td>53.034</td>
 <td>79.791</td>
-<td>acc_score</td>
+<td>acc_score_top1</td>
 <td style="text-align:center">411484.51</td>
 </tr>
 <tr>
@@ -278,7 +278,7 @@ score online <span class="token comment" spellcheck="true"># online judge</span>
 <td>64</td>
 <td>53.034</td>
 <td>79.791</td>
-<td>avg_vote</td>
+<td>avg_vote_top1</td>
 <td style="text-align:center">392390.15</td>
 </tr>
 <tr>
@@ -328,8 +328,8 @@ Note that
 <td>64</td>
 <td>26.382</td>
 <td>54.200</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">-</td>
 </tr>
 <tr>
 <td>resv2_152</td>
@@ -338,26 +338,46 @@ Note that
 <td>64</td>
 <td>34.275</td>
 <td>63.136</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">-</td>
 </tr>
 <tr>
 <td>resv2_152</td>
 <td>block4,logits</td>
 <td>4</td>
 <td>64</td>
-<td></td>
-<td></td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
+<td>38.992</td>
+<td>68.469</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">-</td>
 </tr>
 <tr>
 <td>resv2_152</td>
-<td>block(3,4),logits</td>
-<td>4</td>
+<td>block4,logits</td>
+<td>8(steps)45448</td>
 <td>64</td>
-<td></td>
-<td></td>
+<td>44.040</td>
+<td>73.657</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
+<td>resv2_152</td>
+<td>block4,logits</td>
+<td>12(steps)68172</td>
+<td>64</td>
+<td>46.409</td>
+<td>75.631</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
+<td>resv2_152</td>
+<td><strong>block(3,4),logits</strong></td>
+<td>4+ ~(steps)24282</td>
+<td>64</td>
+<td>46.508</td>
+<td>75.727</td>
 <td style="text-align:center"></td>
 <td style="text-align:center"></td>
 </tr>
@@ -404,9 +424,13 @@ Note that
 </tbody>
 </table>
 <blockquote>
-<p>That training just <strong>logits part</strong> of all network causes model divergent.<br>
-<strong>Inception-resnet-v2 is unsuitable for this task.</strong></p>
+<ol>
+<li>That training just <strong>logits part</strong> of all network causes model divergent.</li>
+<li><strong>Inception-resnet-v2 is unsuitable for this task.</strong></li>
+<li>Fine tuning on block 3, block 4 and logits in resnetv2-152 is better than ohters.</li>
+</ol>
 </blockquote>
+<p><img src="images/loss.png?0.3846614271101334" alt="" title="Loss"></p>
 
       </div>
       <div class="md-sidebar-toc"><ul>
