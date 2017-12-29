@@ -214,7 +214,7 @@ code.language-yaml {
       <h1 class="mume-header" id="funcational-map-of-the-worldrsidea-whu">Funcational Map of the World@RSIDEA-WHU</h1>
 
 <blockquote>
-<p>update at 2017.12.27 11:57 v0.3</p>
+<p>update at 2017.12.27 09:27 v0.4</p>
 </blockquote>
 <hr>
 <h2 class="mume-header" id="1-dataset">1. dataset</h2>
@@ -378,6 +378,46 @@ Note that
 <td>64</td>
 <td>46.508</td>
 <td>75.727</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
+<td>resv2_152</td>
+<td><strong>block(3,4),logits</strong></td>
+<td>10(steps)56810</td>
+<td>64</td>
+<td>50.930</td>
+<td>78.989</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
+<td>resv2_152</td>
+<td><strong>block(3,4),logits</strong></td>
+<td>13+ ~(steps)76544</td>
+<td>64</td>
+<td>52.409</td>
+<td>79.923</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td>resv2_152</td>
+<td><strong>block(3,4),logits</strong></td>
+<td>13+ ~(steps)77705</td>
+<td>64</td>
+<td>53.286</td>
+<td>80.036</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td>resv2_152</td>
+<td><strong>block(3,4),logits</strong></td>
+<td>15(steps)85215</td>
+<td>64</td>
+<td>53.023</td>
+<td>79.915</td>
 <td style="text-align:center"></td>
 <td style="text-align:center"></td>
 </tr>
@@ -430,7 +470,9 @@ Note that
 <li>Fine tuning on block 3, block 4 and logits in resnetv2-152 is better than ohters.</li>
 </ol>
 </blockquote>
-<p><img src="images/loss.png?0.3846614271101334" alt="" title="Loss"></p>
+<p><img src="images/loss.png?0.7338822185712359" alt="" title="Loss"></p>
+<p>In this figure, we can find Resnetv2-152 is trained more stable when batch_size is set to 128 rather than 64.<br>
+<img src="images/loss_128.png?0.8171298534117917" alt="" title="Loss"></p>
 
       </div>
       <div class="md-sidebar-toc"><ul>
