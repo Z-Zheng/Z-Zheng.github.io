@@ -214,13 +214,14 @@ code.language-yaml {
       <h1 class="mume-header" id="funcational-map-of-the-worldrsidea-whu">Funcational Map of the World@RSIDEA-WHU</h1>
 
 <blockquote>
-<p>update at 2017.12.27 09:27 v0.4</p>
+<p>update at 2017.12.31 14:10 v0.5 END</p>
 </blockquote>
 <hr>
 <h2 class="mume-header" id="1-dataset">1. dataset</h2>
 
 <pre class="language-python">fmow_train<span class="token punctuation">:</span> <span class="token number">363572</span>
 fmow_val<span class="token punctuation">:</span> <span class="token number">53041</span>
+fmow_val_with_false_detections<span class="token punctuation">:</span><span class="token number">63440</span>
 fmow_test<span class="token punctuation">:</span> <span class="token number">16948</span> <span class="token punctuation">(</span><span class="token number">76988</span><span class="token punctuation">)</span>
 <span class="token comment" spellcheck="true"># batch = 64</span>
 <span class="token comment" spellcheck="true"># for train part, 1 epoch = 5681 steps</span>
@@ -422,6 +423,16 @@ Note that
 <td style="text-align:center"></td>
 </tr>
 <tr>
+<td>resv2_152</td>
+<td><strong>block(3,4),logits</strong></td>
+<td>50</td>
+<td>128</td>
+<td>46.7383</td>
+<td>69.121</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">464757.97</td>
+</tr>
+<tr>
 <td>*resv2_101</td>
 <td>block4,logits</td>
 <td>2+ ~(steps)13085</td>
@@ -470,9 +481,9 @@ Note that
 <li>Fine tuning on block 3, block 4 and logits in resnetv2-152 is better than ohters.</li>
 </ol>
 </blockquote>
-<p><img src="images/loss.png?0.7338822185712359" alt="" title="Loss"></p>
+<p><img src="images/loss.png?0.17839761489127626" alt="" title="Loss"></p>
 <p>In this figure, we can find Resnetv2-152 is trained more stable when batch_size is set to 128 rather than 64.<br>
-<img src="images/loss_128.png?0.8171298534117917" alt="" title="Loss"></p>
+<img src="images/loss_128.png?0.28827729637480526" alt="" title="Loss"></p>
 
       </div>
       <div class="md-sidebar-toc"><ul>
