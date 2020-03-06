@@ -8,58 +8,74 @@
     <title>Zhuo Zheng's Main page</title>
     <script src="lib/jq214/jquery.js"></script>
 
-    <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.css">
     <link href="lib/bts4b2/bootstrap.min.css" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-sketchy.min.css">
     <script src="lib/bts4b2/bootstrap.bundle.min.js"></script>
+    <style>
+        #bio {
+            text-align: center;
+        }
+
+        .myname {
+            color: black;
+        }
+        .itemtitle{
+            color: black;
+        }
+    </style>
 </head>
 <body>
 
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Zhuo Zheng</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03"
-            aria-controls="navbarColor03"
-            aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarColor03">
-        <ul class="navbar-nav nav-pills mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="index.html">Home
-                    <span class="sr-only">(current)</span>
-                </a>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
-                   aria-expanded="false">Labs</a>
-                <div class="dropdown-menu" x-placement="bottom-start"
-                     style="position: absolute; transform: translate3d(0px, 40px, 0px); top: 0px; left: 0px; will-change: transform;">
-                    <a class="dropdown-item" href="#">HSR</a>
-                    <a class="dropdown-item" href="otop.html">HSI</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Separated link</a>
-                </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">About</a>
-            </li>
-        </ul>
-    </div>
-</nav>
-<div class="container">
+<div class="container" style="margin-top: 20px">
     <div class="row">
-        <div class="col-md-12">
-            <h3>Biography</h3>
+        <div class="col-md-3">
+            <div id="bio">
+                <img src="images/me.jpg" class="rounded-circle" width="150" height="150">
+                <p>Zhuo Zheng</p>
+                <p><a href="http://www.lmars.whu.edu.cn/">State Key Laboratory of Information Engineering in Surveying,
+                    Mapping and Remote Sensing</a></p>
+                <p><a href="https://www.whu.edu.cn/">Wuhan University</a></p>
+            </div>
+
+        </div>
+        <div class="col-md-8">
+            <p>
+                I am a second-year RS master student at State Key Laboratory of Information Engineering in Surveying,
+                Mapping and Remote Sensing (LIESMARS), Wuhan University.
+                I received B.S. degree from the School of Geography and Information Engineering, China University of
+                Geosciences, Wuhan, China, in 2018.
+                I'm now a member of <a href="http://rsidea.whu.edu.cn/">RSIDEA group</a>, advised by Prof. <a
+                    href="http://rsidea.whu.edu.cn/">Yanfei Zhong</a> and Prof. <a
+                    href="http://www.lmars.whu.edu.cn/prof_web/zhangliangpei/rs/index.html">Liangpei Zhang</a>.
+            </p>
+            <P>
+                My research interest is in remote sensing image process, computer vision, especially multi-source remote
+                sensing imagery panoptic parsing.
+            </P>
+            <p>Email: zhengzhuo [at] whu [dot] edu [dot] cn</p>
+            <p>
+                <a href="https://github.com/Z-Zheng"><img src="images/git.jpg" class="rounded-circle" width="30"
+                                                          height="30"></a>
+                <a href="https://scholar.google.com/citations?user=CREpn_AAAAAJ&hl=zh-CN"><img src="images/gs.jpg"
+                                                                                               class="rounded-circle"
+                                                                                               width="30"
+                                                                                               height="30"></a>
+                <a href="https://www.researchgate.net/profile/Zhuo_Zheng7"><img src="images/rg.jfif"
+                                                                                class="rounded-circle" width="30"
+                                                                                height="30"></a>
+            </p>
         </div>
     </div>
     <div class="row">
         <div class="col-md-12">
-            <h6 style="text-align:center">Building</h6>
+            <h3>Recent News</h3>
+            <p>2020.02, A paper is accepted by CVPR 2020. </p>
+            <p>2020.02, I achieve 4th overall in <a href="https://xview2.org/">xView2 Challenge</a>.</p>
+            <p>2020.01, A paper is accepted by TGRS 2020. </p>
             <div class="progress">
                 <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
-                     aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+                     aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 10%"></div>
             </div>
         </div>
     </div>
@@ -67,24 +83,32 @@
     <!--    paper-->
     <div class="row">
         <div class="col-md-12">
-            <h3>Publication</h3>
+            <h3>Selected Publication</h3>
         </div>
     </div>
     <div class="row">
         <div class="col-md-12">
             <div class="card border-dark mb-3">
-                <div class="card-header align-items-center"><h5>FPGA: Fast Patch-Free Global Learning Framework for
-                    Fully End-to-End Hyperspectral Image Classification</h5></div>
-                <div class="card-body">
-                    <h6 class="card-title">Zhuo Zheng, Yanfei Zhong, Ailong Ma, Liangpei Zhang</h6>
-                    <p class="card-text">IEEE Transactions on Geoscience and Remote Sensing (TGRS), 2020
-                    </p>
-                    <button type="button" class="btn btn-link"><a href="#">paper</a></button>
-                    <!--                    <button type="button" class="btn btn-link"><a href="#">code</a></button>-->
-
+                <div class="alert alert-dismissible alert-info">
+                    <p class="itemtitle">Foreground-Aware Relation Network for Geospatial Object Segmentation in High Spatial Resolution
+                        Remote Sensing Imagery</p>
+                    <p><b class="myname">Zhuo Zheng</b>, Yanfei Zhong, Junjue Wang, Ailong Ma</p>
+                    <p>Computer Vision and Pattern Recognition (CVPR), 2020</p>
+                    <p><a href="#">paper</a></p>
+                </div>
+                <div class="alert alert-dismissible alert-info">
+                    <p class="itemtitle">FPGA: Fast Patch-Free Global Learning Framework for Fully End-to-End Hyperspectral Image
+                        Classification</p>
+                    <p><b class="myname">Zhuo Zheng</b>, Yanfei Zhong, Ailong Ma, Liangpei Zhang</p>
+                    <p>IEEE Transactions on Geoscience and Remote Sensing (TGRS), 2020</p>
+                    <p><a href="https://ieeexplore.ieee.org/document/9007624">paper</a> <a href="#">code (coming
+                        soon)</a></p>
                 </div>
             </div>
-
+            <div class="progress">
+                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
+                     aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 10%"></div>
+            </div>
         </div>
 
     </div>
@@ -92,24 +116,25 @@
     <!--    award-->
     <div class="row">
         <div class="col-md-12">
-            <h3>Award</h3>
+            <h3>Competition</h3>
         </div>
     </div>
     <div class="row">
         <div class="col-md-12">
             <div class="card border-dark mb-3">
-                <div class="card-header align-items-center"><h5>Single-view Semantic 3D Challenge, 2nd Place</h5></div>
-                <div class="card-body">
-                    <h6 class="card-title">Zhuo Zheng, Yanfei Zhong, Junjue Wang</h6>
-                    <p class="card-text">2019 IEEE GRSS Data Fusion Contest
-                    </p>
-                    <button type="button" class="btn btn-link">
+                <div class="alert alert-dismissible alert-warning">
+                    <p class="itemtitle">xView2 Challenge, 4th Place (4/3500+), overall</p>
+                    <p><b class="myname">Zhuo Zheng</b>, Junjue Wang, Yanfei Zhong, Ailong Ma, Liangpei Zhang</p>
+                    <p>
+                        <a href="https://xview2.org/">website</a>
+<!--                        <a href="https://ieeexplore.ieee.org/abstract/document/8897927">tech report</a></p>-->
+                </div>
+                <div class="alert alert-dismissible alert-warning">
+                    <p class="itemtitle">2019 IEEE GRSS Data Fusion Contest, Single-view Semantic 3D Challenge, 2nd Place</p>
+                    <p><b class="myname">Zhuo Zheng</b>, Yanfei Zhong, Junjue Wang</p>
+                    <p>
                         <a href="http://www.grss-ieee.org/community/technical-committees/data-fusion/2019-ieee-grss-data-fusion-contest-results/">website</a>
-                    </button>
-                    <button type="button" class="btn btn-link">
-                        <a href="https://ieeexplore.ieee.org/abstract/document/8897927">Tech report</a>
-                    </button>
-                    <!--                    <button type="button" class="btn btn-link"><a href="#">code</a></button>-->
+                        <a href="https://ieeexplore.ieee.org/abstract/document/8897927">tech report</a></p>
                 </div>
             </div>
         </div>
