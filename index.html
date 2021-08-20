@@ -8,12 +8,23 @@
     <title>Zhuo Zheng - Wuhan University</title>
     <script src="lib/jq214/jquery.js"></script>
 
-<!--    <link href="lib/bts4b2/bootstrap.min.css" type="text/css" rel="stylesheet">-->
+    <!--    <link href="lib/bts4b2/bootstrap.min.css" type="text/css" rel="stylesheet">-->
     <link rel="stylesheet" type="text/css" href="css/bootstrap-simplex.min.css">
     <script src="lib/bts4b2/bootstrap.bundle.min.js"></script>
+    <script src="https://kit.fontawesome.com/0cf3363282.js" crossorigin="anonymous"></script>
     <style>
         #bio {
             text-align: center;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li.link {
+            float: left;
+            margin-left: 10px
         }
 
         .myname {
@@ -27,8 +38,17 @@
         .my_highlight {
             color: #0028ff
         }
+
         .paper_highlight {
             color: #9d190b;
+        }
+
+        .slidable {
+
+        }
+
+        .panel {
+            display: none;
         }
     </style>
 </head>
@@ -58,34 +78,58 @@
                     href="http://www.lmars.whu.edu.cn/prof_web/zhangliangpei/rs/index.html">Liangpei Zhang</a>.
             </p>
             <P>
-                My research interest is in remote sensing image process, computer vision/earth vision, especially multi-source remote
+                My research interest is in remote sensing image process, computer vision/earth vision, especially
+                multi-source remote
                 sensing imagery scene parsing.
-                My research goal is to design original and insightful Earth vision technologies to make high positive impacts on the geoscience field.
+                My research goal is to design original and insightful Earth vision technologies to make high positive
+                impacts on the geoscience field.
                 Meanwhile, I am an enthusiast of remote sensing data science competitions.
             </P>
             <p>Email: zhengzhuo [at] whu [dot] edu [dot] cn</p>
-            <p>
-                <a href="https://github.com/Z-Zheng"><img src="images/git.jpg" class="rounded-circle" width="30"
-                                                          height="30"></a>
-
-                <a href="https://scholar.google.com/citations?user=CREpn_AAAAAJ&hl=zh-CN"><img src="images/gs.jpg"
-                                                                                               class="rounded-circle"
-                                                                                               width="30"
-                                                                                               height="30"></a>
-                <a href="https://www.researchgate.net/profile/Zhuo_Zheng7"><img src="images/rg.jfif"
-                                                                                class="rounded-circle" width="30"
-                                                                                height="30"></a>
-            </p>
+            <ul>
+                <li class="link">
+                    <a href="https://github.com/Z-Zheng">
+                        <i class="fab fa-github"></i>
+                        Github
+                    </a>
+                </li>
+                <li class="link">
+                    <a href="https://scholar.google.com/citations?user=CREpn_AAAAAJ&hl=zh-CN">
+                        <i class="fab fa-google"></i>
+                        Google Scholar
+                    </a>
+                </li>
+                <li class="link">
+                    <a href="https://www.researchgate.net/profile/Zhuo_Zheng7">
+                        <i class="fab fa-researchgate"></i>
+                        ResearchGate
+                    </a>
+                </li>
+                <li class="link">
+                    <a href="https://orcid.org/0000-0003-1811-6725">
+                        <i class="fab fa-orcid"></i>
+                        ORCID
+                    </a>
+                </li>
+                <li class="link">
+                    <a href="https://twitter.com/ZhuoZheng2">
+                        <i class="fab fa-twitter-square"></i>
+                        Twitter
+                    </a>
+                </li>
+            </ul>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12" name="news">
             <h3>Recent News</h3>
             <p>2021.08, One paper is accepted by RSE.</p>
             <p>2021.07, One paper is accepted by ICCV 2021.</p>
             <p>2021.07, I win the 5th place in the Overhead Geopose Challenge hosted by NGA.</p>
-            <p>2021.03, Our team win the 4th place in 2021 IEEE GRSS Data Fusion Contest, Track: Multitemporal Semantic Change Detection.</p>
-            <p>2021.03, Our <a href="https://www.ingentaconnect.com/content/asprs/pers/2020/00000086/00000003/art00006">PE&RS paper</a> wins the first place in the 2021 John I. Davidson President’s Award.
+            <p>2021.03, Our team win the 4th place in 2021 IEEE GRSS Data Fusion Contest, Track: Multitemporal Semantic
+                Change Detection.</p>
+            <p>2021.03, Our <a href="https://www.ingentaconnect.com/content/asprs/pers/2020/00000086/00000003/art00006">PE&RS
+                paper</a> wins the first place in the 2021 John I. Davidson President’s Award.
             <p>2020.12, One paper is accepted by ISPRS P&RS.</p>
             <p>2020.11, the <a href="https://github.com/Z-Zheng/FarSeg">source code</a> of FarSeg (CVPR 2020) has been
                 available.</p>
@@ -98,11 +142,11 @@
             <!--                (TGRS 2020)</a> and <a-->
             <!--                    href="https://www.researchgate.net/publication/340061228_Foreground-Aware_Relation_Network_for_Geospatial_Object_Segmentation_in_High_Spatial_Resolution_Remote_Sensing_Imagery">FarSeg-->
             <!--                (CVPR 2020)</a> are available.</p>-->
-<!--            <p>2020.04, One paper is accepted by ISPRS P&RS.</p>-->
-<!--            <p>2020.03, One paper is accepted by TGRS.</p>-->
-<!--            <p>2020.02, One paper is accepted by CVPR 2020.</p>-->
-<!--            &lt;!&ndash;            <p>2020.02, I achieve 4th overall in <a href="https://xview2.org/">xView2 Challenge</a>.</p>&ndash;&gt;-->
-<!--            <p>2020.01, One paper is accepted by TGRS.</p>-->
+            <!--            <p>2020.04, One paper is accepted by ISPRS P&RS.</p>-->
+            <!--            <p>2020.03, One paper is accepted by TGRS.</p>-->
+            <!--            <p>2020.02, One paper is accepted by CVPR 2020.</p>-->
+            <!--            &lt;!&ndash;            <p>2020.02, I achieve 4th overall in <a href="https://xview2.org/">xView2 Challenge</a>.</p>&ndash;&gt;-->
+            <!--            <p>2020.01, One paper is accepted by TGRS.</p>-->
         </div>
     </div>
 
@@ -115,33 +159,43 @@
     <div class="row">
         <div class="col-md-12">
             <div class="alert alert-dismissible alert-primary">
-                <i class="itemtitle"><b>Building damage assessment for rapid disaster response with a deep object-based semantic change detection framework: from natural disasters to man-made disasters</b></i><br>
+                <i class="itemtitle"><b>Building damage assessment for rapid disaster response with a deep object-based
+                    semantic change detection framework: from natural disasters to man-made disasters</b></i><br>
                 <b class="myname">Zhuo Zheng</b>, Yanfei Zhong, Junjue Wang, Ailong Ma, Liangpei Zhang<br>
-                Remote Sensing of Environment (RSE), 2021<br>
+                <div class="slidable">Remote Sensing of Environment (RSE), 2021</div>
+                <div class="panel">SCI Q1 Top, IF=10.164, ranking it 1 out of 32 in Remote Sensing</div>
                 <a href="#">paper (soon)</a>
                 &nbsp
                 <a href="https://github.com/Z-Zheng/ChangeOS">code</a><br>
-                <i class="paper_highlight"><b>Highlight:</b> A <b class="my_highlight">deep object-based semantic change detection</b> method for <b class="my_highlight">building damage assessment</b> in the context of <b class="my_highlight">disaster response</b>.</i>
+                <i class="paper_highlight"><b>Highlight:</b> A <b class="my_highlight">deep object-based semantic change
+                    detection</b> method for <b class="my_highlight">building damage assessment</b> in the context of <b
+                        class="my_highlight">disaster response</b>.</i>
             </div>
 
             <div class="alert alert-dismissible alert-danger">
-                <i class="itemtitle"><b>Change is Everywhere: Single-Temporal Supervised Object Change Detection in Remote Sensing Imagery</b></i><br>
+                <i class="itemtitle"><b>Change is Everywhere: Single-Temporal Supervised Object Change Detection in
+                    Remote Sensing Imagery</b></i><br>
                 <b class="myname">Zhuo Zheng</b>, Ailong Ma, Liangpei Zhang, Yanfei Zhong<br>
                 International Conference on Computer Vision (ICCV), 2021<br>
                 <a href="https://arxiv.org/abs/2108.07002">paper</a>
                 &nbsp
                 <a href="https://github.com/Z-Zheng/ChangeStar">code</a><br>
-                <i class="paper_highlight"><b>Highlight:</b> A <b class="my_highlight">single-temporal supervised</b> learning algorithm and a plug-and-play change detection head: <b class="my_highlight">ChangeMixin</b> for <b class="my_highlight">change detection.</b></i>
+                <i class="paper_highlight"><b>Highlight:</b> A <b class="my_highlight">single-temporal supervised</b>
+                    learning algorithm and a plug-and-play change detection head: <b
+                            class="my_highlight">ChangeMixin</b> for <b class="my_highlight">change detection.</b></i>
             </div>
 
             <div class="alert alert-dismissible alert-warning">
                 <i class="itemtitle"><b>Deep multisensor learning for missing-modality all-weather mapping</b></i><br>
                 <b class="myname">Zhuo Zheng</b>, Ailong Ma, Liangpei Zhang, Yanfei Zhong<br>
-                ISPRS Journal of Photogrammetry and Remote Sensing (ISPRS P&RS), 2021<br>
+                <div class="slidable">ISPRS Journal of Photogrammetry and Remote Sensing (ISPRS P&RS), 2021</div>
+                <div class="panel">SCI Q1 Top, IF=8.979, ranking it 1 out of 50 in Geography, Physical</div>
                 <a href="https://www.sciencedirect.com/science/article/pii/S0924271620303476">paper</a>
                 &nbsp
                 <a href="#">code (soon)</a><br>
-                <i class="paper_highlight"><b>Highlight:</b> A <b class="my_highlight">registration-free</b> multi-modal/sensor learning algorithm via exploring <b class="my_highlight">meta-modal/sensory representation</b> for <b class="my_highlight">all-weather mapping</b>.</i>
+                <i class="paper_highlight"><b>Highlight:</b> A <b class="my_highlight">registration-free</b>
+                    multi-modal/sensor learning algorithm via exploring <b class="my_highlight">meta-modal/sensory
+                        representation</b> for <b class="my_highlight">all-weather mapping</b>.</i>
             </div>
 
             <div class="alert alert-dismissible alert-danger">
@@ -150,44 +204,52 @@
                 <b class="myname">Zhuo Zheng</b>, Yanfei Zhong, Junjue Wang, Ailong Ma<br>
                 IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2020<br>
                 <a href="http://openaccess.thecvf.com/content_CVPR_2020/papers/Zheng_Foreground-Aware_Relation_Network_for_Geospatial_Object_Segmentation_in_High_Spatial_CVPR_2020_paper.pdf">paper</a>
-                    &nbsp
-                    <a href="https://github.com/Z-Zheng/FarSeg">code/model</a>
+                &nbsp
+                <a href="https://github.com/Z-Zheng/FarSeg">code/model</a>
                 <br>
-                <i class="paper_highlight"><b>Highlight:</b> <b class="my_highlight">Explicit foreground modeling</b> from the perspectives of <b class="my_highlight">relation</b> and <b class="my_highlight">optimization</b> for real-time geospatial object segmentation.</i>
+                <i class="paper_highlight"><b>Highlight:</b> <b class="my_highlight">Explicit foreground modeling</b>
+                    from the perspectives of <b class="my_highlight">relation</b> and <b class="my_highlight">optimization</b>
+                    for real-time geospatial object segmentation.</i>
             </div>
 
             <div class="alert alert-dismissible alert-info">
                 <i class="itemtitle"><b>FPGA: Fast Patch-Free Global Learning Framework for Fully End-to-End
                     Hyperspectral Image Classification</b></i><br>
                 <b class="myname">Zhuo Zheng</b>, Yanfei Zhong, Ailong Ma, Liangpei Zhang<br>
-                IEEE Transactions on Geoscience and Remote Sensing (TGRS), 2020<br>
+                <div class="slidable">IEEE Transactions on Geoscience and Remote Sensing (TGRS), 2020</div>
+                <div class="panel">SCI Q1 Top, IF=5.6</div>
                 <a href="https://ieeexplore.ieee.org/document/9007624">paper</a>
-                    &nbsp
+                &nbsp
                 <a href="https://github.com/Z-Zheng/FreeNet">code</a>
                 <br>
-                <i class="paper_highlight"><b>Highlight:</b> <b class="my_highlight">Patch-free is all you need</b> towards faster and stronger hyperspectral image classification.</i>
+                <i class="paper_highlight"><b>Highlight:</b> <b class="my_highlight">Patch-free is all you need</b>
+                    towards faster and stronger hyperspectral image classification.</i>
             </div>
 
             <div class="alert alert-dismissible alert-warning">
                 <i class="itemtitle"><b>HyNet: Hyper-scale object detection network framework for multiple spatial
                     resolution remote sensing imagery</b></i><br>
                 <b class="myname">Zhuo Zheng</b>, Yanfei Zhong, Ailong Ma, Xiaobing Han, Ji Zhao, Yanfei Liu,
-                    Liangpei Zhang<br>
-                ISPRS Journal of Photogrammetry and Remote Sensing (ISPRS P&RS), 2020<br>
+                Liangpei Zhang<br>
+                <div class="slidable">ISPRS Journal of Photogrammetry and Remote Sensing (ISPRS P&RS), 2020</div>
+                <div class="panel">SCI Q1 Top, IF=8.979, ranking it 1 out of 50 in Geography, Physical</div>
                 <a href="https://www.sciencedirect.com/science/article/pii/S0924271620301167">paper</a>
                 <br>
-                <i class="paper_highlight"><b>Highlight:</b> <b class="my_highlight">Hyper-scale = Multi-scale &times; Multi-scale</b>, a new perspective of scale modeling at the convolutional groups.  </i>
+                <i class="paper_highlight"><b>Highlight:</b> <b class="my_highlight">Hyper-scale = Multi-scale &times;
+                    Multi-scale</b>, a new perspective of scale modeling at the convolutional groups. </i>
             </div>
 
             <div class="alert alert-dismissible alert-info">
                 <i class="itemtitle"><b>COLOR: Cycling, Offline Learning, and Online Representation Framework for
                     Airport and Airplane Detection Using GF-2 Satellite Images</b></i><br>
                 Yanfei Zhong, <b class="myname">Zhuo Zheng<sup>*</sup></b>, Ailong Ma, Xiaoyan Lu, Liangpei Zhang
-                    &nbsp (* denotes the corresponding author)<br>
-                IEEE Transactions on Geoscience and Remote Sensing (TGRS), 2020<br>
+                &nbsp (* denotes the corresponding author)<br>
+                <div class="slidable">IEEE Transactions on Geoscience and Remote Sensing (TGRS), 2020</div>
+                <div class="panel">SCI Q1 Top, IF=5.6</div>
                 <a href="https://ieeexplore.ieee.org/document/9091107">paper</a>
                 <br>
-                <i class="paper_highlight"><b>Highlight:</b> <b class="my_highlight">Evolvable model and dataset</b>: making your model and dataset both great again for new domain data.</i>
+                <i class="paper_highlight"><b>Highlight:</b> <b class="my_highlight">Evolvable model and dataset</b>:
+                    making your model and dataset both great again for new domain data.</i>
             </div>
         </div>
 
@@ -208,22 +270,24 @@
                 <a href="https://www.drivendata.org/competitions/78/overhead-geopose-challenge/">website</a><br>
             </div>
             <div class="alert alert-dismissible alert-warning">
-                <b class="itemtitle">2021 IEEE GRSS Data Fusion Contest, Track: Multitemporal Semantic Change Detection, <b
-                        class="my_highlight">4th Place</b></b><br>
+                <b class="itemtitle">2021 IEEE GRSS Data Fusion Contest, Track: Multitemporal Semantic Change Detection,
+                    <b
+                            class="my_highlight">4th Place</b></b><br>
                 <b class="myname">Zhuo Zheng</b>, Junjue Wang, Yinhe Liu, Shiqi Tian, Yanfei Zhong, Ailong Ma<br>
                 <a href="https://www.grss-ieee.org/community/technical-committees/2021-ieee-grss-data-fusion-contest-track-msd/">website</a>
                 &nbsp
                 <a href="https://www.grss-ieee.org/community/technical-committees/2021-ieee-grss-data-fusion-contest-results/">announcement</a>
             </div>
-            <div class="alert alert-dismissible alert-danger">
-                    <b class="itemtitle">2021 John I. Davidson President’s Award<b
-                            class="my_highlight">, 1st Place</b></b><br>
-                    <a href="https://www.asprs.org/awards-and-scholarships/award-winners/2021-award-winners.html">announcement</a>
+            <div class="alert alert-dismissible alert-info">
+                <b class="itemtitle">2021 John I. Davidson President’s Award<b
+                        class="my_highlight">, 1st Place</b></b><br>
+                <a href="https://www.asprs.org/awards-and-scholarships/award-winners/2021-award-winners.html">announcement</a>
             </div>
             <div class="alert alert-dismissible alert-danger">
-                    <b class="itemtitle">2020 Graduate Academic Innovation Outstanding Prize, Wuhan University&nbsp(武汉大学“研究生学术创新奖”<b
+                <b class="itemtitle">2020 Graduate Academic Innovation Outstanding Prize, Wuhan
+                    University&nbsp(武汉大学“研究生学术创新奖”<b
                             class="my_highlight">&nbsp特等奖&nbsp(研究生学术创新校长奖)</b>)</b><br>
-                    <a href="https://gs.whu.edu.cn/info/1057/7261.htm">announcement</a>
+                <a href="https://gs.whu.edu.cn/info/1057/7261.htm">announcement</a>
             </div>
             <div class="alert alert-dismissible alert-warning">
                 <b class="itemtitle">SpaceNet 6 & EarthVision workshop challenge at CVPR 2020, <b
@@ -254,16 +318,16 @@
             </div>
         </div>
     </div>
-<!--    <div class="row">-->
-<!--        <div class="col-md-12">-->
-<!--            <h3>Competition</h3>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--    <div class="row">-->
-<!--        <div class="col-md-12">-->
-<!--            -->
-<!--        </div>-->
-<!--    </div>-->
+    <!--    <div class="row">-->
+    <!--        <div class="col-md-12">-->
+    <!--            <h3>Competition</h3>-->
+    <!--        </div>-->
+    <!--    </div>-->
+    <!--    <div class="row">-->
+    <!--        <div class="col-md-12">-->
+    <!--            -->
+    <!--        </div>-->
+    <!--    </div>-->
 
     <div class="row">
         <div class="col-md-12">
@@ -297,6 +361,14 @@
     page views since March 2020
     <br>
 </div>
+
+<script>
+    $(document).ready(function () {
+        $(".slidable").click(function () {
+            $(".panel").slideToggle("fast");
+        });
+    });
+</script>
 
 </body>
 
