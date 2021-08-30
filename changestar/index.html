@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ChangeStar</title>
+
+    <script src="../lib/jq214/jquery.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap-proj.min.css">
+    <script src="../lib/bts4b2/bootstrap.bundle.min.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        /* highlight */
+        pre[data-line] {
+            position: relative;
+            padding: 1em 0 1em 3em;
+        }
+
+        pre[data-line] .line-highlight-wrapper {
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: transparent;
+            display: block;
+            width: 100%;
+        }
+
+        pre[data-line] .line-highlight {
+            position: absolute;
+            left: 0;
+            right: 0;
+            padding: inherit 0;
+            margin-top: 1em;
+            background: hsla(24, 20%, 50%, .08);
+            background: linear-gradient(to right, hsla(24, 20%, 50%, .1) 70%, hsla(24, 20%, 50%, 0));
+            pointer-events: none;
+            line-height: inherit;
+            white-space: pre;
+        }
+
+        pre[data-line] .line-highlight:before,
+        pre[data-line] .line-highlight[data-end]:after {
+            content: attr(data-start);
+            position: absolute;
+            top: .4em;
+            left: .6em;
+            min-width: 1em;
+            padding: 0 .5em;
+            background-color: hsla(24, 20%, 50%, .4);
+            color: hsl(24, 20%, 95%);
+            font: bold 65%/1.5 sans-serif;
+            text-align: center;
+            vertical-align: .3em;
+            border-radius: 999px;
+            text-shadow: none;
+            box-shadow: 0 1px white;
+        }
+
+        pre[data-line] .line-highlight[data-end]:after {
+            content: attr(data-end);
+            top: auto;
+            bottom: .4em;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <h1 class="col-md-12 text-center">
+            Change is Everywhere: <br>Single-Temporal Supervised Object Change Detection <br>in Remote Sensing Imagery
+            <br>
+            <small>
+                ICCV 2021
+            </small>
+        </h1>
+    </div>
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <ul class="list-inline">
+                <li>
+                    <a href="http://zhuozheng.top/">
+                        Zhuo Zheng
+                    </a>
+
+                </li>
+                <li>
+                    Ailong Ma
+                </li>
+                <li>
+                    <a href="http://www.lmars.whu.edu.cn/prof_web/zhangliangpei/rs/index.html">
+                        Liangpei Zhang
+                    </a>
+                </li>
+                <li>
+                    <a href="http://rsidea.whu.edu.cn/">
+                        Yanfei Zhong
+                    </a>
+                </li>
+
+            </ul>
+            LIESMARS, Wuhan University
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2 text-center">
+            <ul class="nav nav-pills nav-justified">
+                <li>
+                    <a href="https://arxiv.org/abs/2108.07002">
+                        <img src="changestar.png" height="120px"><br>
+                        <h4><strong>Paper</strong></h4>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://github.com/Z-Zheng/ChangeStar">
+                        <img src="../images/github_pad.png" height="120px"><br>
+                        <h4><strong>Code</strong></h4>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <h3>
+                Abstract
+            </h3>
+            <img src="changestar_teaser.png" class="img-responsive" alt="overview"><br>
+            <p class="text-justify">
+                For high spatial resolution (HSR) remote sensing images, bitemporal supervised learning always dominates
+                change detection using many pairwise labeled bitemporal images.
+                However, it is very expensive and time-consuming to pairwise label large-scale bitemporal HSR remote
+                sensing images.
+                In this paper, we propose <b>single-temporal supervised learning (STAR)</b> for change detection from a
+                new perspective of exploiting object changes in unpaired images as supervisory signals.
+                STAR enables us to train a high-accuracy change detector only using unpaired labeled images and
+                generalize to real-world bitemporal images.
+                To evaluate the effectiveness of STAR, we design a simple yet effective change detector called <b>ChangeStar</b>,
+                which can reuse any deep semantic segmentation architecture by the <b>ChangeMixin</b> module.
+                The comprehensive experimental results show that ChangeStar outperforms the baseline with a large margin
+                under single-temporal supervision and achieves superior performance under bitemporal supervision.
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <h3>
+                Change is Everywhere
+            </h3>
+            <p class="text-justify">
+                We observed that the importance of pairwise labeled bitemporal images lies in that the change detector
+                needs paired semantic information to define positive and negative samples for object change detection.
+                These positive and negative samples are usually determined by whether the pixels at two different times
+                have different semantics in the same geographical area.
+                The semantics of bitemporal pixels control the label assignment, while the positional consistency
+                condition (The bitemporal pixels should be at the same geographical position.) is only used to guarantee
+                independent and identically distributed (i.i.d.) training and inference.
+                It is conceivable that change is everywhere, especially between unpaired images, if we relax the
+                positional consistency condition to define positive and negative samples.
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <h3>
+                Single-Temporal supervised leARning (STAR)
+            </h3>
+            <p class="text-justify">
+                The key idea of single-temporal supervised learning (STAR) is to learn a generalizable object change
+                detector from arbitrary image pairs with only semantic labels via Eq. 2.
+                \begin{equation}
+                \mathop{{\rm min}}\limits_{\theta} \, \mathcal{L}(\mathbf{F}_\theta(\mathbf{X}^i, \mathbf{X}^j), {\rm
+                compare}(\mathbf{Y}^i, \mathbf{Y}^j))
+                \end{equation}
+                To provide change supervisory signals with single-temporal data, pseudo bitemporal image pairs are first
+                constructed.
+                Leveraging pseudo bitemporal image pairs, bitemporal data in the original learning problem
+                (Eq. 1) can be replaced with single-temporal data, thus the learning problem can be
+                reformulated as:
+                \begin{equation}
+                \mathop{{\rm min}}\limits_{\theta} \, \mathcal{L}(\mathbf{F}_{\theta}(\mathbf{X}^{t_1},
+                \pi\mathbf{X}^{t_1}), \mathbf{Y}^{t_1} \oplus \pi\mathbf{Y}^{t_1})
+                \end{equation}
+                where pseudo bitemporal image pairs \(\mathbf{X}^{t_1}, \pi\mathbf{X}^{t_1} \) with their change label
+                \(\mathbf{Y}^{t_1} \oplus \pi\mathbf{Y}^{t_1} \) provide single-temporal supervision.
+                The superscript \(t_1 \) is only used to represent that the data is single-temporal.
+                <br><br>
+                Please check the paper for detailed description of STAR.
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <h3>
+                ChangeStar = Any Segmentation Model + ChangeMixin
+            </h3>
+            <img src="changestar_arch.png" class="img-responsive" alt="" style="margin: 0 auto;"><br>
+            <p class="text-justify">
+                ChangeStar is a simple yet unified network composed of a deep semantic segmentation model and the
+                ChangeMixin module.
+                This design is inspired by reusing the modern semantic segmentation architecture because semantic
+                segmentation and object change detection are both dense prediction tasks.
+                To this end, we design the ChangeMixin module to enable any off-the-shelf deep semantic segmentation
+                model to detect object change.
+                <br><br>
+                Please check the paper for detailed description of ChangeStar.
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <h3>
+                Bitemporal Supervision vs. Single-Temporal Supervision
+            </h3>
+
+            <p class="text-justify">
+                Single-temporal supervision belongs to weak supervision for object change detection.
+                To investigate the gap between bitemporal supervision and single-temporal supervision, we conducted
+                comprehensive experiments to analyze their performance difference.
+                The results are presented in Table 5.
+                We observe that there is 16\(\sim \)19% F\(_1 \) gap between PCC and bitemporal supervised methods.
+                Our STAR can significantly bridge the gap to within 10% when using a large backbone.
+                And it can be seen that the performance gap keeps getting smaller as the backbone network goes deeper.
+                <br>
+                <h5>Table 5: Bitemporal supervision versus single-temporal supervision. All methods were evaluated on LEVIR-CD\(^{\texttt{test}} \).</h5>
+                <img src="table5.png" class="img-responsive" alt="" style="margin: 0 auto;"><br>
+                Please check the paper for more analysis.
+            </p>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <h3>
+                BibTeX
+            </h3>
+            <pre data-role="codeBlock" data-info="text" class="language-text">@inproceedings{zheng2021change,
+  title={Change is Everywhere: Single-Temporal Supervised Object Change Detection for High Spatial Resolution Remote Sensing Imagery},
+  author={Zheng, Zhuo and Ma, Ailong and Liangpei Zhang and Zhong, Yanfei},
+  booktitle={Proceedings of the IEEE international conference on computer vision},
+  year={2021}
+}
+@inproceedings{zheng2020foreground,
+  title={Foreground-Aware Relation Network for Geospatial Object Segmentation in High Spatial Resolution Remote Sensing Imagery},
+  author={Zheng, Zhuo and Zhong, Yanfei and Wang, Junjue and Ma, Ailong},
+  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
+  pages={4096--4105},
+  year={2020}
+}
+                </pre>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <h3>
+                Acknowledgments
+            </h3>
+            This work was supported in part by the National Key Research and Development Program of China under grant
+            no.
+            2017YFB0504202, in part by the National Natural Science Foundation of China under grant nos. 41771385 and
+            41801267, and in part by the China Postdoctoral Science Foundation under grant no. 2017M622522.
+            <br><br>
+            The website template was borrowed from <a href="https://bowenc0221.github.io/">Bowen Cheng</a> and <a
+                href="http://mgharbi.com/">Michaël Gharbi</a>.
+            <p></p>
+        </div>
+    </div>
+
+</div>
+
+
+</body>
+
+</html>
