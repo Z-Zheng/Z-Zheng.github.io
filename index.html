@@ -15,6 +15,7 @@
     <style>
         #bio {
             text-align: center;
+            position: relative;
         }
 
         ul {
@@ -24,7 +25,7 @@
 
         li.link {
             float: left;
-            margin-left: 10px
+            margin-left: 10px;
         }
 
         .myname {
@@ -52,30 +53,40 @@
     <div class="row">
         <div class="col-md-3">
             <div id="bio">
-                <img src="images/me.jpg" class="rounded-circle" width="150" height="150">
-                <p>Zhuo Zheng</p>
-                <p><a href="https://cs.stanford.edu/">Department of Computer Science</a></p>
-                <p><a href="https://www.stanford.edu/">Stanford University</a></p>
+                <img src="images/me_sea.jpg" class="rounded-circle" style="width:70%;margin-top: 10px;" alt="zhuozheng">
+                <div style="margin: 10px;">
+                    Zhuo Zheng
+                    <br>
+                    <a href="https://cs.stanford.edu/">Department of Computer Science</a>
+                    <br>
+                    <a href="https://www.stanford.edu/">Stanford University</a>
+                </div>
             </div>
         </div>
         <div class="col-md-9">
             <p>
-                I am currently a postdoc at Stanford Artificial Intelligence Laboratory (SAIL), Department of Computer Science, Stanford University, working with Prof. <a href="https://cs.stanford.edu/~ermon/">Stefano Ermon</a>.
-                I received my Ph.D. in Photogrammetry and Remote Sensing from Wuhan University in 2023, advised by Prof. <a href="http://rsidea.whu.edu.cn/">Yanfei Zhong</a> and Prof. <a href="http://www.lmars.whu.edu.cn/prof_web/zhangliangpei/rs/index.html">Liangpei Zhang</a>.
+                I am currently a postdoc at Stanford Artificial Intelligence Laboratory (SAIL), Department of Computer
+                Science, Stanford University, working with Prof. <a href="https://cs.stanford.edu/~ermon/">Stefano
+                Ermon</a>.
+                I received my Ph.D. in Photogrammetry and Remote Sensing from Wuhan University in 2023, advised by Prof.
+                <a href="http://rsidea.whu.edu.cn/">Yanfei Zhong</a> and Prof. <a
+                    href="http://www.lmars.whu.edu.cn/prof_web/zhangliangpei/rs/index.html">Liangpei Zhang</a>.
                 I obtained B.S. degree from the School of Geography and Information Engineering, China University of
                 Geosciences, Wuhan, China, in 2018.
-<!--                I'm now a member of <a href="http://rsidea.whu.edu.cn/">RSIDEA group</a>, advised by Prof. <a-->
-<!--                    href="http://rsidea.whu.edu.cn/">Yanfei Zhong</a> and Prof. <a-->
-<!--                    href="http://www.lmars.whu.edu.cn/prof_web/zhangliangpei/rs/index.html">Liangpei Zhang</a>.-->
+                <!--                I'm now a member of <a href="http://rsidea.whu.edu.cn/">RSIDEA group</a>, advised by Prof. <a-->
+                <!--                    href="http://rsidea.whu.edu.cn/">Yanfei Zhong</a> and Prof. <a-->
+                <!--                    href="http://www.lmars.whu.edu.cn/prof_web/zhangliangpei/rs/index.html">Liangpei Zhang</a>.-->
             </p>
             <p>
-                My research interest is in Earth vision, especially multi-modal and multi-temporal remote sensing image analysis.
+                My research interest is in Earth vision, especially multi-modal and multi-temporal remote sensing image
+                analysis.
                 My research goal is to design original and insightful Earth vision technologies to make high positive
                 impacts on the geoscience field.
                 Meanwhile, I am an enthusiast of remote sensing data science competitions.
             </p>
 
-            <p>Our Change family: ChangeStar (single-temporal learning), ChangeMask (many-to-many architecture), ChangeOS (one-to-many architecture), Changen (generative change modeling)</p>
+            <p>Our Change family: ChangeStar (single-temporal learning), ChangeMask (many-to-many architecture),
+                ChangeOS (one-to-many architecture), Changen (generative change modeling)</p>
 
             <p>Email: zhuozheng [at] cs [dot] stanford [dot] edu; zhengzhuo [at] whu [dot] edu [dot] cn</p>
             <ul>
@@ -115,29 +126,30 @@
     <div class="row">
         <div class="col-md-12" name="news">
             <h3>Recent News</h3>
-            <p>2023.10, <a href="https://zenodo.org/record/8404754">Urban Vehicle Segmentation (UV6K) dataset</a> is publicly available. Use it in your study now!</p>
+            <p>2023.10, <a href="https://zenodo.org/record/8404754">Urban Vehicle Segmentation (UV6K) dataset</a> is
+                publicly available. Use it in your study now!</p>
             <p>2023.07, One paper is accepted by ICCV 2023.</p>
             <p>2023.07, One paper is accepted by IEEE TPAMI.</p>
             <p>2023.06, Awarded with Li Xiaowen Remote Sensing Young Scholar Award.</p>
             <p>2022.12, Awarded with the 16th Wuhan University Top Ten Academic Stars.</p>
             <p>2022.10, Awarded with the 2022 Graduate Academic Innovation Outstanding Prize.</p>
-<!--            <p>2021.12, Awarded with "Wang Zhizhuo Innovation Talent" Outstanding Prize.</p>-->
-<!--            <p>2021.10, One paper is accepted by NeurIPS 2021 Datasets and Benchmarks.</p>-->
-<!--            <p>2021.10, One paper is accepted by ISPRS P&RS.</p>-->
-<!--            <p>2021.08, One paper is accepted by RSE.</p>-->
-<!--            <p>2021.07, One paper is accepted by ICCV 2021.</p>-->
-<!--            <p>2021.07, I win the 5th place in the Overhead Geopose Challenge hosted by NGA.</p>-->
-<!--            <p>2021.03, Our team win the 4th place in 2021 IEEE GRSS Data Fusion Contest, Track: Multitemporal Semantic-->
-<!--                Change Detection.</p>-->
-<!--            <p>2021.03, Our <a href="https://www.ingentaconnect.com/content/asprs/pers/2020/00000086/00000003/art00006">PE&RS-->
-<!--                paper</a> wins the first place in the 2021 John I. Davidson President’s Award.-->
-<!--            <p>2020.12, One paper is accepted by ISPRS P&RS.</p>-->
-<!--            <p>2020.11, the <a href="https://github.com/Z-Zheng/FarSeg">source code</a> of FarSeg (CVPR 2020) has been-->
-<!--                available.</p>-->
-<!--            <p>2020.10, Awarded with the 2020 Graduate Academic Innovation Outstanding Prize.</p>-->
-<!--            <p>2020.06, I win the top graduate award at SpaceNet 6 & EarthVision workshop challenge at CVPR 2020.</p>-->
-<!--            <p>2020.05, the <a href="https://github.com/Z-Zheng/FreeNet">source code</a> of FPGA (TGRS 2020) has been-->
-<!--                available.</p>-->
+            <!--            <p>2021.12, Awarded with "Wang Zhizhuo Innovation Talent" Outstanding Prize.</p>-->
+            <!--            <p>2021.10, One paper is accepted by NeurIPS 2021 Datasets and Benchmarks.</p>-->
+            <!--            <p>2021.10, One paper is accepted by ISPRS P&RS.</p>-->
+            <!--            <p>2021.08, One paper is accepted by RSE.</p>-->
+            <!--            <p>2021.07, One paper is accepted by ICCV 2021.</p>-->
+            <!--            <p>2021.07, I win the 5th place in the Overhead Geopose Challenge hosted by NGA.</p>-->
+            <!--            <p>2021.03, Our team win the 4th place in 2021 IEEE GRSS Data Fusion Contest, Track: Multitemporal Semantic-->
+            <!--                Change Detection.</p>-->
+            <!--            <p>2021.03, Our <a href="https://www.ingentaconnect.com/content/asprs/pers/2020/00000086/00000003/art00006">PE&RS-->
+            <!--                paper</a> wins the first place in the 2021 John I. Davidson President’s Award.-->
+            <!--            <p>2020.12, One paper is accepted by ISPRS P&RS.</p>-->
+            <!--            <p>2020.11, the <a href="https://github.com/Z-Zheng/FarSeg">source code</a> of FarSeg (CVPR 2020) has been-->
+            <!--                available.</p>-->
+            <!--            <p>2020.10, Awarded with the 2020 Graduate Academic Innovation Outstanding Prize.</p>-->
+            <!--            <p>2020.06, I win the top graduate award at SpaceNet 6 & EarthVision workshop challenge at CVPR 2020.</p>-->
+            <!--            <p>2020.05, the <a href="https://github.com/Z-Zheng/FreeNet">source code</a> of FPGA (TGRS 2020) has been-->
+            <!--                available.</p>-->
             <!--            <p>2020.04, One paper is accepted by ISPRS P&RS.</p>-->
             <!--            <p>2020.03, One paper is accepted by TGRS.</p>-->
             <!--            <p>2020.02, One paper is accepted by CVPR 2020.</p>-->
@@ -157,11 +169,14 @@
             <table class="table table-hover" style="border-collapse: separate">
                 <tbody style="font-family: Arial,serif">
                 <tr>
-                    <td bgcolor="#FFCC99" style="border-style: none; border-width: medium;" valign="top" width="12">&nbsp;</td>
+                    <td bgcolor="#FFCC99" style="border-style: none; border-width: medium;" valign="top" width="12">
+                        &nbsp;
+                    </td>
                     <td style="border-style: none; border-width: medium;">
                         <p style="margin-left: 10px; line-height: 150%; margin-top: 8px; margin-bottom: 8px;">
                             <i style="font-size: 15px">
-                                Scalable Multi-Temporal Remote Sensing Change Data Generation via Simulating Stochastic Change Process
+                                Scalable Multi-Temporal Remote Sensing Change Data Generation via Simulating Stochastic
+                                Change Process
                             </i>
                             <br>
                             <span style="color: #000000"><b>Zhuo Zheng</b>, Shiqi Tian, Ailong Ma, Liangpei Zhang, Yanfei Zhong</span>
@@ -177,17 +192,22 @@
                                 </b>
                             </span>
                             <br>
-                            <span class="paper_highlight"><b>Highlight:</b> <b class="my_highlight">New direction</b>: Generative Change Modeling; <b class="my_highlight">Changen</b>, Change generator, enables object change generation with controllable object property and change event; Effective <b class="my_highlight">synthetic change data pre-training</b>.
+                            <span class="paper_highlight"><b>Highlight:</b> <b class="my_highlight">New direction</b>: Generative Change Modeling; <b
+                                    class="my_highlight">Changen</b>, Change generator, enables object change generation with controllable object property and change event; Effective <b
+                                    class="my_highlight">synthetic change data pre-training</b>.
                             </span>
                         </p>
                     </td>
                 </tr>
                 <tr>
-                    <td bgcolor="#FFCC99" style="border-style: none; border-width: medium;" valign="top" width="12">&nbsp;</td>
+                    <td bgcolor="#FFCC99" style="border-style: none; border-width: medium;" valign="top" width="12">
+                        &nbsp;
+                    </td>
                     <td style="border-style: none; border-width: medium;">
                         <p style="margin-left: 10px; line-height: 150%; margin-top: 8px; margin-bottom: 8px;">
                             <i style="font-size: 15px">
-                                FarSeg++: Foreground-Aware Relation Network for Geospatial Object Segmentation in High Spatial Resolution Remote Sensing Imagery
+                                FarSeg++: Foreground-Aware Relation Network for Geospatial Object Segmentation in High
+                                Spatial Resolution Remote Sensing Imagery
                             </i>
                             <br>
                             <span style="color: #000000"><b>Zhuo Zheng</b>, Yanfei Zhong, Junjue Wang, Ailong Ma, Liangpei Zhang</span>
@@ -212,11 +232,14 @@
                     </td>
                 </tr>
                 <tr>
-                    <td bgcolor="#FFCC99" style="border-style: none; border-width: medium;" valign="top" width="12">&nbsp;</td>
+                    <td bgcolor="#FFCC99" style="border-style: none; border-width: medium;" valign="top" width="12">
+                        &nbsp;
+                    </td>
                     <td style="border-style: none; border-width: medium;">
                         <p style="margin-left: 10px; line-height: 150%; margin-top: 8px; margin-bottom: 8px;">
                             <i style="font-size: 15px">
-                                ChangeMask: Deep Multi-task Encoder-Transformer-Decoder Architecture for Semantic Change Detection
+                                ChangeMask: Deep Multi-task Encoder-Transformer-Decoder Architecture for Semantic Change
+                                Detection
                             </i>
                             <br>
                             <span style="color: #000000"><b>Zhuo Zheng</b>, Yanfei Zhong, Shiqi Tian, Ailong Ma, Liangpei Zhang</span>
@@ -230,8 +253,10 @@
                                     <span style="color: #808080">paper</span></a>
                                 &nbsp;&nbsp;&nbsp;
                                 <b>SECOND dataset:
-                                    <a href="assets/changemask/SECOND/train.csv"><span style="color: #FF0000">train</span></a> /
-                                    <a href="assets/changemask/SECOND/val.csv"><span style="color: #FF0000">val</span></a>
+                                    <a href="assets/changemask/SECOND/train.csv"><span
+                                            style="color: #FF0000">train</span></a> /
+                                    <a href="assets/changemask/SECOND/val.csv"><span
+                                            style="color: #FF0000">val</span></a>
                                     split (ours)
                                 </b>
                             </span>
@@ -245,11 +270,14 @@
                     </td>
                 </tr>
                 <tr>
-                    <td bgcolor="#FFCC99" style="border-style: none; border-width: medium;" valign="top" width="12">&nbsp;</td>
+                    <td bgcolor="#FFCC99" style="border-style: none; border-width: medium;" valign="top" width="12">
+                        &nbsp;
+                    </td>
                     <td style="border-style: none; border-width: medium;">
                         <p style="margin-left: 10px; line-height: 150%; margin-top: 8px; margin-bottom: 8px;">
                             <i style="font-size: 15px">
-                                Building Damage Assessment for Rapid Disaster Response with a Deep Object-based Semantic Change Detection Framework: from
+                                Building Damage Assessment for Rapid Disaster Response with a Deep Object-based Semantic
+                                Change Detection Framework: from
                                 natural disasters to man-made disasters
                             </i>
                             <br>
@@ -276,7 +304,9 @@
                     </td>
                 </tr>
                 <tr>
-                    <td bgcolor="#FFCC99" style="border-style: none; border-width: medium;" valign="top" width="12">&nbsp;</td>
+                    <td bgcolor="#FFCC99" style="border-style: none; border-width: medium;" valign="top" width="12">
+                        &nbsp;
+                    </td>
                     <td style="border-style: none; border-width: medium;">
                         <p style="margin-left: 10px; line-height: 150%; margin-top: 8px; margin-bottom: 8px;">
                             <i style="font-size: 15px">
@@ -315,7 +345,9 @@
                     </td>
                 </tr>
                 <tr>
-                    <td bgcolor="#FFCC99" style="border-style: none; border-width: medium;" valign="top" width="12">&nbsp;</td>
+                    <td bgcolor="#FFCC99" style="border-style: none; border-width: medium;" valign="top" width="12">
+                        &nbsp;
+                    </td>
                     <td style="border-style: none; border-width: medium;">
                         <p style="margin-left: 10px; line-height: 150%; margin-top: 8px; margin-bottom: 8px;">
                             <i style="font-size: 15px">
@@ -324,7 +356,8 @@
                             <br>
                             <span style="color: #000000">Junjue Wang<sup>*</sup>, <b>Zhuo Zheng</b><sup>*</sup>, Ailong Ma, Xiaoyan Lu, Yanfei Zhong (* Equal contribution)</span>
                             <br>
-                            35th Annual Conference on Neural Information Processing Systems (<b>NeurIPS</b> Datasets & Benchmarks Track), 2021
+                            35th Annual Conference on Neural Information Processing Systems (<b>NeurIPS</b> Datasets &
+                            Benchmarks Track), 2021
                             <br>
                             <span>
                                     <a href="https://arxiv.org/abs/2110.08733">
@@ -343,7 +376,9 @@
                 </tr>
 
                 <tr>
-                    <td bgcolor="#FFCC99" style="border-style: none; border-width: medium;" valign="top" width="12">&nbsp;</td>
+                    <td bgcolor="#FFCC99" style="border-style: none; border-width: medium;" valign="top" width="12">
+                        &nbsp;
+                    </td>
                     <td style="border-style: none; border-width: medium;">
                         <p style="margin-left: 10px; line-height: 150%; margin-top: 8px; margin-bottom: 8px;">
                             <i style="font-size: 15px">
@@ -362,7 +397,8 @@
                                     </a>
                                 </span>
                             <br>
-                            <span class="paper_highlight"><b>Highlight:</b> A <b class="my_highlight">registration-free</b>
+                            <span class="paper_highlight"><b>Highlight:</b> A <b
+                                    class="my_highlight">registration-free</b>
                         multi-modal/sensor learning algorithm via exploring <b class="my_highlight">meta-modal/sensory
                             representation</b> for <b class="my_highlight">all-weather mapping</b>.</span>
                         </p>
@@ -370,7 +406,9 @@
                 </tr>
 
                 <tr>
-                    <td bgcolor="#FFCC99" style="border-style: none; border-width: medium;" valign="top" width="12">&nbsp;</td>
+                    <td bgcolor="#FFCC99" style="border-style: none; border-width: medium;" valign="top" width="12">
+                        &nbsp;
+                    </td>
                     <td style="border-style: none; border-width: medium;">
                         <p style="margin-left: 10px; line-height: 150%; margin-top: 8px; margin-bottom: 8px;">
                             <i style="font-size: 15px">
@@ -406,7 +444,9 @@
                 </tr>
 
                 <tr>
-                    <td bgcolor="#FFCC99" style="border-style: none; border-width: medium;" valign="top" width="12">&nbsp;</td>
+                    <td bgcolor="#FFCC99" style="border-style: none; border-width: medium;" valign="top" width="12">
+                        &nbsp;
+                    </td>
                     <td style="border-style: none; border-width: medium;">
                         <p style="margin-left: 10px; line-height: 150%; margin-top: 8px; margin-bottom: 8px;">
                             <i style="font-size: 15px">
@@ -444,7 +484,9 @@
                 </tr>
 
                 <tr>
-                    <td bgcolor="#FFCC99" style="border-style: none; border-width: medium;" valign="top" width="12">&nbsp;</td>
+                    <td bgcolor="#FFCC99" style="border-style: none; border-width: medium;" valign="top" width="12">
+                        &nbsp;
+                    </td>
                     <td style="border-style: none; border-width: medium;">
                         <p style="margin-left: 10px; line-height: 150%; margin-top: 8px; margin-bottom: 8px;">
                             <i style="font-size: 15px">
@@ -472,7 +514,9 @@
                 </tr>
 
                 <tr>
-                    <td bgcolor="#FFCC99" style="border-style: none; border-width: medium;" valign="top" width="12">&nbsp;</td>
+                    <td bgcolor="#FFCC99" style="border-style: none; border-width: medium;" valign="top" width="12">
+                        &nbsp;
+                    </td>
                     <td style="border-style: none; border-width: medium;">
                         <p style="margin-left: 10px; line-height: 150%; margin-top: 8px; margin-bottom: 8px;">
                             <i style="font-size: 15px">
@@ -501,7 +545,16 @@
             </table>
         </div>
     </div>
-
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Teaching</h3>
+            <div class="alert alert-dismissible">
+                <ul>
+                    <li><b class="itemtitle">Fall 2023/2024: Data for Sustainable Development (CS 325B)</b></li>
+                </ul>
+            </div>
+        </div>
+    </div>
     <!--    award-->
     <div class="row">
         <div class="col-md-12">
@@ -511,16 +564,19 @@
     <div class="row">
         <div class="col-md-12">
             <div class="alert alert-dismissible alert-danger">
-                <b class="itemtitle">2023 Li Xiaowen Remote Sensing Young Scholar Award &nbsp(李小文遥感科学青年奖)</b><br>
+                <b class="itemtitle">2023 Li Xiaowen Remote Sensing Young Scholar Award
+                    &nbsp(李小文遥感科学青年奖)</b><br>
                 <a href="https://geo.bnu.edu.cn/xwzx/9ddb15a97da84d3aaf1d4d251b247f13.html">press</a>
             </div>
             <div class="alert alert-dismissible alert-danger">
-                <b class="itemtitle">16th Wuhan University Top Ten Academic Stars &nbsp(武汉大学第十六届研究生“十大学术之星”)</b><br>
+                <b class="itemtitle">16th Wuhan University Top Ten Academic Stars
+                    &nbsp(武汉大学第十六届研究生“十大学术之星”)</b><br>
                 <a href="https://ygb.whu.edu.cn/info/1086/20257.htm">announcement</a>
             </div>
             <div class="alert alert-dismissible alert-danger">
                 <b class="itemtitle">2022 Graduate Academic Innovation Outstanding Prize, Wuhan
-                    University&nbsp(武汉大学“研究生学术创新奖”<b class="my_highlight">&nbsp特等奖&nbsp(研究生学术创新校长奖) & “研究生英诺卓越奖学金”</b>)</b><br>
+                    University&nbsp(武汉大学“研究生学术创新奖”<b class="my_highlight">&nbsp特等奖&nbsp(研究生学术创新校长奖)
+                        & “研究生英诺卓越奖学金”</b>)</b><br>
                 <a href="https://gs.whu.edu.cn/content.jsp?urltype=news.NewsContentUrl&wbtreeid=1057&wbnewsid=9971">announcement</a>
             </div>
             <div class="alert alert-dismissible alert-danger">
@@ -588,30 +644,34 @@
         <div class="col-md-12">
             <h3>Invited Talks</h3>
             <div class="alert alert-dismissible alert-dark">
-            <ul>
-                <li>
-                    <b class="itemtitle">Change is Everywhere: Single-Temporal Supervised Object Change Detection in Remote Sensing Imagery</b><br>
-                    <h6>IEEE Geoscience and Remote Sensing Society (GRSS) Wuhan Student Chapter, 2023.02.24</h6>
-                </li>
-                <li>
-                    <b class="itemtitle">变化无处不在：单时相监督的遥感影像变化检测</b><br>
-                    <h6>中国图象图形学学会(CSIG) 第一期学生会员分享论坛, 2022.12.23</h6>
-                </li>
-                <li>
-                    <b class="itemtitle">Building Damage Assessment with Deep Object-based Semantic Change Detection Framework:
-From natural disasters to man-made disasters</b><br>
-                    <b class="my_highlight">Excellent Presentation Award</b>
-                    <h6>The 2021 International Graduate Workshop on GeoInformatics (IGWG2021), 2021.12.18</h6>
-                </li>
-                <li>
-                    <b class="itemtitle">面向地理目标的遥感视觉理解</b><br>
-                    <h6>武汉大学, GeoScience Cafe #281, 2020.11.27</h6>
-                </li>
-                <li>
-                    <b class="itemtitle">WE1.R7.3: Pop-Net: Encoder-Dual Decoder for Semantic Segmentation and Single-View Height Estimation</b><br>
-                    <h6>2019 IEEE Geoscience and Remote Sensing Symposium (IGARSS), IEEE GRSS Data Fusion Contest I, 2019.07.31</h6>
-                </li>
-            </ul>
+                <ul>
+                    <li>
+                        <b class="itemtitle">Change is Everywhere: Single-Temporal Supervised Object Change Detection in
+                            Remote Sensing Imagery</b><br>
+                        <h6>IEEE Geoscience and Remote Sensing Society (GRSS) Wuhan Student Chapter, 2023.02.24</h6>
+                    </li>
+                    <li>
+                        <b class="itemtitle">变化无处不在：单时相监督的遥感影像变化检测</b><br>
+                        <h6>中国图象图形学学会(CSIG) 第一期学生会员分享论坛, 2022.12.23</h6>
+                    </li>
+                    <li>
+                        <b class="itemtitle">Building Damage Assessment with Deep Object-based Semantic Change Detection
+                            Framework:
+                            From natural disasters to man-made disasters</b><br>
+                        <b class="my_highlight">Excellent Presentation Award</b>
+                        <h6>The 2021 International Graduate Workshop on GeoInformatics (IGWG2021), 2021.12.18</h6>
+                    </li>
+                    <li>
+                        <b class="itemtitle">面向地理目标的遥感视觉理解</b><br>
+                        <h6>武汉大学, GeoScience Cafe #281, 2020.11.27</h6>
+                    </li>
+                    <li>
+                        <b class="itemtitle">WE1.R7.3: Pop-Net: Encoder-Dual Decoder for Semantic Segmentation and
+                            Single-View Height Estimation</b><br>
+                        <h6>2019 IEEE Geoscience and Remote Sensing Symposium (IGARSS), IEEE GRSS Data Fusion Contest I,
+                            2019.07.31</h6>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
@@ -665,7 +725,6 @@ From natural disasters to man-made disasters</b><br>
     page views since March 2020
     <br>
 </div>
-
 
 
 </body>
