@@ -47,10 +47,33 @@
         .checked {
             color: orange;
         }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: url("images/ZhuoZheng.png") center/contain no-repeat;
+            pointer-events: none;
+            z-index: -1;
+            /* initial state */
+            opacity: 0;
+            filter: blur(8px);
+            clip-path: circle(0% at 50% 50%);
+            transition: opacity 1.2s ease-in-out,
+            filter 1.2s ease-in-out,
+            clip-path 1.2s ease-in-out;
+        }
+
+        body.bg-show::before {
+            opacity: .14;
+            filter: blur(0);
+            clip-path: circle(150% at 50% 50%);
+        }
     </style>
 </head>
-<body>
 
+
+<body>
 
 <div class="container" style="margin-top: 20px">
     <div class="row">
@@ -81,9 +104,14 @@
             <p>
                 I study Earth Vision and Simulation, especially multi-modal and multi-temporal remote sensing image
                 understanding and generation.
-                My research aims to develop original and insightful Spatial-Temporal Intelligence technologies that address pressing societal and environmental challenges, contributing to a more sustainable future for humanity.
-                I pioneered single-temporal change representation learning for change detection and invented many foundational concepts (e.g., <a href="https://arxiv.org/pdf/2309.17031">change event simulation and semantic change synthesis</a>) as well as key techniques in remote sensing change data generation, making zero-shot change understanding possible.
-                Meanwhile, I am an enthusiast of remote sensing data science competitions (commonly used ID: EVER), but now I have little time to play these games :(
+                My research aims to develop original and insightful Spatial-Temporal Intelligence technologies that address
+                pressing societal and environmental challenges, contributing to a more sustainable future for humanity.
+                I pioneered single-temporal change representation learning for change detection and invented many foundational
+                concepts (e.g., <a href="https://arxiv.org/pdf/2309.17031">change event simulation and semantic change
+                synthesis</a>) as well as key techniques in remote sensing change data generation, making zero-shot change
+                understanding possible.
+                Meanwhile, I am an enthusiast of remote sensing data science competitions (commonly used ID: EVER), but now I have
+                little time to play these games :(
             </p>
 
             <p>Email: zhuozheng [at] cs [dot] stanford [dot] edu; zhengzhuo [at] whu [dot] edu [dot] cn</p>
@@ -126,22 +154,39 @@
         <div class="col-md-12">
             <h5>Our Change Family:</h5>
             <ul>
-                <li><a href="https://www.sciencedirect.com/science/article/pii/S0924271624002624">Probabilistic Change Model (PCM)</a> (unified change modeling principle)</li>
-                <li><a href="https://www.sciencedirect.com/science/article/pii/S0924271624002624">ChangeSparse</a> (an instance of Deep PCM with a powerful sparse change transformer for binary, o2m and m2m change detection tasks)</li>
-                <li><a href="https://arxiv.org/abs/2108.07002">ChangeStar</a>, <a href="https://link.springer.com/article/10.1007/s11263-024-02141-4">ChangeStar2</a> (single-temporal change
+                <li><a href="https://www.sciencedirect.com/science/article/pii/S0924271624002624">Probabilistic Change Model
+                    (PCM)</a> (unified change modeling principle)
+                </li>
+                <li><a href="https://www.sciencedirect.com/science/article/pii/S0924271624002624">ChangeSparse</a> (an instance of
+                    Deep PCM with a powerful sparse change transformer for binary, o2m and m2m change detection tasks)
+                </li>
+                <li><a href="https://arxiv.org/abs/2108.07002">ChangeStar</a>, <a
+                        href="https://link.springer.com/article/10.1007/s11263-024-02141-4">ChangeStar2</a> (single-temporal
+                    change
                     representation learning, temporal symmetry)
                 </li>
-                <li><a href="https://www.sciencedirect.com/science/article/pii/S0034425721003564">ChangeOS</a> (one-to-many [o2m] semantic change detection
+                <li><a href="https://www.sciencedirect.com/science/article/pii/S0034425721003564">ChangeOS</a> (one-to-many [o2m]
+                    semantic change detection
                     architecture, deep object-based change detection, building damage assessment)
                 </li>
-                <li><a href="https://www.sciencedirect.com/science/article/pii/S0034425724004425">STCA</a> (transferable building damage assessment, single-temporal change adaptation)</li>
-                <li><a href="https://www.sciencedirect.com/science/article/pii/S0924271621002835">ChangeMask</a> (many-to-many [m2m] semantic change detection
+                <li><a href="https://www.sciencedirect.com/science/article/pii/S0034425724004425">STCA</a> (transferable building
+                    damage assessment, single-temporal change adaptation)
+                </li>
+                <li><a href="https://www.sciencedirect.com/science/article/pii/S0924271621002835">ChangeMask</a> (many-to-many
+                    [m2m] semantic change detection
                     architecture, temporal symmetric change representation)
                 </li>
-                <li><a href="https://arxiv.org/abs/2309.17031">Changen</a>, <a href="https://arxiv.org/abs/2406.17998">Changen2</a> (generative change modeling, pioneering remote sensing change data generation)</li>
+                <li><a href="https://arxiv.org/abs/2309.17031">Changen</a>, <a
+                        href="https://arxiv.org/abs/2406.17998">Changen2</a> (generative change modeling, pioneering remote
+                    sensing change data generation)
+                </li>
                 <li><a href="https://arxiv.org/abs/2402.01188">Segment Any Change</a> (the first zero-shot change detector)</li>
-                <li><a href="https://arxiv.org/abs/2410.06234">TEOChat and TEOChatlas</a> (the first temporal EO VLM and instruction-following dataset)</li>
-                <li><a href="https://github.com/Z-Zheng/pytorch-change-models">torchange</a> (a unified change representation learning benchmark library, open-source software)</li>
+                <li><a href="https://arxiv.org/abs/2410.06234">TEOChat and TEOChatlas</a> (the first temporal EO VLM and
+                    instruction-following dataset)
+                </li>
+                <li><a href="https://github.com/Z-Zheng/pytorch-change-models">torchange</a> (a unified change representation
+                    learning benchmark library, open-source software)
+                </li>
             </ul>
         </div>
     </div>
@@ -154,17 +199,22 @@
             <p>2024.10, Changen2 got accepted to IEEE TPAMI.</p>
             <p>2024.10, Awarded with the 2024 Graduate Academic Innovation Outstanding Prize.</p>
             <p>2024.09, Segment Any Change got accepted to NeurIPS 2024.</p>
-            <p>2024.09, selected for Stanford University's <a href="https://elsevier.digitalcommonsdata.com/datasets/btchxktzyw/7">World Top 2% Scientists List</a> (Geological & Geomatics Engineering) for 2024.</p>
-            <p>2024.09, <a href="https://www.sciencedirect.com/science/article/pii/S0034425724004425">STCA</a> got accepted to RSE.</p>
-            <p>2024.06, <a href="https://www.sciencedirect.com/science/article/pii/S0924271624002624">DPCM and ChangeSparse</a> got accepted to ISPRS P&RS.</p>
-            <p>2024.05, <a href="https://link.springer.com/article/10.1007/s11263-024-02141-4">ChangeStar2</a> got accepted in IJCV.</p>
+            <p>2024.09, selected for Stanford University's <a
+                    href="https://elsevier.digitalcommonsdata.com/datasets/btchxktzyw/7">World Top 2% Scientists List</a>
+                (Geological & Geomatics Engineering) for 2024.</p>
+            <p>2024.09, <a href="https://www.sciencedirect.com/science/article/pii/S0034425724004425">STCA</a> got accepted to
+                RSE.</p>
+            <p>2024.06, <a href="https://www.sciencedirect.com/science/article/pii/S0924271624002624">DPCM and ChangeSparse</a>
+                got accepted to ISPRS P&RS.</p>
+            <p>2024.05, <a href="https://link.springer.com/article/10.1007/s11263-024-02141-4">ChangeStar2</a> got accepted in
+                IJCV.</p>
             <p>2023.10, <a href="https://zenodo.org/record/8404754">Urban Vehicle Segmentation (UV6K) dataset</a> is
                 publicly available. Use it in your study now!</p>
             <p>2023.07, One paper is accepted by ICCV 2023.</p>
             <p>2023.07, One paper is accepted by IEEE TPAMI.</p>
             <p>2023.06, Awarded with Li Xiaowen Remote Sensing Young Scholar Award.</p>
-<!--            <p>2022.12, Awarded with the 16th Wuhan University Top Ten Academic Stars.</p>-->
-<!--            <p>2022.10, Awarded with the 2022 Graduate Academic Innovation Outstanding Prize.</p>-->
+            <!--            <p>2022.12, Awarded with the 16th Wuhan University Top Ten Academic Stars.</p>-->
+            <!--            <p>2022.10, Awarded with the 2022 Graduate Academic Innovation Outstanding Prize.</p>-->
             <!--            <p>2021.12, Awarded with "Wang Zhizhuo Innovation Talent" Outstanding Prize.</p>-->
             <!--            <p>2021.10, One paper is accepted by NeurIPS 2021 Datasets and Benchmarks.</p>-->
             <!--            <p>2021.10, One paper is accepted by ISPRS P&RS.</p>-->
@@ -331,7 +381,8 @@
                             SCI Q1 Top, ranking it 1 out of 32 in Remote Sensing
                             <br>
                             <span>
-                                <a href="https://www.sciencedirect.com/science/article/pii/S0034425724004425"><span style="color: #808080">paper</span></a>&nbsp;&nbsp;&nbsp;
+                                <a href="https://www.sciencedirect.com/science/article/pii/S0034425724004425"><span
+                                        style="color: #808080">paper</span></a>&nbsp;&nbsp;&nbsp;
                             </span>
                             <br>
                             <span class="paper_highlight"><b>Highlight:</b> <b class="my_highlight">Transferable building damage assessment</b>; Unsupervised single-temporal change adaptation (STCA) enables models to achieve adaptation with only target pre-disaster images.
@@ -346,7 +397,8 @@
                     <td style="border-style: none; border-width: medium;">
                         <p style="margin-left: 10px; line-height: 150%; margin-top: 8px; margin-bottom: 8px;">
                             <i style="font-size: 15px">
-                                Unifying Remote Sensing Change Detection via Deep Probabilistic Change Models: From Principles, Models to Applications
+                                Unifying Remote Sensing Change Detection via Deep Probabilistic Change Models: From Principles,
+                                Models to Applications
                             </i>
                             <br>
                             <span style="color: #000000"><b>Zhuo Zheng</b>, Yanfei Zhong, Ji Zhao, Ailong Ma, Liangpei Zhang</span>
@@ -356,7 +408,8 @@
                             SCI Q1 Top, ranking it 1 out of 50 in Geography, Physical
                             <br>
                             <span>
-                                <a href="https://www.sciencedirect.com/science/article/pii/S0924271624002624"><span style="color: #808080">paper</span></a>&nbsp;&nbsp;&nbsp;
+                                <a href="https://www.sciencedirect.com/science/article/pii/S0924271624002624"><span
+                                        style="color: #808080">paper</span></a>&nbsp;&nbsp;&nbsp;
                                 <b>
                                     <a href="https://github.com/Z-Zheng/pytorch-change-models">
                                         <span style="color: #FF0000">code</span>
@@ -365,7 +418,9 @@
                             </span>
                             <br>
                             <span class="paper_highlight"><b>Highlight:</b>
-                                Unified probabilistic change modeling: <b class="my_highlight">Probabilistic Change Model (PCM)</b>; and strong model instance: <b class="my_highlight">ChangeSparse</b>.
+                                Unified probabilistic change modeling: <b
+                                        class="my_highlight">Probabilistic Change Model (PCM)</b>; and strong model instance: <b
+                                        class="my_highlight">ChangeSparse</b>.
                             </span>
                         </p>
                     </td>
@@ -387,7 +442,8 @@
                             SCI Q1 Top
                             <br>
                             <span>
-                                <a href="https://link.springer.com/article/10.1007/s11263-024-02141-4"><span style="color: #808080">paper</span></a>&nbsp;&nbsp;&nbsp;
+                                <a href="https://link.springer.com/article/10.1007/s11263-024-02141-4"><span
+                                        style="color: #808080">paper</span></a>&nbsp;&nbsp;&nbsp;
                                 <b>
                                     <a href="https://github.com/Z-Zheng/pytorch-change-models">
                                         <span style="color: #FF0000">code</span>
@@ -586,8 +642,8 @@
                             <span class="fa fa-star checked">
                             </span>
                             <b>The method has been included in</b> <a
-                                    href="https://github.com/microsoft/torchgeo">microsoft/torchgeo</a>
-                                and <a href="https://github.com/PaddlePaddle/PaddleRS">PaddlePaddle/PaddleRS</a>.
+                                href="https://github.com/microsoft/torchgeo">microsoft/torchgeo</a>
+                            and <a href="https://github.com/PaddlePaddle/PaddleRS">PaddlePaddle/PaddleRS</a>.
                         </p>
                     </td>
                 </tr>
@@ -815,7 +871,8 @@
     <div class="row">
         <div class="col-md-12">
             <div class="alert alert-dismissible alert-danger">
-                <b class="itemtitle">2025 Early Career Award, Remote Sensing Specialty Group (RSSG) of American Association of Geographers (AAG) </b><br>
+                <b class="itemtitle">2025 Early Career Award, Remote Sensing Specialty Group (RSSG) of American Association of
+                    Geographers (AAG) </b><br>
                 <a href="http://www.aagrssg.org/early-career-award/">announcement</a>
             </div>
             <div class="alert alert-dismissible alert-danger">
@@ -915,7 +972,8 @@
                     </li>
                     <li>
                         <b class="itemtitle">Keynote Talk: Learning Change Representation from Single-Temporal Supervision</b><br>
-                        <h6>WACV 2025, GeoCV - The First Workshop on Computer Vision for Geospatial Image Analysis, 2025.03.04</h6>
+                        <h6>WACV 2025, GeoCV - The First Workshop on Computer Vision for Geospatial Image Analysis,
+                            2025.03.04</h6>
                     </li>
                     <li>
                         <b class="itemtitle">Dynamic, high-resolution poverty measurement in data-scarce environments</b><br>
@@ -1014,6 +1072,14 @@
     <br>
 </div>
 
+<script>
+    const EXCLUDE_SEL = 'a, button, input, textarea, select, summary, [role="button"], [data-no-bg-toggle]';
+    let timer;
+    document.addEventListener('click', (e) => {
+        if (e.target.closest(EXCLUDE_SEL)) return;
+        document.body.classList.toggle('bg-show');
+    });
+</script>
 
 </body>
 
