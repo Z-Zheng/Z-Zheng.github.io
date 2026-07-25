@@ -99,83 +99,116 @@
     <section id="lineage" class="section">
         <div class="section-head"><span class="section-num">02</span><h2 class="section-title">Our Change Family</h2></div>
 
-        <div class="kg">
-            <div class="kg-root">
-                <span class="kg-root-title">Change Modeling</span>
-                <span class="kg-root-sub">representation · generation · foundation · application</span>
-            </div>
+        <div class="threads">
 
-            <div class="kg-branches">
-
-                <div class="kg-branch">
-                    <div class="kg-cat"><span class="kg-cat-idx">01</span> Representation &amp; Principles</div>
-                    <ul class="kg-leaves">
-                        <li class="kg-node">
-                            <span class="kg-name"><a href="https://www.sciencedirect.com/science/article/pii/S0924271624002624" class="inline-link">Probabilistic Change Model (PCM)</a></span>
-                            <span class="kg-desc">unified change modeling principle</span>
-                        </li>
-                        <li class="kg-node">
-                            <span class="kg-name"><a href="https://arxiv.org/abs/2108.07002" class="inline-link">ChangeStar</a> · <a href="https://link.springer.com/article/10.1007/s11263-024-02141-4" class="inline-link">ChangeStar2</a></span>
-                            <span class="kg-desc">single-temporal change representation, temporal symmetry</span>
-                        </li>
-                        <li class="kg-node">
-                            <span class="kg-name"><a href="https://www.sciencedirect.com/science/article/pii/S0924271621002835" class="inline-link">ChangeMask</a></span>
-                            <span class="kg-desc">temporal-symmetric semantic change (m2m)</span>
-                        </li>
-                        <li class="kg-node">
-                            <span class="kg-name"><a href="https://www.sciencedirect.com/science/article/pii/S0924271624002624" class="inline-link">ChangeSparse</a></span>
-                            <span class="kg-desc">sparse change transformer, a Deep PCM instance</span>
-                        </li>
-                        <li class="kg-node">
-                            <span class="kg-name"><a href="https://github.com/Z-Zheng/pytorch-change-models" class="inline-link">torchange</a></span>
-                            <span class="kg-desc">unified open-source benchmark library</span>
-                        </li>
-                    </ul>
+            <article class="thread">
+                <div class="thread-head">
+                    <span class="thread-idx">01</span>
+                    <h3 class="thread-name">Single-Temporal Supervision</h3>
                 </div>
-
-                <div class="kg-branch">
-                    <div class="kg-cat"><span class="kg-cat-idx">02</span> Generative Modeling</div>
-                    <ul class="kg-leaves">
-                        <li class="kg-node">
-                            <span class="kg-name"><a href="https://arxiv.org/abs/2309.17031" class="inline-link">Changen</a> · <a href="https://arxiv.org/abs/2406.17998" class="inline-link">Changen2</a></span>
-                            <span class="kg-desc">pioneering remote sensing change data generation</span>
-                        </li>
-                        <li class="kg-node">
-                            <span class="kg-name"><a href="https://www.sciencedirect.com/science/article/pii/S0034425725003839" class="inline-link">NeDS</a></span>
-                            <span class="kg-desc">disaster simulation via deep generative modeling</span>
-                        </li>
-                    </ul>
+                <p class="thread-claim">Change detection does not need paired bitemporal labels. I introduced
+                    <strong>single-temporal supervision</strong>, which learns change from unpaired single-date images
+                    and removes the annotation bottleneck that had limited the field.</p>
+                <div class="thread-works">
+                    <a class="work-chip" href="https://arxiv.org/abs/2108.07002">
+                        <span class="work-name">ChangeStar</span><span class="work-venue">ICCV 2021</span>
+                    </a>
+                    <a class="work-chip" href="https://link.springer.com/article/10.1007/s11263-024-02141-4">
+                        <span class="work-name">ChangeStar2</span><span class="work-venue">IJCV 2024</span>
+                    </a>
+                    <a class="work-chip" href="https://www.sciencedirect.com/science/article/pii/S0034425724004425">
+                        <span class="work-name">STCA</span><span class="work-venue">RSE 2024</span>
+                    </a>
                 </div>
+                <p class="thread-impact"><i class="fas fa-code-branch"></i>Adopted in
+                    <a href="https://github.com/microsoft/torchgeo" class="inline-link">microsoft/torchgeo</a>,
+                    <a href="https://github.com/PaddlePaddle/PaddleRS" class="inline-link">PaddleRS</a> and
+                    <a href="https://www.arcgis.com/home/item.html?id=a779106ce9eb4fc28de6d04d8edb893c" class="inline-link">Esri ArcGIS</a></p>
+            </article>
 
-                <div class="kg-branch">
-                    <div class="kg-cat"><span class="kg-cat-idx">03</span> Foundation &amp; Zero-shot</div>
-                    <ul class="kg-leaves">
-                        <li class="kg-node">
-                            <span class="kg-name"><a href="https://arxiv.org/abs/2402.01188" class="inline-link">Segment Any Change</a></span>
-                            <span class="kg-desc">the first zero-shot change detector</span>
-                        </li>
-                        <li class="kg-node">
-                            <span class="kg-name"><a href="https://arxiv.org/abs/2410.06234" class="inline-link">TEOChat &amp; TEOChatlas</a></span>
-                            <span class="kg-desc">the first temporal EO vision-language model &amp; dataset</span>
-                        </li>
-                    </ul>
+            <article class="thread">
+                <div class="thread-head">
+                    <span class="thread-idx">02</span>
+                    <h3 class="thread-name">Generative Change Modeling</h3>
                 </div>
-
-                <div class="kg-branch">
-                    <div class="kg-cat"><span class="kg-cat-idx">04</span> Damage Assessment</div>
-                    <ul class="kg-leaves">
-                        <li class="kg-node">
-                            <span class="kg-name"><a href="https://www.sciencedirect.com/science/article/pii/S0034425721003564" class="inline-link">ChangeOS</a></span>
-                            <span class="kg-desc">object-based semantic change (o2m), building damage</span>
-                        </li>
-                        <li class="kg-node">
-                            <span class="kg-name"><a href="https://www.sciencedirect.com/science/article/pii/S0034425724004425" class="inline-link">STCA</a></span>
-                            <span class="kg-desc">transferable damage, single-temporal change adaptation</span>
-                        </li>
-                    </ul>
+                <p class="thread-claim">Rather than collecting ever more change data, simulate it. I opened
+                    <strong>generative change modeling</strong>, which synthesizes change supervision from unlabeled
+                    single-temporal imagery and makes zero-shot change monitoring possible.</p>
+                <div class="thread-works">
+                    <a class="work-chip" href="https://arxiv.org/abs/2309.17031">
+                        <span class="work-name">Changen</span><span class="work-venue">ICCV 2023</span>
+                    </a>
+                    <a class="work-chip" href="https://arxiv.org/abs/2406.17998">
+                        <span class="work-name">Changen2</span><span class="work-venue">TPAMI 2024</span>
+                        <i class="fas fa-star work-star" title="ESI Highly Cited Paper"></i>
+                    </a>
+                    <a class="work-chip" href="https://www.sciencedirect.com/science/article/pii/S0034425725003839">
+                        <span class="work-name">NeDS</span><span class="work-venue">RSE 2025</span>
+                    </a>
                 </div>
+                <p class="thread-impact"><i class="fas fa-code-branch"></i>Change generation shipped in
+                    <a href="https://www.arcgis.com/home/item.html?id=a779106ce9eb4fc28de6d04d8edb893c" class="inline-link">Esri ArcGIS</a></p>
+            </article>
 
-            </div>
+            <article class="thread">
+                <div class="thread-head">
+                    <span class="thread-idx">03</span>
+                    <h3 class="thread-name">Unified Principles &amp; Architectures</h3>
+                </div>
+                <p class="thread-claim">Binary, one-to-many and many-to-many change detection are not separate problems.
+                    I cast them as one <strong>probabilistic change model</strong>, then designed architectures that
+                    exploit the temporal symmetry the formulation exposes.</p>
+                <div class="thread-works">
+                    <a class="work-chip" href="https://www.sciencedirect.com/science/article/pii/S0924271624002624">
+                        <span class="work-name">PCM &middot; ChangeSparse</span><span class="work-venue">ISPRS P&amp;RS 2024</span>
+                    </a>
+                    <a class="work-chip" href="https://www.sciencedirect.com/science/article/pii/S0924271621002835">
+                        <span class="work-name">ChangeMask</span><span class="work-venue">ISPRS P&amp;RS 2022</span>
+                        <i class="fas fa-star work-star" title="ESI Highly Cited Paper"></i>
+                    </a>
+                    <a class="work-chip" href="https://www.sciencedirect.com/science/article/pii/S0034425721003564">
+                        <span class="work-name">ChangeOS</span><span class="work-venue">RSE 2021</span>
+                        <i class="fas fa-star work-star" title="ESI Highly Cited Paper"></i>
+                    </a>
+                </div>
+                <p class="thread-impact"><i class="fas fa-trophy"></i>ChangeOS placed 4th of 3500+ overall in the
+                    <a href="https://xview2.org/challenge" class="inline-link">xView2 Challenge</a> &mdash; the only
+                    single-model solution in the top five</p>
+            </article>
+
+            <article class="thread">
+                <div class="thread-head">
+                    <span class="thread-idx">04</span>
+                    <h3 class="thread-name">Foundation Models &amp; Language</h3>
+                </div>
+                <p class="thread-claim">Change understanding should be promptable and conversational. I built the
+                    <strong>first zero-shot change detector</strong> and the <strong>first vision-language assistant</strong>
+                    for temporal Earth observation data.</p>
+                <div class="thread-works">
+                    <a class="work-chip" href="https://arxiv.org/abs/2402.01188">
+                        <span class="work-name">Segment Any Change</span><span class="work-venue">NeurIPS 2024</span>
+                    </a>
+                    <a class="work-chip" href="https://arxiv.org/abs/2410.06234">
+                        <span class="work-name">TEOChat &middot; TEOChatlas</span><span class="work-venue">ICLR 2025</span>
+                    </a>
+                </div>
+            </article>
+
+            <article class="thread thread-tool">
+                <div class="thread-head">
+                    <span class="thread-idx"><i class="fas fa-cube"></i></span>
+                    <h3 class="thread-name">torchange</h3>
+                </div>
+                <p class="thread-claim">All of the above, packaged as one benchmark library &mdash; so the entire line of
+                    work is reproducible from a single install.</p>
+                <div class="thread-works">
+                    <a class="work-chip" href="https://github.com/Z-Zheng/pytorch-change-models">
+                        <span class="work-name"><i class="fab fa-github"></i> Z-Zheng/pytorch-change-models</span>
+                        <span class="work-venue">open source</span>
+                    </a>
+                </div>
+            </article>
+
         </div>
     </section>
 
