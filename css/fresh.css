@@ -628,7 +628,8 @@ html[data-silhouette='on'] .avatar-watermark { opacity: 0.07; }
   color: var(--ink-3);
 }
 
-/* rounded accent pill for the venue */
+/* rounded accent pill for the venue — no uppercase transform, so venue
+   names keep their own casing (NeurIPS, arXiv, ISPRS P&RS) */
 .venue-badge {
   display: inline-block;
   background: var(--accent-soft);
@@ -636,10 +637,9 @@ html[data-silhouette='on'] .avatar-watermark { opacity: 0.07; }
   border-radius: var(--r-pill);
   padding: 2px 9px;
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 10.5px;
   font-weight: 500;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
+  letter-spacing: 0.04em;
   color: var(--accent);
 }
 
