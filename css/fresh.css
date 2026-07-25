@@ -1,46 +1,23 @@
 /* ==========================================================================
    CLEAR AIR — light, airy design system for zhuozheng.top
-   Two palettes ship in this file. Switch with the data-theme attribute on
-   <html>:  data-theme="cardinal"  (default, Stanford red)
-            data-theme="gold"      (black & gold)
-   All colour lives in the theme blocks below; nothing else hardcodes a hue.
+
+   Default palette is black + antique gold + Stanford Cardinal, with one job
+   per colour so no hue is decoration:
+
+     ink   (near-black)  structure and body copy
+     accent(gold)        interactive + metadata — links, nav state, venue
+                         pills, dates, resource chips
+     signal(Cardinal)    identity and distinction — the name, Stanford, the
+                         self-name in author lists, the job-market line,
+                         recognition badges, honours
+     mark  (black chip)  software artifacts, distinct from research output
+
+   An all-Cardinal variant is kept for comparison; switch with
+   <html data-theme="cardinal">.
    ========================================================================== */
 
-/* ---- palette A: Stanford Cardinal (default) ---------------------------- */
+/* ---- default palette: black, gold, Cardinal ---------------------------- */
 :root,
-[data-theme='cardinal'] {
-  --bg: #FAF9F8;
-  --surface: #FFFFFF;
-  --surface-2: #F6F3F2;
-
-  --ink: #211C1C;
-  --ink-2: #6B5E5E;
-  --ink-3: #746666;
-
-  --line: #EBE5E4;
-  --line-2: #DCD3D1;
-
-  /* Stanford Cardinal; --accent-bright is decorative only (never text) */
-  --accent: #8C1515;
-  --accent-bright: #B01B1B;
-  --accent-soft: #F8E8E7;
-  --accent-edge: #DEB2B1;
-
-  /* recognition marker — deep bronze */
-  --mark: #7E5C0C;
-  --mark-soft: #FBF2DF;
-  --mark-edge: #E4CD97;
-
-  --shadow-tint: 33, 28, 28;
-  --accent-tint: 140, 21, 21;
-  --header-bg: rgba(250, 249, 248, 0.82);
-
-  --wash-1: rgba(140, 21, 21, 0.07);
-  --wash-2: rgba(126, 92, 12, 0.055);
-  --wash-3: rgba(33, 28, 28, 0.035);
-}
-
-/* ---- palette B: black & gold ------------------------------------------- */
 [data-theme='gold'] {
   --bg: #FAF8F3;
   --surface: #FFFFFF;
@@ -60,7 +37,12 @@
   --accent-soft: #FAF2DB;
   --accent-edge: #DBC287;
 
-  /* recognition marker — the "black" half of black-and-gold */
+  /* Stanford Cardinal — identity and distinction */
+  --signal: #8C1515;
+  --signal-soft: #F8E7E4;
+  --signal-edge: #DDB0AB;
+
+  /* the "black" half of black-and-gold — software, not research output */
   --mark: #2A2520;
   --mark-soft: #EFEBE2;
   --mark-edge: #CBC3B3;
@@ -70,8 +52,44 @@
   --header-bg: rgba(250, 248, 243, 0.82);
 
   --wash-1: rgba(201, 162, 39, 0.10);
-  --wash-2: rgba(27, 24, 19, 0.05);
-  --wash-3: rgba(122, 92, 12, 0.05);
+  --wash-2: rgba(140, 21, 21, 0.05);
+  --wash-3: rgba(27, 24, 19, 0.045);
+}
+
+/* ---- variant: all Cardinal --------------------------------------------- */
+[data-theme='cardinal'] {
+  --bg: #FAF9F8;
+  --surface: #FFFFFF;
+  --surface-2: #F6F3F2;
+
+  --ink: #211C1C;
+  --ink-2: #6B5E5E;
+  --ink-3: #746666;
+
+  --line: #EBE5E4;
+  --line-2: #DCD3D1;
+
+  --accent: #8C1515;
+  --accent-bright: #B01B1B;
+  --accent-soft: #F8E8E7;
+  --accent-edge: #DEB2B1;
+
+  /* here identity and interaction share the one accent */
+  --signal: #8C1515;
+  --signal-soft: #F8E8E7;
+  --signal-edge: #DEB2B1;
+
+  --mark: #7E5C0C;
+  --mark-soft: #FBF2DF;
+  --mark-edge: #E4CD97;
+
+  --shadow-tint: 33, 28, 28;
+  --accent-tint: 140, 21, 21;
+  --header-bg: rgba(250, 249, 248, 0.82);
+
+  --wash-1: rgba(140, 21, 21, 0.07);
+  --wash-2: rgba(126, 92, 12, 0.055);
+  --wash-3: rgba(33, 28, 28, 0.035);
 }
 
 /* ---- shared tokens ----------------------------------------------------- */
@@ -234,7 +252,7 @@ html[data-silhouette='on'] .avatar-watermark { opacity: 0.07; }
   font-size: 15px;
   font-weight: 700;
   letter-spacing: -0.01em;
-  color: var(--ink);
+  color: var(--signal);
   flex-shrink: 0;
 }
 
@@ -354,12 +372,19 @@ html[data-silhouette='on'] .avatar-watermark { opacity: 0.07; }
   font-size: clamp(13.5px, 1.6vh, 15.5px);
   color: var(--ink-2);
 }
+/* the institution reads in Cardinal, like the name above it */
+.hero-affiliation .inline-link { text-decoration-color: var(--signal-edge); }
+.hero-affiliation .inline-link:hover,
+.hero-affiliation .inline-link:focus-visible {
+  color: var(--signal);
+  text-decoration-color: var(--signal);
+}
 
 .hero-divider {
   width: 34px;
   height: 3px;
   border-radius: var(--r-pill);
-  background: linear-gradient(to right, var(--accent), var(--accent-bright));
+  background: linear-gradient(to right, var(--signal), var(--accent-bright));
   margin: var(--space-4) auto;
 }
 
@@ -376,18 +401,18 @@ html[data-silhouette='on'] .avatar-watermark { opacity: 0.07; }
 .hero-body .prose strong { color: var(--ink); font-weight: 600; }
 .hero-body .prose + .prose { margin-top: var(--space-3); }
 
-/* the one place a soft tinted card is used — the job-market note */
+/* the highest-value line on the page, so it carries the signal colour */
 .job-market-callout {
   margin-top: var(--space-4);
   display: block;
   text-align: left;
-  background: var(--accent-soft);
-  border: 1px solid var(--accent-edge);
+  background: var(--signal-soft);
+  border: 1px solid var(--signal-edge);
   border-radius: var(--r-md);
   padding: 11px var(--space-4);
   font-size: clamp(12.5px, 1.55vh, 14.5px);
   font-weight: 600;
-  color: var(--accent);
+  color: var(--signal);
 }
 
 .hero-email {
@@ -517,7 +542,7 @@ html[data-silhouette='on'] .avatar-watermark { opacity: 0.07; }
   color: var(--ink-3);
 }
 
-.work-star { font-size: 9px; color: var(--mark); align-self: center; }
+.work-star { font-size: 9px; color: var(--signal); align-self: center; }
 
 /* one compact line of external evidence per thread */
 .thread-impact {
@@ -564,7 +589,7 @@ html[data-silhouette='on'] .avatar-watermark { opacity: 0.07; }
   color: var(--ink-2);
 }
 .news-body strong { color: var(--ink); font-weight: 600; }
-.news-flag { color: var(--mark); font-size: 11px; margin-right: var(--space-2); }
+.news-flag { color: var(--signal); font-size: 11px; margin-right: var(--space-2); }
 
 /* ----------------------------- publications ----------------------------- */
 
@@ -634,7 +659,8 @@ html[data-silhouette='on'] .avatar-watermark { opacity: 0.07; }
   line-height: 1.42;
   color: var(--ink-2);
 }
-.pub-authors strong { color: var(--ink); font-weight: 600; }
+/* the site owner's name, so it is findable in every author list */
+.pub-authors strong { color: var(--signal); font-weight: 600; }
 
 .pub-quote {
   margin-top: 6px;
@@ -686,9 +712,9 @@ html[data-silhouette='on'] .avatar-watermark { opacity: 0.07; }
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  background: var(--mark-soft);
-  border: 1px solid var(--mark-edge);
-  color: var(--mark);
+  background: var(--signal-soft);
+  border: 1px solid var(--signal-edge);
+  color: var(--signal);
   border-radius: var(--r-pill);
   padding: 2px 9px;
   font-family: var(--font-mono);
@@ -704,7 +730,7 @@ html[data-silhouette='on'] .avatar-watermark { opacity: 0.07; }
   line-height: 1.5;
   color: var(--ink-3);
 }
-.adopt-note > i, .result-note > i { color: var(--mark); margin-right: 5px; font-size: 10px; }
+.adopt-note > i, .result-note > i { color: var(--signal); margin-right: 5px; font-size: 10px; }
 .result-note strong { color: var(--ink-2); font-weight: 600; }
 
 /* ------------------------------- teaching ------------------------------- */
@@ -755,7 +781,7 @@ html[data-silhouette='on'] .avatar-watermark { opacity: 0.07; }
   transition: transform var(--t-fast), box-shadow var(--t-fast);
 }
 .award-row:hover { transform: translateY(-1px); box-shadow: var(--shadow-2); }
-.award-row > i { color: var(--accent); font-size: 13px; padding-top: 3px; }
+.award-row > i { color: var(--signal); font-size: 13px; padding-top: 3px; }
 
 .award-title {
   font-family: var(--font-display);
