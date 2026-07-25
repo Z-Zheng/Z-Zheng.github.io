@@ -249,19 +249,10 @@ html[data-silhouette='on'] .avatar-watermark { opacity: 0.07; }
 
 /* pill-shaped nav items — the friendly, fresh cue */
 .nav-item {
-  display: flex;
-  align-items: baseline;
-  gap: 5px;
   padding: 7px 11px;
   border-radius: var(--r-pill);
   white-space: nowrap;
   transition: background var(--t-fast), color var(--t-fast);
-}
-.nav-index {
-  font-family: var(--font-mono);
-  font-size: 9.5px;
-  color: var(--ink-3);
-  transition: color var(--t-fast);
 }
 .nav-label {
   font-size: 12.5px;
@@ -275,7 +266,6 @@ html[data-silhouette='on'] .avatar-watermark { opacity: 0.07; }
 
 .nav-item.is-active { background: var(--accent-soft); }
 .nav-item.is-active .nav-label { color: var(--accent); }
-.nav-item.is-active .nav-index { color: var(--accent); opacity: 0.75; }
 
 @media (max-width: 900px) {
   .nav-links {
