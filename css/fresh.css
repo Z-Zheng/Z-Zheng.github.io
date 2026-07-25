@@ -1,8 +1,8 @@
 /* ==========================================================================
    CLEAR AIR — light, airy design system for zhuozheng.top
 
-   Default palette is black + antique gold + Stanford Cardinal, with one job
-   per colour so no hue is decoration:
+   Black + antique gold + Stanford Cardinal, with one job per colour so no
+   hue is decoration:
 
      ink   (near-black)  structure and body copy
      accent(gold)        interactive + metadata — links, nav state, venue
@@ -11,14 +11,9 @@
                          self-name in author lists, the job-market line,
                          recognition badges, honours
      mark  (black chip)  software artifacts, distinct from research output
-
-   An all-Cardinal variant is kept for comparison; switch with
-   <html data-theme="cardinal">.
    ========================================================================== */
 
-/* ---- default palette: black, gold, Cardinal ---------------------------- */
-:root,
-[data-theme='gold'] {
+:root {
   --bg: #FAF8F3;
   --surface: #FFFFFF;
   --surface-2: #F5F2E9;
@@ -45,7 +40,6 @@
   /* the "black" half of black-and-gold — software, not research output */
   --mark: #2A2520;
   --mark-soft: #EFEBE2;
-  --mark-edge: #CBC3B3;
 
   --shadow-tint: 27, 24, 19;
   --accent-tint: 122, 92, 12;
@@ -54,51 +48,13 @@
   --wash-1: rgba(201, 162, 39, 0.10);
   --wash-2: rgba(140, 21, 21, 0.05);
   --wash-3: rgba(27, 24, 19, 0.045);
-}
 
-/* ---- variant: all Cardinal --------------------------------------------- */
-[data-theme='cardinal'] {
-  --bg: #FAF9F8;
-  --surface: #FFFFFF;
-  --surface-2: #F6F3F2;
-
-  --ink: #211C1C;
-  --ink-2: #6B5E5E;
-  --ink-3: #746666;
-
-  --line: #EBE5E4;
-  --line-2: #DCD3D1;
-
-  --accent: #8C1515;
-  --accent-bright: #B01B1B;
-  --accent-soft: #F8E8E7;
-  --accent-edge: #DEB2B1;
-
-  /* here identity and interaction share the one accent */
-  --signal: #8C1515;
-  --signal-soft: #F8E8E7;
-  --signal-edge: #DEB2B1;
-
-  --mark: #7E5C0C;
-  --mark-soft: #FBF2DF;
-  --mark-edge: #E4CD97;
-
-  --shadow-tint: 33, 28, 28;
-  --accent-tint: 140, 21, 21;
-  --header-bg: rgba(250, 249, 248, 0.82);
-
-  --wash-1: rgba(140, 21, 21, 0.07);
-  --wash-2: rgba(126, 92, 12, 0.055);
-  --wash-3: rgba(33, 28, 28, 0.035);
-}
-
-/* ---- shared tokens ----------------------------------------------------- */
-:root {
   --font-display: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-mono: 'JetBrains Mono', 'IBM Plex Mono', Consolas, monospace;
 
-  --space-1: 4px;  --space-2: 8px;  --space-3: 12px; --space-4: 16px;
+  /* 4px base; --space-1 (4px) is unused and therefore not defined */
+  --space-2: 8px;  --space-3: 12px; --space-4: 16px;
   --space-5: 24px; --space-6: 32px; --space-7: 48px; --space-8: 64px; --space-9: 96px;
 
   --r-sm: 6px;
@@ -110,11 +66,8 @@
   --nav-height: 62px;
 
   --t-fast: 140ms ease;
-  --t-med: 240ms cubic-bezier(0.4, 0, 0.2, 1);
-}
 
-/* elevation follows the theme's ink so shadows never look grey-blue */
-:root {
+  /* elevation derives from the ink tint, so shadows never look grey-blue */
   --shadow-1: 0 1px 2px rgba(var(--shadow-tint), 0.05), 0 1px 3px rgba(var(--shadow-tint), 0.03);
   --shadow-2: 0 2px 4px rgba(var(--shadow-tint), 0.05), 0 10px 24px -14px rgba(var(--shadow-tint), 0.16);
   --shadow-accent: 0 4px 14px -6px rgba(var(--accent-tint), 0.26);
@@ -161,8 +114,6 @@ a.inline-link:hover, a.inline-link:focus-visible {
 
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
 
-.tnum { font-variant-numeric: tabular-nums; }
-
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
@@ -170,7 +121,7 @@ a.inline-link:hover, a.inline-link:focus-visible {
 
 /* --------------------------- airy background ---------------------------- */
 /* Three very diffuse colour washes keep the page feeling light rather than
-   plain — no texture, no noise. Hues come from the active theme. */
+   plain — no texture, no noise. */
 
 .bg-wash {
   position: fixed;
@@ -293,9 +244,6 @@ html[data-silhouette='on'] .avatar-watermark { opacity: 0.07; }
 .nav-item.is-active { background: var(--accent-soft); }
 .nav-item.is-active .nav-label { color: var(--accent); }
 .nav-item.is-active .nav-index { color: var(--accent); opacity: 0.75; }
-
-/* the sliding underline is redundant next to the active pill */
-.nav-indicator { display: none; }
 
 @media (max-width: 900px) {
   .nav-links {
