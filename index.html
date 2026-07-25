@@ -7,1214 +7,885 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="icon" type="image/vnd.microsoft.icon" href="/images/favicon.ico">
     <title>Zhuo Zheng - Stanford University</title>
-    <script src="lib/jq214/jquery.js"></script>
 
-    <link rel="stylesheet" type="text/css" href="css/bootstrap-simplex.min.css">
-    <script src="lib/bts4b2/bootstrap.bundle.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400;1,8..60,500;1,8..60,600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/site.css">
     <script src="https://kit.fontawesome.com/0cf3363282.js" crossorigin="anonymous"></script>
-    <style>
-        #bio {
-            text-align: center;
-            position: relative;
-        }
-
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        li.link {
-            float: left;
-            margin-left: 10px;
-        }
-
-        .myname {
-            color: black;
-        }
-
-        .itemtitle {
-            color: black;
-        }
-
-        .checked {
-            color: orange;
-        }
-
-        /* 模拟表格行的 Flex 容器 */
-        .pub-row {
-            display: flex;
-            width: 100%;
-            transition: background-color 0.15s ease-in-out;
-            border-bottom: 1px solid #f0f0f0; /* 加一条极淡的分割线，增加条理感 */
-        }
-
-        .pub-row:hover {
-            background-color: #f8f9fa; /* 更淡的悬停背景色 */
-        }
-
-        .pub-bar {
-            background-color: #B83A4B; /* 保留这个原有色条，或者改成 #ffcf9e 更柔和 */
-            width: 8px; /* 稍微变细一点，更精致 */
-            min-width: 8px;
-            border-radius: 6px 0 0 6px; /*哪怕是色条也给一点圆角*/
-            flex-shrink: 0;
-        }
-
-        .pub-content {
-            flex-grow: 1;
-            padding: 12px 18px; /* 增加一点呼吸感 */
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; /* 优先使用现代无衬线字体 */
-        }
-
-        /* 确保内容里的链接样式正常 */
-        .pub-content a {
-            text-decoration: none;
-        }
-
-        .pub-content a:hover {
-            text-decoration: underline;
-        }
-
-        /* 标签容器，保证按钮之间有间距 */
-        .pub-actions {
-            margin-top: 8px;
-            margin-bottom: 4px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            align-items: center;
-        }
-
-        .pub-tag {
-            display: inline-flex;
-            align-items: center;
-            padding: 2px 8px; /* 稍微大一点的内边距 */
-            font-size: 11px; /* 字号稍微调小，更精致 */
-            font-weight: 600;
-            letter-spacing: 0.3px; /* 增加一点字间距 */
-            border-radius: 50px; /* 全圆角（胶囊形），非常现代 */
-            color: #fff !important; /* 强制白字 */
-            text-decoration: none !important;
-            transition: all 0.2s ease;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05); /* 极淡的阴影，增加层次 */
-            border: none;
-            opacity: 0.95; /* 默认轻微透明，看起来不那么“实” */
-        }
-
-        .pub-tag:hover {
-            transform: translateY(-2px); /* 悬停轻微上浮 */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-            opacity: 1;
-        }
-
-        .pub-tag i {
-            margin-right: 5px;
-            font-size: 11px;
-        }
-
-        /* --- 清新配色方案 (Fresh Palette) --- */
-
-        /* Paper: 活力蓝 (Dodger Blue) - 经典、科技、清爽 */
-        .tag-paper {
-            background-color: #3498db;
-            background: linear-gradient(135deg, #3498db, #2980b9); /* 加上极淡的渐变会更有质感 */
-        }
-
-        /* Code: 深岩灰 (Dark Slate) - 比纯黑柔和，比浅灰有分量 */
-        .tag-code {
-            background-color: #34495e;
-        }
-
-        /* Dataset: 薄荷绿/蓝绿 (Teal/Sea Green) - 象征数据海洋，清新养眼 */
-        .tag-data {
-            background-color: #16a085;
-            background: linear-gradient(135deg, #1abc9c, #16a085);
-        }
-
-        /* Arxiv: 珊瑚红 (Coral/Soft Red) - 既醒目又不血腥 */
-        .tag-arxiv {
-            background-color: #e74c3c;
-            background: linear-gradient(135deg, #ff6b6b, #ee5253);
-        }
-
-        /* Project/Demo: 薰衣草紫 (Soft Purple) - 区别于论文，增加一抹亮色 */
-        .tag-project {
-            background-color: #9b59b6;
-            background: linear-gradient(135deg, #a29bfe, #6c5ce7);
-        }
-
-        /* 链接文字颜色优化 */
-        .pub-content a {
-            color: #2c3e50; /* 正文链接改用深灰蓝，不要纯黑 */
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        .pub-content a:hover {
-            color: #3498db; /* 悬停变蓝 */
-            text-decoration: none;
-        }
-
-        /* Highlight区域微调 */
-        .paper_highlight {
-            display: block;
-            margin-top: 8px;
-            font-size: 13px; /* 稍微缩小highlight字体 */
-            color: #891615; /* 灰色字，不要纯黑 */
-            background-color: #fcfcfc; /* 极淡的背景衬托 */
-            padding: 6px 10px;
-            border-radius: 3px;
-            border-left: 3px solid #eee; /* 左侧加一条灰线 */
-        }
-
-        .my_highlight {
-            color: #3498db; /* highlight 关键字改用蓝色 */
-        }
-
-        /* --------------------------------------------------------- */
-        /* 新增：期刊/会议 专属标签 (Venue Tag) */
-        /* --------------------------------------------------------- */
-        .tag-venue {
-            display: inline-flex;       /* 保持盒子特性 */
-            align-items: center;        /* 文字在标签内垂直居中 */
-            justify-content: center;    /* 文字在标签内水平居中 */
-
-            /* 尺寸调整 */
-            padding: 3px 8px;           /* 上下 2px，左右 8px */
-            min-height: 10px;           /* 强制给一个最小高度，保证方块饱满 */
-
-            /* 字体调整 */
-            font-size: 11px;            /* 稍微大一点，清楚一点 */
-            font-weight: 800;           /* 加粗，像 Badge */
-            line-height: 1;             /* 避免继承外部行高导致标签撑太大 */
-
-            /* 外观装饰 */
-            border-radius: 6px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: #fff;
-            box-shadow: 0 2px 4px rgba(118, 75, 162, 0.2);
-
-            /* 关键对齐属性 */
-            margin-right: 3px;          /* 标签和后面文字的间距 */
-            vertical-align: middle;     /* 【核心】让标签的中线与行内文字的中线对齐 */
-            transform: translateY(-2px);/* 【微调】因为 vertical-align: middle 有时会偏低，向上提 2px 视觉更平衡 */
-
-            cursor: default;
-        }
-
-
-        body::before {
-            content: "";
-            position: fixed;
-            inset: 0;
-            background: url("images/ZhuoZheng.png") center/contain no-repeat;
-            pointer-events: none;
-            z-index: -1;
-            /* initial state */
-            opacity: 0;
-            filter: blur(8px);
-            clip-path: circle(0% at 50% 50%);
-            transition: opacity 1.2s ease-in-out,
-            filter 1.2s ease-in-out,
-            clip-path 1.2s ease-in-out;
-        }
-
-        body.bg-show::before {
-            opacity: .14;
-            filter: blur(0);
-            clip-path: circle(150% at 50% 50%);
-        }
-    </style>
 </head>
-
 
 <body>
 
-<div class="container" style="margin-top: 20px">
-    <div class="row">
-        <div class="col-md-3">
-            <div id="bio">
-                <img src="images/me_canyon.jpg" class="rounded-circle" style="width:70%;margin-top: 10px;" alt="zhuozheng">
-                <div style="margin: 10px;">
-                    Zhuo Zheng
-                    <br>
-                    <a href="https://cs.stanford.edu/">Department of Computer Science</a>
-                    <br>
-                    <a href="https://www.stanford.edu/">Stanford University</a>
+<div class="avatar-watermark" aria-hidden="true"></div>
+
+<header class="site-header">
+    <div class="nav-inner">
+        <a href="#hero" class="nav-word">Zhuo Zheng</a>
+        <nav class="nav-links" id="nav-links" aria-label="Section navigation">
+            <a href="#hero" class="nav-item" data-target="hero"><span class="nav-index">01</span><span class="nav-label">Bio</span></a>
+            <a href="#lineage" class="nav-item" data-target="lineage"><span class="nav-index">02</span><span class="nav-label">Change Family</span></a>
+            <a href="#news" class="nav-item" data-target="news"><span class="nav-index">03</span><span class="nav-label">News</span></a>
+            <a href="#publications" class="nav-item" data-target="publications"><span class="nav-index">04</span><span class="nav-label">Publications</span></a>
+            <a href="#teaching" class="nav-item" data-target="teaching"><span class="nav-index">05</span><span class="nav-label">Teaching</span></a>
+            <a href="#honors" class="nav-item" data-target="honors"><span class="nav-index">06</span><span class="nav-label">Honors</span></a>
+            <a href="#talks" class="nav-item" data-target="talks"><span class="nav-index">07</span><span class="nav-label">Talks</span></a>
+            <a href="#service" class="nav-item" data-target="service"><span class="nav-index">08</span><span class="nav-label">Service</span></a>
+            <span class="nav-indicator" id="nav-indicator" aria-hidden="true"></span>
+        </nav>
+    </div>
+</header>
+
+<main class="wrap">
+
+    <!-- 01 Bio -->
+    <section id="hero" class="hero section" style="margin-top:0;">
+        <div class="hero-grid">
+            <div class="hero-photo-col">
+                <img src="images/me_canyon.jpg" alt="Zhuo Zheng" class="hero-photo-img">
+                <ul class="social-row">
+                    <li><a href="https://github.com/Z-Zheng" aria-label="Github"><i class="fab fa-github"></i></a></li>
+                    <li><a href="https://scholar.google.com/citations?user=CREpn_AAAAAJ&hl=zh-CN" aria-label="Google Scholar"><i class="fab fa-google"></i></a></li>
+                    <li><a href="https://www.researchgate.net/profile/Zhuo_Zheng7" aria-label="ResearchGate"><i class="fab fa-researchgate"></i></a></li>
+                    <li><a href="https://orcid.org/0000-0003-1811-6725" aria-label="ORCID"><i class="fab fa-orcid"></i></a></li>
+                    <li><a href="https://twitter.com/ZhuoZheng2" aria-label="Twitter"><i class="fab fa-twitter-square"></i></a></li>
+                </ul>
+            </div>
+            <div class="hero-intro">
+                <h1 class="hero-name">Zhuo Zheng</h1>
+                <p class="hero-affiliation">
+                    <a href="https://cs.stanford.edu/" class="inline-link">Department of Computer Science</a>,
+                    <a href="https://www.stanford.edu/" class="inline-link">Stanford University</a>
+                </p>
+                <div class="hero-divider" aria-hidden="true"></div>
+                <div class="hero-body">
+                    <p class="prose">
+                        Bio: I am currently a postdoc at Stanford Artificial Intelligence Laboratory (SAIL), Department of Computer
+                        Science, Stanford University, working with Prof. <a href="https://cs.stanford.edu/~ermon/" class="inline-link">Stefano
+                        Ermon</a>, Prof. <a href="https://earth.stanford.edu/people/david-lobell" class="inline-link">David Lobell</a>, and Prof. <a
+                            href="https://web.stanford.edu/~mburke/" class="inline-link">Marshall Burke</a>.
+                        I am also Co-Lead of the Working Group on Machine/Deep Learning for Image Analysis (WG-MIA) within IEEE GRSS IADF.
+                        I received my Ph.D. in Photogrammetry and Remote Sensing from Wuhan University in 2023, advised by Prof.
+                        <a href="http://rsidea.whu.edu.cn/" class="inline-link">Yanfei Zhong</a> and Prof. <a
+                            href="http://www.lmars.whu.edu.cn/prof_web/zhangliangpei/rs/index.html" class="inline-link">Liangpei Zhang</a>.
+                        I obtained B.S. degree from the School of Geography and Information Engineering, China University of
+                        Geosciences, Wuhan, China, in 2018.
+                    </p>
+                    <p class="prose">
+                        I study Earth Vision and Simulation, especially multi-modal and multi-temporal remote sensing image
+                        understanding and generation.
+                        My research is dedicated to advancing original and insightful
+                        artificial intelligence technologies for remote sensing, with the goal of
+                        addressing pressing societal and environmental challenges and contributing to a more sustainable future for humanity.
+                        I pioneered single-temporal change representation learning for change detection and invented many foundational
+                        concepts (e.g., <a href="https://arxiv.org/pdf/2309.17031" class="inline-link">change event simulation and semantic change
+                        synthesis</a>) as well as key techniques in remote sensing change data generation, making zero-shot change
+                        monitoring possible.
+                        My research impact has been recognized in Stanford University’s World Top 2% Scientists List (Geological & Geomatics Engineering) for both 2024 and 2025.
+                        Meanwhile, I am an enthusiast of remote sensing data science competitions (commonly used ID: EVER), but now I have
+                        little time to play these games :(
+                    </p>
+
+                    <p class="job-market-callout">I am on the 2026-2027 academic job market and seeking faculty positions. Feel free to connect.</p>
+
+                    <p class="hero-email">Email: zhuozheng [at] cs [dot] stanford [dot] edu; zhengzhuo [at] whu [dot] edu [dot] cn</p>
                 </div>
             </div>
         </div>
-        <div class="col-md-9">
-            <p>
-                Bio: I am currently a postdoc at Stanford Artificial Intelligence Laboratory (SAIL), Department of Computer
-                Science, Stanford University, working with Prof. <a href="https://cs.stanford.edu/~ermon/">Stefano
-                Ermon</a>, Prof. <a href="https://earth.stanford.edu/people/david-lobell">David Lobell</a>, and Prof. <a
-                    href="https://web.stanford.edu/~mburke/">Marshall Burke</a>.
-                I am also Co-Lead of the Working Group on Machine/Deep Learning for Image Analysis (WG-MIA) within IEEE GRSS IADF.
-                I received my Ph.D. in Photogrammetry and Remote Sensing from Wuhan University in 2023, advised by Prof.
-                <a href="http://rsidea.whu.edu.cn/">Yanfei Zhong</a> and Prof. <a
-                    href="http://www.lmars.whu.edu.cn/prof_web/zhangliangpei/rs/index.html">Liangpei Zhang</a>.
-                I obtained B.S. degree from the School of Geography and Information Engineering, China University of
-                Geosciences, Wuhan, China, in 2018.
-            </p>
-            <p>
-                I study Earth Vision and Simulation, especially multi-modal and multi-temporal remote sensing image
-                understanding and generation.
-                My research is dedicated to advancing original and insightful
-                artificial intelligence technologies for remote sensing, with the goal of
-                addressing pressing societal and environmental challenges and contributing to a more sustainable future for humanity.
-                I pioneered single-temporal change representation learning for change detection and invented many foundational
-                concepts (e.g., <a href="https://arxiv.org/pdf/2309.17031">change event simulation and semantic change
-                synthesis</a>) as well as key techniques in remote sensing change data generation, making zero-shot change
-                monitoring possible.
-                My research impact has been recognized in Stanford University’s World Top 2% Scientists List (Geological & Geomatics Engineering) for both 2024 and 2025.
-                Meanwhile, I am an enthusiast of remote sensing data science competitions (commonly used ID: EVER), but now I have
-                little time to play these games :(
-            </p>
+    </section>
 
-            <p>I am on the 2026-2027 academic job market and seeking faculty positions. Feel free to connect.</p>
+    <!-- 02 Change Family -->
+    <section id="lineage" class="section">
+        <div class="section-head"><span class="section-num">02</span><h2 class="section-title">Our Change Family</h2></div>
 
-            <p>Email: zhuozheng [at] cs [dot] stanford [dot] edu; zhengzhuo [at] whu [dot] edu [dot] cn</p>
-            <ul>
-                <li class="link">
-                    <a href="https://github.com/Z-Zheng">
-                        <i class="fab fa-github"></i>
-                        Github
-                    </a>
-                </li>
-                <li class="link">
-                    <a href="https://scholar.google.com/citations?user=CREpn_AAAAAJ&hl=zh-CN">
-                        <i class="fab fa-google"></i>
-                        Google Scholar
-                    </a>
-                </li>
-                <li class="link">
-                    <a href="https://www.researchgate.net/profile/Zhuo_Zheng7">
-                        <i class="fab fa-researchgate"></i>
-                        ResearchGate
-                    </a>
-                </li>
-                <li class="link">
-                    <a href="https://orcid.org/0000-0003-1811-6725">
-                        <i class="fab fa-orcid"></i>
-                        ORCID
-                    </a>
-                </li>
-                <li class="link">
-                    <a href="https://twitter.com/ZhuoZheng2">
-                        <i class="fab fa-twitter-square"></i>
-                        Twitter
-                    </a>
-                </li>
+        <div class="kg">
+            <div class="kg-root">
+                <span class="kg-root-title">Change Modeling</span>
+                <span class="kg-root-sub">representation · generation · foundation · application</span>
+            </div>
+
+            <div class="kg-branches">
+
+                <div class="kg-branch">
+                    <div class="kg-cat"><span class="kg-cat-idx">01</span> Representation &amp; Principles</div>
+                    <ul class="kg-leaves">
+                        <li class="kg-node">
+                            <span class="kg-name"><a href="https://www.sciencedirect.com/science/article/pii/S0924271624002624" class="inline-link">Probabilistic Change Model (PCM)</a></span>
+                            <span class="kg-desc">unified change modeling principle</span>
+                        </li>
+                        <li class="kg-node">
+                            <span class="kg-name"><a href="https://arxiv.org/abs/2108.07002" class="inline-link">ChangeStar</a> · <a href="https://link.springer.com/article/10.1007/s11263-024-02141-4" class="inline-link">ChangeStar2</a></span>
+                            <span class="kg-desc">single-temporal change representation, temporal symmetry</span>
+                        </li>
+                        <li class="kg-node">
+                            <span class="kg-name"><a href="https://www.sciencedirect.com/science/article/pii/S0924271621002835" class="inline-link">ChangeMask</a></span>
+                            <span class="kg-desc">temporal-symmetric semantic change (m2m)</span>
+                        </li>
+                        <li class="kg-node">
+                            <span class="kg-name"><a href="https://www.sciencedirect.com/science/article/pii/S0924271624002624" class="inline-link">ChangeSparse</a></span>
+                            <span class="kg-desc">sparse change transformer, a Deep PCM instance</span>
+                        </li>
+                        <li class="kg-node">
+                            <span class="kg-name"><a href="https://github.com/Z-Zheng/pytorch-change-models" class="inline-link">torchange</a></span>
+                            <span class="kg-desc">unified open-source benchmark library</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="kg-branch">
+                    <div class="kg-cat"><span class="kg-cat-idx">02</span> Generative Modeling</div>
+                    <ul class="kg-leaves">
+                        <li class="kg-node">
+                            <span class="kg-name"><a href="https://arxiv.org/abs/2309.17031" class="inline-link">Changen</a> · <a href="https://arxiv.org/abs/2406.17998" class="inline-link">Changen2</a></span>
+                            <span class="kg-desc">pioneering remote sensing change data generation</span>
+                        </li>
+                        <li class="kg-node">
+                            <span class="kg-name"><a href="https://www.sciencedirect.com/science/article/pii/S0034425725003839" class="inline-link">NeDS</a></span>
+                            <span class="kg-desc">disaster simulation via deep generative modeling</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="kg-branch">
+                    <div class="kg-cat"><span class="kg-cat-idx">03</span> Foundation &amp; Zero-shot</div>
+                    <ul class="kg-leaves">
+                        <li class="kg-node">
+                            <span class="kg-name"><a href="https://arxiv.org/abs/2402.01188" class="inline-link">Segment Any Change</a></span>
+                            <span class="kg-desc">the first zero-shot change detector</span>
+                        </li>
+                        <li class="kg-node">
+                            <span class="kg-name"><a href="https://arxiv.org/abs/2410.06234" class="inline-link">TEOChat &amp; TEOChatlas</a></span>
+                            <span class="kg-desc">the first temporal EO vision-language model &amp; dataset</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="kg-branch">
+                    <div class="kg-cat"><span class="kg-cat-idx">04</span> Damage Assessment</div>
+                    <ul class="kg-leaves">
+                        <li class="kg-node">
+                            <span class="kg-name"><a href="https://www.sciencedirect.com/science/article/pii/S0034425721003564" class="inline-link">ChangeOS</a></span>
+                            <span class="kg-desc">object-based semantic change (o2m), building damage</span>
+                        </li>
+                        <li class="kg-node">
+                            <span class="kg-name"><a href="https://www.sciencedirect.com/science/article/pii/S0034425724004425" class="inline-link">STCA</a></span>
+                            <span class="kg-desc">transferable damage, single-temporal change adaptation</span>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 03 News -->
+    <section id="news" class="section">
+        <div class="section-head"><span class="section-num">03</span><h2 class="section-title">Recent News</h2></div>
+        <div class="news-list">
+            <div class="news-row"><div class="news-date">2026.05</div><p class="news-body">Serve as Associate Editor of <a href="https://www.nature.com/npjgeoinform/" class="inline-link">npj Geoinformatics</a>.</p></div>
+            <div class="news-row"><div class="news-date">2025.11</div><p class="news-body"><i class="fas fa-fire news-flag"></i>One paper about poverty measurement got accepted to JDE.</p></div>
+            <div class="news-row"><div class="news-date">2025.10</div><p class="news-body">We are organizing the 3rd Workshop on Computer Vision for Earth Observation (<a href="https://geoai.ornl.gov/cv4eo-wacv/" class="inline-link">CV4EO</a>) in WACV 2026.</p></div>
+            <div class="news-row"><div class="news-date">2025.09</div><p class="news-body"><i class="fas fa-trophy news-flag"></i>Our DisasterM3 Team won first place (1/261) at the AI for Earthquake Response Challenge by European Space Agency</p></div>
+            <div class="news-row"><div class="news-date">2025.09</div><p class="news-body"><i class="fas fa-trophy news-flag"></i>Selected for Stanford University's <a href="https://elsevier.digitalcommonsdata.com/datasets/btchxktzyw/8" class="inline-link">World Top 2% Scientists List</a> (Geological & Geomatics Engineering) for 2025.</p></div>
+            <div class="news-row"><div class="news-date">2025.09</div><p class="news-body">Serve as Co-Lead of the Working Group on Machine/Deep Learning for Image Analysis (WG-MIA) in IEEE GRSS IADF</p></div>
+            <div class="news-row"><div class="news-date">2025.08</div><p class="news-body"><i class="fas fa-fire news-flag"></i>NeDS (Neural Disaster Simulation) got accepted to RSE.</p></div>
+            <div class="news-row"><div class="news-date">2025.05</div><p class="news-body">We are organizing ICCV workshop <a href="http://sustain-eo-ai.github.io" class="inline-link">SEA: Sustainability with Earth Observation & AI</a>.</p></div>
+            <div class="news-row"><div class="news-date">2025.03</div><p class="news-body"><i class="fas fa-trophy news-flag"></i>Awarded with 2025 AAG RSSG Early Career Award.</p></div>
+            <div class="news-row"><div class="news-date">2025.01</div><p class="news-body"><i class="fas fa-fire news-flag"></i>TEOChat got accepted to ICLR 2025.</p></div>
+        </div>
+        <!-- Archived news (earlier entries), preserved verbatim for reference; not rendered. -->
+        <!--            <p>2024.10, Changen2 got accepted to IEEE TPAMI.</p>-->
+        <!--            <p>2024.10, Awarded with the 2024 Graduate Academic Innovation Outstanding Prize.</p>-->
+        <!--            <p>2024.09, Segment Any Change got accepted to NeurIPS 2024.</p>-->
+        <!--            <p>2024.09, selected for Stanford University's <a-->
+        <!--                    href="https://elsevier.digitalcommonsdata.com/datasets/btchxktzyw/7">World Top 2% Scientists List</a>-->
+        <!--                (Geological & Geomatics Engineering) for 2024.</p>-->
+        <!--            <p>2024.09, <a href="https://www.sciencedirect.com/science/article/pii/S0034425724004425">STCA</a> got accepted to-->
+        <!--                RSE.</p>-->
+        <!--            <p>2024.06, <a href="https://www.sciencedirect.com/science/article/pii/S0924271624002624">DPCM and ChangeSparse</a>-->
+        <!--                got accepted to ISPRS P&RS.</p>-->
+        <!--            <p>2024.05, <a href="https://link.springer.com/article/10.1007/s11263-024-02141-4">ChangeStar2</a> got accepted in-->
+        <!--                IJCV.</p>-->
+        <!--            <p>2023.10, <a href="https://zenodo.org/record/8404754">Urban Vehicle Segmentation (UV6K) dataset</a> is-->
+        <!--                publicly available. Use it in your study now!</p>-->
+        <!--            <p>2023.07, One paper is accepted by ICCV 2023.</p>-->
+        <!--            <p>2023.07, One paper is accepted by IEEE TPAMI.</p>-->
+        <!--            <p>2023.06, Awarded with Li Xiaowen Remote Sensing Young Scholar Award.</p>-->
+        <!--            <p>2022.12, Awarded with the 16th Wuhan University Top Ten Academic Stars.</p>-->
+        <!--            <p>2022.10, Awarded with the 2022 Graduate Academic Innovation Outstanding Prize.</p>-->
+        <!--            <p>2021.12, Awarded with "Wang Zhizhuo Innovation Talent" Outstanding Prize.</p>-->
+        <!--            <p>2021.10, One paper is accepted by NeurIPS 2021 Datasets and Benchmarks.</p>-->
+        <!--            <p>2021.10, One paper is accepted by ISPRS P&RS.</p>-->
+        <!--            <p>2021.08, One paper is accepted by RSE.</p>-->
+        <!--            <p>2021.07, One paper is accepted by ICCV 2021.</p>-->
+        <!--            <p>2021.07, I win the 5th place in the Overhead Geopose Challenge hosted by NGA.</p>-->
+        <!--            <p>2021.03, Our team win the 4th place in 2021 IEEE GRSS Data Fusion Contest, Track: Multitemporal Semantic-->
+        <!--                Change Detection.</p>-->
+        <!--            <p>2021.03, Our <a href="https://www.ingentaconnect.com/content/asprs/pers/2020/00000086/00000003/art00006">PE&RS-->
+        <!--                paper</a> wins the first place in the 2021 John I. Davidson President's Award.-->
+        <!--            <p>2020.12, One paper is accepted by ISPRS P&RS.</p>-->
+        <!--            <p>2020.11, the <a href="https://github.com/Z-Zheng/FarSeg">source code</a> of FarSeg (CVPR 2020) has been-->
+        <!--                available.</p>-->
+        <!--            <p>2020.10, Awarded with the 2020 Graduate Academic Innovation Outstanding Prize.</p>-->
+        <!--            <p>2020.06, I win the top graduate award at SpaceNet 6 & EarthVision workshop challenge at CVPR 2020.</p>-->
+        <!--            <p>2020.05, the <a href="https://github.com/Z-Zheng/FreeNet">source code</a> of FPGA (TGRS 2020) has been-->
+        <!--                available.</p>-->
+        <!--            <p>2020.04, One paper is accepted by ISPRS P&RS.</p>-->
+        <!--            <p>2020.03, One paper is accepted by TGRS.</p>-->
+        <!--            <p>2020.02, One paper is accepted by CVPR 2020.</p>-->
+        <!--            &lt;!&ndash;            <p>2020.02, I achieve 4th overall in <a href="https://xview2.org/">xView2 Challenge</a>.</p>&ndash;&gt;-->
+        <!--            <p>2020.01, One paper is accepted by TGRS.</p>-->
+    </section>
+
+    <!-- 04 Publications -->
+    <section id="publications" class="section">
+        <div class="section-head"><span class="section-num">04</span><h2 class="section-title">Selected Publication</h2></div>
+        <div class="pub-list">
+
+            <article class="pub-entry">
+                <div class="pub-num">20</div>
+                <div>
+                    <div class="pub-meta"><span class="venue-badge">JDE</span> Journal of Development Economics, 2025 &middot; SCI Q1 Top</div>
+                    <p class="pub-title">Dynamic, high-resolution poverty measurement in data-scarce environments</p>
+                    <p class="pub-authors"><strong>Zhuo Zheng</strong>, Timothy Wu, Richard Lee, David Newhouse, Talip Kilic, Marshall Burke, Stefano Ermon, David Lobell</p>
+                    <div class="pub-tags">
+                        <a class="resource-tag" href="https://www.sciencedirect.com/science/article/pii/S0304387825002421"><i class="fas fa-file-alt"></i>Paper</a>
+                    </div>
+                </div>
+            </article>
+
+            <article class="pub-entry">
+                <div class="pub-num">19</div>
+                <div>
+                    <div class="pub-meta"><span class="venue-badge">RSE</span> Remote Sensing of Environment, 2025 &middot; SCI Q1 Top, ranking it 1 out of 32 in Remote Sensing</div>
+                    <p class="pub-title">Neural disaster simulation for transferable building damage assessment</p>
+                    <p class="pub-authors"><strong>Zhuo Zheng</strong>, Yanfei Zhong, Zijing Wan, Liangpei Zhang, Stefano Ermon</p>
+                    <div class="pub-tags">
+                        <a class="resource-tag" href="https://www.sciencedirect.com/science/article/pii/S0034425725003839"><i class="fas fa-file-alt"></i>Paper</a>
+                        <a class="resource-tag" href="https://github.com/Z-Zheng/pytorch-change-models"><i class="fab fa-github"></i>Code</a>
+                    </div>
+                    <p class="pub-quote"><strong>Highlight:</strong> <strong>Neural Disaster Simulation (NeDS)</strong> simulates disasters with customizable types and intensity levels and generates visually interpretable pseudo bitemporal damage samples to improve transferable building damage assessment.</p>
+                </div>
+            </article>
+
+            <article class="pub-entry">
+                <div class="pub-num">18</div>
+                <div>
+                    <div class="pub-meta"><span class="venue-badge">NeurIPS</span> 39th Annual Conference on Neural Information Processing Systems, 2025</div>
+                    <p class="pub-title">DisasterM3: A Remote Sensing Vision-Language Dataset for Disaster Damage Assessment and Response</p>
+                    <p class="pub-authors">Junjue Wang<sup>*</sup>, Weihao Xuan<sup>*</sup>, Heli Qi, Zhihao Liu, Kunyi Liu, Yuhan Wu, Hongruixuan Chen, Jian Song, Junshi Xia, <strong>Zhuo Zheng</strong>, Naoto Yokoya</p>
+                    <div class="pub-tags">
+                        <a class="resource-tag" href="https://github.com/Junjue-Wang/DisasterM3"><i class="fas fa-database"></i>Dataset</a>
+                        <a class="resource-tag" href="https://arxiv.org/abs/2505.21089"><i class="fas fa-file-pdf"></i>arXiv</a>
+                    </div>
+                    <p class="pub-quote"><strong>Highlight:</strong> <strong>DisasterM3</strong> includes 26,988 bi-temporal satellite images and 123k instruction pairs across 5 continents, which features 36 historical disaster events, 9 disaster-related visual perception and reasoning tasks, and Optical-SAR Observation data.</p>
+                </div>
+            </article>
+
+            <article class="pub-entry">
+                <div class="pub-num">17</div>
+                <div>
+                    <div class="pub-meta"><span class="venue-badge">ICLR</span> International Conference on Learning Representations, 2025</div>
+                    <p class="pub-title">TEOChat: A Large Vision-Language Assistant for Temporal Earth Observation Data</p>
+                    <p class="pub-authors">Jeremy Andrew Irvin, Emily Ruoyu Liu, Joyce Chuyi Chen, Ines Dormoy, Jinyoung Kim, Samar Khanna, <strong>Zhuo Zheng</strong>, Stefano Ermom</p>
+                    <div class="pub-tags">
+                        <a class="resource-tag" href="https://github.com/ermongroup/TEOChat"><i class="fab fa-github"></i>Code</a>
+                        <a class="resource-tag" href="https://github.com/ermongroup/TEOChat"><i class="fas fa-database"></i>TEOChatlas Dataset</a>
+                        <a class="resource-tag" href="https://huggingface.co/spaces/jirvin16/TEOChat"><i class="fas fa-rocket"></i>Demo</a>
+                        <a class="resource-tag" href="https://arxiv.org/abs/2410.06234"><i class="fas fa-file-pdf"></i>arXiv</a>
+                    </div>
+                    <p class="pub-quote"><strong>Highlight:</strong> <strong>TEOChatlas</strong>, the first temporal EO instruction-following dataset that has &gt;500k instruction-following examples, spanning dozens of spatial and temporal reasoning tasks. <strong>TEOChat</strong> is the first VLM that can converse about temporal earth observation imagery.</p>
+                </div>
+            </article>
+
+            <article class="pub-entry">
+                <div class="pub-num">16</div>
+                <div>
+                    <div class="pub-meta"><span class="venue-badge">TPAMI</span> IEEE Transactions on Pattern Analysis and Machine Intelligence, 2024 &middot; SCI Q1 Top</div>
+                    <p class="pub-title">Changen2: Multi-Temporal Remote Sensing Generative Change Foundation Model</p>
+                    <p class="pub-authors"><strong>Zhuo Zheng</strong>, Stefano Ermon, Dongjun Kim, Liangpei Zhang, Yanfei Zhong</p>
+                    <div class="pub-tags">
+                        <a class="resource-tag" href="https://ieeexplore.ieee.org/document/10713915"><i class="fas fa-file-alt"></i>Paper</a>
+                        <a class="resource-tag" href="https://github.com/Z-Zheng/pytorch-change-models"><i class="fab fa-github"></i>Code</a>
+                        <a class="resource-tag" href="https://huggingface.co/datasets/EVER-Z/Changen2-S1-15k"><i class="fas fa-database"></i>Dataset (S1-15k)</a>
+                        <a class="resource-tag" href="https://huggingface.co/datasets/EVER-Z/Changen2-S9-27k"><i class="fas fa-database"></i>Dataset (S9-27k)</a>
+                        <a class="resource-tag" href="https://arxiv.org/abs/2406.17998"><i class="fas fa-file-pdf"></i>arXiv</a>
+                    </div>
+                    <p class="pub-quote"><strong>Highlight:</strong> <strong>Generative Change Foundation Model</strong>, Changen2 can be trained at scale using self-supervision, yielding change supervisory signals from unlabeled single-temporal images; The resulting task-specific foundation model possesses inherent zero-shot change detection capabilities and excellent transferability.</p>
+                    <div class="badge-row"><span class="badge-fill"><i class="fas fa-trophy"></i>ESI Highly Cited Paper</span></div>
+                </div>
+            </article>
+
+            <article class="pub-entry">
+                <div class="pub-num">15</div>
+                <div>
+                    <div class="pub-meta"><span class="venue-badge">NeurIPS</span> 38th Annual Conference on Neural Information Processing Systems, 2024</div>
+                    <p class="pub-title">Segment Any Change</p>
+                    <p class="pub-authors"><strong>Zhuo Zheng</strong>, Yanfei Zhong, Liangpei Zhang, Stefano Ermon</p>
+                    <div class="pub-tags">
+                        <a class="resource-tag" href="https://github.com/Z-Zheng/pytorch-change-models"><i class="fab fa-github"></i>Code</a>
+                        <a class="resource-tag" href="https://arxiv.org/abs/2402.01188"><i class="fas fa-file-pdf"></i>arXiv</a>
+                    </div>
+                    <p class="pub-quote"><strong>Highlight:</strong> <strong>Zero-shot Change Detection</strong> is introduced for the first time; Training-free Adaptation for Foundation models.</p>
+                </div>
+            </article>
+
+            <article class="pub-entry">
+                <div class="pub-num">14</div>
+                <div>
+                    <div class="pub-meta"><span class="venue-badge">RSE</span> Remote Sensing of Environment, 2024 &middot; SCI Q1 Top, ranking it 1 out of 32 in Remote Sensing</div>
+                    <p class="pub-title">Towards transferable building damage assessment via unsupervised single-temporal change adaptation</p>
+                    <p class="pub-authors"><strong>Zhuo Zheng</strong>, Yanfei Zhong, Liangpei Zhang, Marshall Burke, David B. Lobell, Stefano Ermon</p>
+                    <div class="pub-tags">
+                        <a class="resource-tag" href="https://www.sciencedirect.com/science/article/pii/S0034425724004425"><i class="fas fa-file-alt"></i>Paper</a>
+                    </div>
+                    <p class="pub-quote"><strong>Highlight:</strong> <strong>Transferable building damage assessment</strong>; Unsupervised single-temporal change adaptation (STCA) enables models to achieve adaptation with only target pre-disaster images.</p>
+                </div>
+            </article>
+
+            <article class="pub-entry">
+                <div class="pub-num">13</div>
+                <div>
+                    <div class="pub-meta"><span class="venue-badge">ISPRS P&amp;RS</span> ISPRS Journal of Photogrammetry and Remote Sensing, 2024 &middot; SCI Q1 Top, ranking it 1 out of 50 in Geography, Physical</div>
+                    <p class="pub-title">Unifying Remote Sensing Change Detection via Deep Probabilistic Change Models: From Principles, Models to Applications</p>
+                    <p class="pub-authors"><strong>Zhuo Zheng</strong>, Yanfei Zhong, Ji Zhao, Ailong Ma, Liangpei Zhang</p>
+                    <div class="pub-tags">
+                        <a class="resource-tag" href="https://www.sciencedirect.com/science/article/pii/S0924271624002624"><i class="fas fa-file-alt"></i>Paper</a>
+                        <a class="resource-tag" href="https://github.com/Z-Zheng/pytorch-change-models"><i class="fab fa-github"></i>Code</a>
+                    </div>
+                    <p class="pub-quote"><strong>Highlight:</strong> Unified probabilistic change modeling: <strong>Probabilistic Change Model (PCM)</strong>; and strong model instance: <strong>ChangeSparse</strong>.</p>
+                </div>
+            </article>
+
+            <article class="pub-entry">
+                <div class="pub-num">12</div>
+                <div>
+                    <div class="pub-meta"><span class="venue-badge">IJCV</span> International Journal of Computer Vision, 2024 &middot; SCI Q1 Top</div>
+                    <p class="pub-title">Single-Temporal Supervised Learning for Universal Remote Sensing Change Detection</p>
+                    <p class="pub-authors"><strong>Zhuo Zheng</strong>, Ailong Ma, Liangpei Zhang, Yanfei Zhong</p>
+                    <div class="pub-tags">
+                        <a class="resource-tag" href="https://link.springer.com/article/10.1007/s11263-024-02141-4"><i class="fas fa-file-alt"></i>Paper</a>
+                        <a class="resource-tag" href="https://github.com/Z-Zheng/pytorch-change-models"><i class="fab fa-github"></i>Code</a>
+                    </div>
+                    <p class="pub-quote"><strong>Highlight:</strong> <strong>ChangeStar2:</strong> STAR with Faster and More Stable Convergence; Universal Remote Sensing Change Detection (object, semantic, class-agnostic, time-series change)</p>
+                </div>
+            </article>
+
+            <article class="pub-entry">
+                <div class="pub-num">11</div>
+                <div>
+                    <div class="pub-meta"><span class="venue-badge">ICCV</span> International Conference on Computer Vision, 2023</div>
+                    <p class="pub-title">Scalable Multi-Temporal Remote Sensing Change Data Generation via Simulating Stochastic Change Process</p>
+                    <p class="pub-authors"><strong>Zhuo Zheng</strong>, Shiqi Tian, Ailong Ma, Liangpei Zhang, Yanfei Zhong</p>
+                    <div class="pub-tags">
+                        <a class="resource-tag" href="https://github.com/Z-Zheng/Changen"><i class="fab fa-github"></i>Code</a>
+                        <a class="resource-tag" href="https://arxiv.org/pdf/2309.17031"><i class="fas fa-file-pdf"></i>arXiv</a>
+                    </div>
+                    <p class="pub-quote"><strong>Highlight:</strong> <strong>New direction</strong>: Generative Change Modeling; <strong>Changen</strong>, Change generator, enables object change generation with controllable object property and change event; Effective <strong>synthetic change data pre-training</strong>.</p>
+                    <p class="adopt-note"><i class="fas fa-star"></i>The method has been included in <a href="https://www.arcgis.com/home/item.html?id=a779106ce9eb4fc28de6d04d8edb893c" class="inline-link">Esri ArcGIS</a>.</p>
+                </div>
+            </article>
+
+            <article class="pub-entry">
+                <div class="pub-num">10</div>
+                <div>
+                    <div class="pub-meta"><span class="venue-badge">TPAMI</span> IEEE Transactions on Pattern Analysis and Machine Intelligence, 2023 &middot; SCI Q1 Top</div>
+                    <p class="pub-title">FarSeg++: Foreground-Aware Relation Network for Geospatial Object Segmentation in High Spatial Resolution Remote Sensing Imagery</p>
+                    <p class="pub-authors"><strong>Zhuo Zheng</strong>, Yanfei Zhong, Junjue Wang, Ailong Ma, Liangpei Zhang</p>
+                    <div class="pub-tags">
+                        <a class="resource-tag" href="https://ieeexplore.ieee.org/document/10188509"><i class="fas fa-file-alt"></i>Paper</a>
+                        <a class="resource-tag" href="https://github.com/Z-Zheng/FarSeg"><i class="fab fa-github"></i>Code</a>
+                        <a class="resource-tag" href="https://zenodo.org/record/8404754"><i class="fas fa-database"></i>UV6K Dataset</a>
+                    </div>
+                    <p class="adopt-note"><i class="fas fa-star"></i>The method has been included in <a href="https://www.arcgis.com/home/item.html?id=a779106ce9eb4fc28de6d04d8edb893c" class="inline-link">Esri ArcGIS</a>.</p>
+                </div>
+            </article>
+
+            <article class="pub-entry">
+                <div class="pub-num">9</div>
+                <div>
+                    <div class="pub-meta"><span class="venue-badge">ISPRS P&amp;RS</span> ISPRS Journal of Photogrammetry and Remote Sensing, 2022 &middot; SCI Q1 Top, ranking it 1 out of 50 in Geography, Physical</div>
+                    <p class="pub-title">ChangeMask: Deep Multi-task Encoder-Transformer-Decoder Architecture for Semantic Change Detection</p>
+                    <p class="pub-authors"><strong>Zhuo Zheng</strong>, Yanfei Zhong, Shiqi Tian, Ailong Ma, Liangpei Zhang</p>
+                    <div class="pub-tags">
+                        <a class="resource-tag" href="https://www.sciencedirect.com/science/article/pii/S0924271621002835"><i class="fas fa-file-alt"></i>Paper</a>
+                        <a class="resource-tag" href="https://github.com/Z-Zheng/pytorch-change-models"><i class="fab fa-github"></i>Code</a>
+                        <a class="resource-tag" href="assets/changemask/SECOND/train.csv"><i class="fas fa-database"></i>SECOND (Train, our split)</a>
+                        <a class="resource-tag" href="assets/changemask/SECOND/val.csv"><i class="fas fa-database"></i>SECOND (Val, our split)</a>
+                    </div>
+                    <p class="pub-quote"><strong>Highlight:</strong> <strong>Disentangled semantic and change representation</strong> and <strong>temporal symmetric transformer (TST)</strong> for <strong>semantic change detection</strong>.</p>
+                    <div class="badge-row">
+                        <span class="badge-fill"><i class="fas fa-trophy"></i>ESI Highly Cited Paper</span>
+                        <span class="badge-fill"><i class="fas fa-fire-alt"></i>ISPRS P&amp;RS Top Cited Paper</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="pub-entry">
+                <div class="pub-num">8</div>
+                <div>
+                    <div class="pub-meta"><span class="venue-badge">RSE</span> Remote Sensing of Environment, 2021 &middot; SCI Q1 Top, ranking it 1 out of 32 in Remote Sensing</div>
+                    <p class="pub-title">Building Damage Assessment for Rapid Disaster Response with a Deep Object-based Semantic Change Detection Framework: from natural disasters to man-made disasters</p>
+                    <p class="pub-authors"><strong>Zhuo Zheng</strong>, Yanfei Zhong, Junjue Wang, Ailong Ma, Liangpei Zhang</p>
+                    <div class="pub-tags">
+                        <a class="resource-tag" href="https://www.sciencedirect.com/science/article/pii/S0034425721003564"><i class="fas fa-file-alt"></i>Paper</a>
+                        <a class="resource-tag" href="https://github.com/Z-Zheng/ChangeOS"><i class="fab fa-github"></i>Code</a>
+                    </div>
+                    <p class="pub-quote"><strong>Highlight:</strong> A <strong>deep object-based semantic change detection</strong> method for <strong>building damage assessment</strong> in the context of <strong>disaster response</strong>.</p>
+                    <div class="badge-row">
+                        <span class="badge-fill"><i class="fas fa-trophy"></i>ESI Highly Cited Paper</span>
+                        <span class="badge-fill"><i class="fas fa-fire-alt"></i>RSE Top Cited Paper</span>
+                    </div>
+                    <p class="result-note"><i class="fas fa-star"></i><strong>Our solution is xView2 4th overall officially, which is a unique single-model solution among top-5.</strong></p>
+                </div>
+            </article>
+
+            <article class="pub-entry">
+                <div class="pub-num">7</div>
+                <div>
+                    <div class="pub-meta"><span class="venue-badge">ICCV</span> International Conference on Computer Vision, 2021</div>
+                    <p class="pub-title">Change is Everywhere: Single-Temporal Supervised Object Change Detection in Remote Sensing Imagery</p>
+                    <p class="pub-authors"><strong>Zhuo Zheng</strong>, Ailong Ma, Liangpei Zhang, Yanfei Zhong</p>
+                    <div class="pub-tags">
+                        <a class="resource-tag" href="https://github.com/Z-Zheng/ChangeStar"><i class="fab fa-github"></i>Code</a>
+                        <a class="resource-tag" href="http://zhuozheng.top/changestar"><i class="fas fa-globe"></i>Project</a>
+                        <a class="resource-tag" href="https://arxiv.org/abs/2108.07002"><i class="fas fa-file-pdf"></i>arXiv</a>
+                    </div>
+                    <p class="pub-quote"><strong>Highlight:</strong> A <strong>single-temporal supervised</strong> learning algorithm and a plug-and-play change detection head: <strong>ChangeMixin</strong> for <strong>change detection.</strong></p>
+                    <p class="adopt-note"><i class="fas fa-star"></i>The method has been included in <a href="https://github.com/microsoft/torchgeo" class="inline-link">microsoft/torchgeo</a> and <a href="https://github.com/PaddlePaddle/PaddleRS" class="inline-link">PaddlePaddle/PaddleRS</a> and <a href="https://www.arcgis.com/home/item.html?id=a779106ce9eb4fc28de6d04d8edb893c" class="inline-link">Esri ArcGIS</a>.</p>
+                </div>
+            </article>
+
+            <article class="pub-entry">
+                <div class="pub-num">6</div>
+                <div>
+                    <div class="pub-meta"><span class="venue-badge">NeurIPS</span> 35th Annual Conference on Neural Information Processing Systems, 2021</div>
+                    <p class="pub-title">LoveDA: A Remote Sensing Land-Cover Dataset for Domain Adaptive Semantic Segmentation</p>
+                    <p class="pub-authors">Junjue Wang<sup>*</sup>, <strong>Zhuo Zheng</strong><sup>*</sup>, Ailong Ma, Xiaoyan Lu, Yanfei Zhong (* Equal contribution)</p>
+                    <div class="pub-tags">
+                        <a class="resource-tag" href="https://github.com/Junjue-Wang/LoveDA"><i class="fas fa-database"></i>Dataset/Code</a>
+                        <a class="resource-tag" href="https://arxiv.org/abs/2110.08733"><i class="fas fa-file-pdf"></i>arXiv</a>
+                    </div>
+                </div>
+            </article>
+
+            <article class="pub-entry">
+                <div class="pub-num">5</div>
+                <div>
+                    <div class="pub-meta"><span class="venue-badge">ISPRS P&amp;RS</span> ISPRS Journal of Photogrammetry and Remote Sensing, 2021 &middot; SCI Q1 Top, ranking it 1 out of 50 in Geography, Physical</div>
+                    <p class="pub-title">Deep Multisensor Learning for Missing-Modality All-Weather Mapping</p>
+                    <p class="pub-authors"><strong>Zhuo Zheng</strong>, Ailong Ma, Liangpei Zhang, Yanfei Zhong</p>
+                    <div class="pub-tags">
+                        <a class="resource-tag" href="https://www.sciencedirect.com/science/article/pii/S0924271620303476"><i class="fas fa-file-alt"></i>Paper</a>
+                    </div>
+                    <p class="pub-quote"><strong>Highlight:</strong> A <strong>registration-free</strong> multi-modal/sensor learning algorithm via exploring <strong>meta-modal/sensory representation</strong> for <strong>all-weather mapping</strong>.</p>
+                </div>
+            </article>
+
+            <article class="pub-entry">
+                <div class="pub-num">4</div>
+                <div>
+                    <div class="pub-meta"><span class="venue-badge">CVPR</span> Computer Vision and Pattern Recognition, 2020</div>
+                    <p class="pub-title">Foreground-Aware Relation Network for Geospatial Object Segmentation in High Spatial Resolution Remote Sensing Imagery</p>
+                    <p class="pub-authors"><strong>Zhuo Zheng</strong>, Yanfei Zhong, Junjue Wang, Ailong Ma</p>
+                    <div class="pub-tags">
+                        <a class="resource-tag" href="https://github.com/Z-Zheng/FarSeg"><i class="fab fa-github"></i>Code</a>
+                        <a class="resource-tag" href="https://arxiv.org/pdf/2011.09766.pdf"><i class="fas fa-file-pdf"></i>arXiv</a>
+                    </div>
+                    <p class="pub-quote"><strong>Highlight:</strong> <strong>Explicit foreground modeling</strong> from the perspectives of <strong>relation</strong> and <strong>optimization</strong> for real-time geospatial object segmentation.</p>
+                    <p class="adopt-note"><i class="fas fa-star"></i>The method has been included in <a href="https://github.com/microsoft/torchgeo" class="inline-link">microsoft/torchgeo</a> and <a href="https://github.com/PaddlePaddle/PaddleRS" class="inline-link">PaddlePaddle/PaddleRS</a> and <a href="https://www.arcgis.com/home/item.html?id=a779106ce9eb4fc28de6d04d8edb893c" class="inline-link">Esri ArcGIS</a>.</p>
+                </div>
+            </article>
+
+            <article class="pub-entry">
+                <div class="pub-num">3</div>
+                <div>
+                    <div class="pub-meta"><span class="venue-badge">TGRS</span> IEEE Transactions on Geoscience and Remote Sensing, 2020 &middot; SCI Q1 Top</div>
+                    <p class="pub-title">FPGA: Fast Patch-Free Global Learning Framework for Fully End-to-End Hyperspectral Image Classification</p>
+                    <p class="pub-authors"><strong>Zhuo Zheng</strong>, Yanfei Zhong, Ailong Ma, Liangpei Zhang</p>
+                    <div class="pub-tags">
+                        <a class="resource-tag" href="https://ieeexplore.ieee.org/document/9007624"><i class="fas fa-file-alt"></i>Paper</a>
+                        <a class="resource-tag" href="https://github.com/Z-Zheng/FreeNet"><i class="fab fa-github"></i>Code</a>
+                    </div>
+                    <p class="pub-quote"><strong>Highlight:</strong> <strong>Patch-free is all you need</strong> towards faster and stronger hyperspectral image classification.</p>
+                    <p class="adopt-note"><i class="fas fa-star"></i>The method has been included in <a href="https://github.com/WHULuoJiaTeam/luojianet" class="inline-link">WHULuoJiaTeam/luojianet</a>.</p>
+                    <div class="badge-row"><span class="badge-fill"><i class="fas fa-trophy"></i>ESI Highly Cited Paper</span></div>
+                </div>
+            </article>
+
+            <article class="pub-entry">
+                <div class="pub-num">2</div>
+                <div>
+                    <div class="pub-meta"><span class="venue-badge">ISPRS P&amp;RS</span> ISPRS Journal of Photogrammetry and Remote Sensing, 2020 &middot; SCI Q1 Top, ranking it 1 out of 50 in Geography, Physical</div>
+                    <p class="pub-title">HyNet: Hyper-scale object detection network framework for multiple spatial resolution remote sensing imagery</p>
+                    <p class="pub-authors"><strong>Zhuo Zheng</strong>, Yanfei Zhong, Ailong Ma, Xiaobing Han, Ji Zhao, Yanfei Liu, Liangpei Zhang</p>
+                    <div class="pub-tags">
+                        <a class="resource-tag" href="https://www.sciencedirect.com/science/article/pii/S0924271620301167"><i class="fas fa-file-alt"></i>Paper</a>
+                    </div>
+                    <p class="pub-quote"><strong>Highlight:</strong> <strong>Hyper-scale = Multi-scale &times; Multi-scale</strong>, a new perspective of scale modeling at the convolutional groups.</p>
+                </div>
+            </article>
+
+            <article class="pub-entry">
+                <div class="pub-num">1</div>
+                <div>
+                    <div class="pub-meta"><span class="venue-badge">TGRS</span> IEEE Transactions on Geoscience and Remote Sensing, 2020 &middot; SCI Q1 Top</div>
+                    <p class="pub-title">COLOR: Cycling, Offline Learning, and Online Representation Framework for Airport and Airplane Detection Using GF-2 Satellite Images</p>
+                    <p class="pub-authors">Yanfei Zhong, <strong>Zhuo Zheng</strong><sup>*</sup>, Ailong Ma, Xiaoyan Lu, Liangpei Zhang &nbsp;(* denotes the corresponding author)</p>
+                    <div class="pub-tags">
+                        <a class="resource-tag" href="https://ieeexplore.ieee.org/document/9091107"><i class="fas fa-file-alt"></i>Paper</a>
+                    </div>
+                    <p class="pub-quote"><strong>Highlight:</strong> <strong>Evolvable model and dataset</strong>: making your model and dataset both great again for new domain data.</p>
+                </div>
+            </article>
+
+        </div>
+    </section>
+
+    <!-- 05 Teaching -->
+    <section id="teaching" class="section">
+        <div class="section-head"><span class="section-num">05</span><h2 class="section-title">Teaching</h2></div>
+        <ul class="teaching-list">
+            <li><strong>Fall 2023/2024: Data for Sustainable Development (CS 325B)</strong></li>
+        </ul>
+    </section>
+
+    <!-- 06 Honors and Awards -->
+    <section id="honors" class="section">
+        <div class="section-head"><span class="section-num">06</span><h2 class="section-title">Honors and Awards</h2></div>
+        <div class="award-group">
+            <div class="group-label"><span>Competitions &amp; Challenges</span></div>
+            <div class="awards-list">
+
+                <div class="award-row">
+                    <i class="fas fa-flag-checkered"></i>
+                    <div>
+                        <div class="award-title">2025 AI for Earthquake Response Challenge funded by ESA &Phi;-lab, Disasters Charter, and IEEE ESI TC, 1st Place (1/261)</div>
+                        <div class="award-links"><a href="https://ai4eo.eu/portfolio/ai-for-earthquake-response/" class="inline-link"><i class="fas fa-external-link-alt"></i>Announcement</a></div>
+                    </div>
+                </div>
+
+                <div class="award-row">
+                    <i class="fas fa-flag-checkered"></i>
+                    <div>
+                        <div class="award-title">Overhead Geopose Challenge, 5th Place (5/444)</div>
+                        <div class="award-team">This challenge is hosted by the National Geospatial-Intelligence Agency (NGA)<br>Zhuo Zheng (id: chuchu in the leaderboard)</div>
+                        <div class="award-links"><a href="https://www.drivendata.org/competitions/78/overhead-geopose-challenge/" class="inline-link"><i class="fas fa-external-link-alt"></i>Website</a></div>
+                    </div>
+                </div>
+
+                <div class="award-row">
+                    <i class="fas fa-flag-checkered"></i>
+                    <div>
+                        <div class="award-title">2021 IEEE GRSS Data Fusion Contest, Track: Multitemporal Semantic Change Detection, 4th Place</div>
+                        <div class="award-team">Zhuo Zheng, Junjue Wang, Yinhe Liu, Shiqi Tian, Yanfei Zhong, Ailong Ma</div>
+                        <div class="award-links">
+                            <a href="https://www.grss-ieee.org/community/technical-committees/2021-ieee-grss-data-fusion-contest-track-msd/" class="inline-link"><i class="fas fa-external-link-alt"></i>Website</a>
+                            <a href="https://www.grss-ieee.org/community/technical-committees/2021-ieee-grss-data-fusion-contest-results/" class="inline-link"><i class="fas fa-external-link-alt"></i>Announcement</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="award-row">
+                    <i class="fas fa-flag-checkered"></i>
+                    <div>
+                        <div class="award-title">SpaceNet 6 &amp; EarthVision workshop challenge at CVPR 2020, Top Graduate Award</div>
+                        <div class="award-team">Zhuo Zheng, Junjue Wang, Dingyuan Chen (Team name: __EVER__ in Topcoder)</div>
+                        <div class="award-links">
+                            <a href="https://spacenet.ai/sn6-challenge/" class="inline-link"><i class="fas fa-external-link-alt"></i>Website</a>
+                            <a href="https://medium.com/the-downlinq/spacenet-6-announcing-the-winners-df817712b515" class="inline-link"><i class="fas fa-external-link-alt"></i>Announcement</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="award-row">
+                    <i class="fas fa-flag-checkered"></i>
+                    <div>
+                        <div class="award-title">xView2 Challenge, 4th Place (4/3500+), overall</div>
+                        <div class="award-team">Zhuo Zheng, Junjue Wang, Yanfei Zhong, Ailong Ma, Liangpei Zhang</div>
+                        <div class="award-links">
+                            <a href="https://xview2.org/challenge" class="inline-link"><i class="fas fa-external-link-alt"></i>Website</a>
+                            <a href="https://github.com/DIUx-xView/xView2_fourth_place" class="inline-link"><i class="fas fa-external-link-alt"></i>Code</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="award-row">
+                    <i class="fas fa-flag-checkered"></i>
+                    <div>
+                        <div class="award-title">2019 IEEE GRSS Data Fusion Contest, Single-view Semantic 3D Challenge, 2nd Place</div>
+                        <div class="award-team">Zhuo Zheng, Yanfei Zhong, Junjue Wang</div>
+                        <div class="award-links">
+                            <a href="http://www.grss-ieee.org/community/technical-committees/data-fusion/2019-ieee-grss-data-fusion-contest-results/" class="inline-link"><i class="fas fa-external-link-alt"></i>Website</a>
+                            <a href="https://ieeexplore.ieee.org/abstract/document/8897927" class="inline-link"><i class="fas fa-external-link-alt"></i>Tech report</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="award-group">
+            <div class="group-label"><span>Academic Awards &amp; Honors</span></div>
+            <div class="awards-list">
+
+                <div class="award-row">
+                    <i class="fas fa-award"></i>
+                    <div>
+                        <div class="award-title">2025 Early Career Award, Remote Sensing Specialty Group (RSSG) of American Association of Geographers (AAG)</div>
+                        <div class="award-links"><a href="http://www.aagrssg.org/early-career-award/" class="inline-link"><i class="fas fa-external-link-alt"></i>Announcement</a></div>
+                    </div>
+                </div>
+
+                <div class="award-row">
+                    <i class="fas fa-award"></i>
+                    <div>
+                        <div class="award-title">2024 Graduate Academic Innovation Outstanding Prize, Wuhan University&nbsp;(武汉大学&ldquo;研究生学术创新奖&rdquo;<strong>&nbsp;特等奖&nbsp;(研究生学术创新校长奖)</strong>)</div>
+                        <div class="award-links"><a href="https://gs.whu.edu.cn/content.jsp?urltype=news.NewsContentUrl&wbtreeid=1063&wbnewsid=101421" class="inline-link"><i class="fas fa-external-link-alt"></i>Announcement</a></div>
+                    </div>
+                </div>
+
+                <div class="award-row">
+                    <i class="fas fa-award"></i>
+                    <div>
+                        <div class="award-title">2023 Li Xiaowen Remote Sensing Young Scholar Award&nbsp;(李小文遥感科学青年奖)</div>
+                        <div class="award-links"><a href="https://geo.bnu.edu.cn/xwzx/9ddb15a97da84d3aaf1d4d251b247f13.html" class="inline-link"><i class="fas fa-external-link-alt"></i>Press</a></div>
+                    </div>
+                </div>
+
+                <div class="award-row">
+                    <i class="fas fa-award"></i>
+                    <div>
+                        <div class="award-title">16th Wuhan University Top Ten Academic Stars&nbsp;(武汉大学第十六届研究生&ldquo;十大学术之星&rdquo;)</div>
+                        <div class="award-links"><a href="https://ygb.whu.edu.cn/info/1086/20257.htm" class="inline-link"><i class="fas fa-external-link-alt"></i>Announcement</a></div>
+                    </div>
+                </div>
+
+                <div class="award-row">
+                    <i class="fas fa-award"></i>
+                    <div>
+                        <div class="award-title">2022 Graduate Academic Innovation Outstanding Prize, Wuhan University&nbsp;(武汉大学&ldquo;研究生学术创新奖&rdquo;<strong>&nbsp;特等奖&nbsp;(研究生学术创新校长奖) &amp; &ldquo;研究生英诺卓越奖学金&rdquo;</strong>)</div>
+                        <div class="award-links"><a href="https://gs.whu.edu.cn/content.jsp?urltype=news.NewsContentUrl&wbtreeid=1057&wbnewsid=9971" class="inline-link"><i class="fas fa-external-link-alt"></i>Announcement</a></div>
+                    </div>
+                </div>
+
+                <div class="award-row">
+                    <i class="fas fa-award"></i>
+                    <div>
+                        <div class="award-title">2020-2021 &ldquo;Wang Zhizhuo Innovation Talent&rdquo; Outstanding Prize&nbsp;(&ldquo;王之卓创新人才奖&rdquo;<strong>&nbsp;特等奖</strong>)</div>
+                        <div class="award-links"><a href="http://rsgis.whu.edu.cn/info/1080/9862.htm" class="inline-link"><i class="fas fa-external-link-alt"></i>Announcement</a></div>
+                    </div>
+                </div>
+
+                <div class="award-row">
+                    <i class="fas fa-award"></i>
+                    <div>
+                        <div class="award-title">2021 John I. Davidson President&rsquo;s Award, 1st Place</div>
+                        <div class="award-links"><a href="https://www.asprs.org/awards-and-scholarships/award-winners/2021-award-winners.html" class="inline-link"><i class="fas fa-external-link-alt"></i>Announcement</a></div>
+                    </div>
+                </div>
+
+                <div class="award-row">
+                    <i class="fas fa-award"></i>
+                    <div>
+                        <div class="award-title">2020 Graduate Academic Innovation Outstanding Prize, Wuhan University&nbsp;(武汉大学&ldquo;研究生学术创新奖&rdquo;<strong>&nbsp;特等奖&nbsp;(研究生学术创新校长奖)</strong>)</div>
+                        <div class="award-links"><a href="https://gs.whu.edu.cn/info/1057/7261.htm" class="inline-link"><i class="fas fa-external-link-alt"></i>Announcement</a></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="award-group">
+            <div class="group-label"><span>Scholarships &amp; Fellowships</span></div>
+            <div class="awards-list">
+
+                <div class="award-row">
+                    <i class="fas fa-graduation-cap"></i>
+                    <div>
+                        <div class="award-title">2021 National Scholarship for Graduate Student&nbsp;(博士研究生国家奖学金)</div>
+                        <div class="award-links"><a href="https://www.whu.edu.cn/info/1118/19369.htm" class="inline-link"><i class="fas fa-external-link-alt"></i>Announcement</a></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 07 Invited Talks -->
+    <section id="talks" class="section">
+        <div class="section-head"><span class="section-num">07</span><h2 class="section-title">Invited Talks</h2></div>
+        <div class="talks-list">
+
+            <div class="talk-row">
+                <div class="talk-date">2025.04.12</div>
+                <div>
+                    <div class="talk-venue">第八届地球空间大数据与云计算前沿大会</div>
+                    <div class="talk-title">多时相遥感生成式变化基础模型与应用</div>
+                </div>
+            </div>
+
+            <div class="talk-row">
+                <div class="talk-date">2025.03.14</div>
+                <div>
+                    <div class="talk-venue">武汉大学, GeoScience Cafe #401</div>
+                    <div class="talk-title">高分辨率遥感时空数据的理解与生成</div>
+                </div>
+            </div>
+
+            <div class="talk-row">
+                <div class="talk-date">2025.03.04</div>
+                <div>
+                    <div class="talk-venue">WACV 2025, GeoCV &mdash; The First Workshop on Computer Vision for Geospatial Image Analysis</div>
+                    <div class="talk-title">Keynote Talk: Learning Change Representation from Single-Temporal Supervision</div>
+                </div>
+            </div>
+
+            <div class="talk-row">
+                <div class="talk-date">2024.11.19</div>
+                <div>
+                    <div class="talk-venue">International Seminar on Integrating Household Surveys with Diverse Data Sources</div>
+                    <div class="talk-title">Dynamic, high-resolution poverty measurement in data-scarce environments</div>
+                </div>
+            </div>
+
+            <div class="talk-row">
+                <div class="talk-date">2024.02.29</div>
+                <div>
+                    <div class="talk-venue">University of Georgia (UGA) GeoAI Talk Series I</div>
+                    <div class="talk-title">Scalable Multi-Temporal Remote Sensing Change Data Generation via Simulating Stochastic Change Process</div>
+                </div>
+            </div>
+
+            <div class="talk-row">
+                <div class="talk-date">2023.02.24</div>
+                <div>
+                    <div class="talk-venue">IEEE Geoscience and Remote Sensing Society (GRSS) Wuhan Student Chapter</div>
+                    <div class="talk-title">Change is Everywhere: Single-Temporal Supervised Object Change Detection in Remote Sensing Imagery</div>
+                </div>
+            </div>
+
+            <div class="talk-row">
+                <div class="talk-date">2022.12.23</div>
+                <div>
+                    <div class="talk-venue">中国图象图形学学会(CSIG) 第一期学生会员分享论坛</div>
+                    <div class="talk-title">变化无处不在：单时相监督的遥感影像变化检测</div>
+                </div>
+            </div>
+
+            <div class="talk-row">
+                <div class="talk-date">2021.12.18</div>
+                <div>
+                    <div class="talk-venue">The 2021 International Graduate Workshop on GeoInformatics (IGWG2021)</div>
+                    <div class="talk-title">Building Damage Assessment with Deep Object-based Semantic Change Detection Framework: From natural disasters to man-made disasters
+                        <span class="talk-award badge-fill"><i class="fas fa-award"></i>Excellent Presentation Award</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="talk-row">
+                <div class="talk-date">2020.11.27</div>
+                <div>
+                    <div class="talk-venue">武汉大学, GeoScience Cafe #281</div>
+                    <div class="talk-title">面向地理目标的遥感视觉理解</div>
+                </div>
+            </div>
+
+            <div class="talk-row">
+                <div class="talk-date">2019.07.31</div>
+                <div>
+                    <div class="talk-venue">2019 IEEE Geoscience and Remote Sensing Symposium (IGARSS), IEEE GRSS Data Fusion Contest I</div>
+                    <div class="talk-title">WE1.R7.3: Pop-Net: Encoder-Dual Decoder for Semantic Segmentation and Single-View Height Estimation</div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 08 Academic Service -->
+    <section id="service" class="section">
+        <div class="section-head"><span class="section-num">08</span><h2 class="section-title">Academic Service</h2></div>
+
+        <div class="service-group">
+            <div class="group-label"><span>Editor</span></div>
+            <ul class="service-simple"><li>Associate Editor, npj Geoinformatics</li></ul>
+        </div>
+
+        <div class="service-group">
+            <div class="group-label"><span>Journal Reviewer</span></div>
+            <p class="service-runin">IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI)<span class="sep">&middot;</span>International Journal of Computer Vision (IJCV)<span class="sep">&middot;</span>Remote Sensing of Environment (RSE)<span class="sep">&middot;</span>ISPRS Journal of Photogrammetry and Remote Sensing (ISPRS P&amp;RS)<span class="sep">&middot;</span>IEEE Transactions on Geoscience and Remote Sensing (TGRS)<span class="sep">&middot;</span>IEEE Transactions on Image Processing (TIP)<span class="sep">&middot;</span>IEEE Transactions on Neural Networks and Learning Systems (TNNLS)<span class="sep">&middot;</span>IEEE Transactions on Cybernetics (TCYB)<span class="sep">&middot;</span>IEEE Transactions on Circuits and Systems for Video Technology (TCSVT)<span class="sep">&middot;</span>IEEE Geoscience and Remote Sensing Letters (GRSL)<span class="sep">&middot;</span>IEEE Journal of Selected Topics in Applied Earth Observations and Remote Sensing (JSTARS)<span class="sep">&middot;</span>International Journal of Applied Earth Observation and Geoinformation (JAG)<span class="sep">&middot;</span>International Journal of Remote Sensing (IJRS)</p>
+        </div>
+
+        <div class="service-group">
+            <div class="group-label"><span>Conference Reviewer</span></div>
+            <p class="service-runin">ICML <span class="yr">(2024&ndash;2025)</span><span class="sep">&middot;</span>ICLR <span class="yr">(2024&ndash;2025)</span><span class="sep">&middot;</span>ICCV <span class="yr">(2023&ndash;2025)</span><span class="sep">&middot;</span>ECCV <span class="yr">(2022&ndash;2024)</span><span class="sep">&middot;</span>CVPR <span class="yr">(2022&ndash;2026)</span><span class="sep">&middot;</span>NeurIPS <span class="yr">(2021, 2023, 2024)</span></p>
+        </div>
+
+        <div class="service-group">
+            <div class="group-label"><span>Technical Committee</span></div>
+            <ul class="service-simple"><li><a href="https://www.grss-ieee.org/technical-committees/image-analysis-and-data-fusion/" class="inline-link">Co-Lead, WG-MIA (Machine/Deep Learning for Image Analysis), IEEE GRSS IADF<i class="fas fa-external-link-alt"></i></a></li></ul>
+        </div>
+
+        <div class="service-group">
+            <div class="group-label"><span>Workshop Organizer</span></div>
+            <ul class="service-simple">
+                <li><a href="https://sustain-eo-ai.github.io/" class="inline-link">SEA: Sustainability with Earth Observation & AI workshop, ICCV 2025<i class="fas fa-external-link-alt"></i></a></li>
+                <li><a href="https://geoai.ornl.gov/cv4eo-wacv/" class="inline-link">The 3rd Workshop on Computer Vision for Earth Observation (CV4EO), WACV 2026<i class="fas fa-external-link-alt"></i></a></li>
             </ul>
         </div>
-    </div>
+    </section>
 
-    <div class="row">
-        <div class="col-md-12">
-            <h5>Our Change Family:</h5>
-            <ul>
-                <li><a href="https://www.sciencedirect.com/science/article/pii/S0924271624002624">Probabilistic Change Model
-                    (PCM)</a> (unified change modeling principle)
-                </li>
-                <li><a href="https://www.sciencedirect.com/science/article/pii/S0924271624002624">ChangeSparse</a> (an instance of
-                    Deep PCM with a powerful sparse change transformer for binary, o2m and m2m change detection tasks)
-                </li>
-                <li><a href="https://arxiv.org/abs/2108.07002">ChangeStar</a>, <a
-                        href="https://link.springer.com/article/10.1007/s11263-024-02141-4">ChangeStar2</a> (single-temporal
-                    change
-                    representation learning, temporal symmetry)
-                </li>
-                <li><a href="https://www.sciencedirect.com/science/article/pii/S0034425721003564">ChangeOS</a> (one-to-many [o2m]
-                    semantic change detection
-                    architecture, deep object-based change detection, building damage assessment)
-                </li>
-                <li><a href="https://www.sciencedirect.com/science/article/pii/S0034425724004425">STCA</a> (transferable building
-                    damage assessment, single-temporal change adaptation)
-                </li>
-                <li><a href="https://www.sciencedirect.com/science/article/pii/S0924271621002835">ChangeMask</a> (many-to-many
-                    [m2m] semantic change detection
-                    architecture, temporal symmetric change representation)
-                </li>
-                <li><a href="https://arxiv.org/abs/2309.17031">Changen</a>, <a
-                        href="https://arxiv.org/abs/2406.17998">Changen2</a> (generative change modeling, pioneering remote
-                    sensing change data generation)
-                </li>
-                <li><a href="https://www.sciencedirect.com/science/article/pii/S0034425725003839">NeDS</a> (disaster simulation
-                    via deep generative modeling)
-                </li>
-                <li><a href="https://arxiv.org/abs/2402.01188">Segment Any Change</a> (the first zero-shot change detector)</li>
-                <li><a href="https://arxiv.org/abs/2410.06234">TEOChat and TEOChatlas</a> (the first temporal EO VLM and
-                    instruction-following dataset)
-                </li>
-                <li><a href="https://github.com/Z-Zheng/pytorch-change-models">torchange</a> (a unified change representation
-                    learning benchmark library, open-source software)
-                </li>
-            </ul>
-        </div>
-    </div>
+    <footer class="site-footer">
+        <a href="#hero" class="back-to-top">&uarr; Back to top</a>
+        <p>&copy; 2026 Zhuo Zheng</p>
+    </footer>
 
-    <div class="row">
-        <div class="col-md-12" name="news">
-            <h3>Recent News</h3>
-            <p>2026.05, Serve as Associate Editor of <a href="https://www.nature.com/npjgeoinform/">npj Geoinformatics</a>.</p>
-            <p>2025.11, One paper about poverty measurement got accepted to JDE.</p>
-            <p>2025.10, We are organizing the 3rd Workshop on Computer Vision for Earth Observation (<a
-                    href="https://geoai.ornl.gov/cv4eo-wacv/">CV4EO</a>) in WACV 2026.
-            <p>2025.09, our DisasterM3 Team won first place (1/261) at the AI for Earthquake Response Challenge by European Space
-                Agency</p>
-            <p>2025.09, selected for Stanford University's <a
-                    href="https://elsevier.digitalcommonsdata.com/datasets/btchxktzyw/8">World Top 2% Scientists List</a>
-                (Geological & Geomatics Engineering) for 2025.</p>
-            <p>2025.09, Serve as Co-Lead of the Working Group on Machine/Deep Learning for Image Analysis (WG-MIA) in IEEE GRSS
-                IADF</p>
-            <p>2025.08, NeDS (Neural Disaster Simulation) got accepted to RSE.</p>
-            <p>2025.05, We are organizing ICCV workshop <a href="http://sustain-eo-ai.github.io">SEA: Sustainability with Earth
-                Observation & AI</a>.</p>
-            <p>2025.03, Awarded with 2025 AAG RSSG Early Career Award.</p>
-            <p>2025.01, TEOChat got accepted to ICLR 2025.</p>
-<!--            <p>2024.10, Changen2 got accepted to IEEE TPAMI.</p>-->
-<!--            <p>2024.10, Awarded with the 2024 Graduate Academic Innovation Outstanding Prize.</p>-->
-<!--            <p>2024.09, Segment Any Change got accepted to NeurIPS 2024.</p>-->
-<!--            <p>2024.09, selected for Stanford University's <a-->
-<!--                    href="https://elsevier.digitalcommonsdata.com/datasets/btchxktzyw/7">World Top 2% Scientists List</a>-->
-<!--                (Geological & Geomatics Engineering) for 2024.</p>-->
-<!--            <p>2024.09, <a href="https://www.sciencedirect.com/science/article/pii/S0034425724004425">STCA</a> got accepted to-->
-<!--                RSE.</p>-->
-<!--            <p>2024.06, <a href="https://www.sciencedirect.com/science/article/pii/S0924271624002624">DPCM and ChangeSparse</a>-->
-<!--                got accepted to ISPRS P&RS.</p>-->
-<!--            <p>2024.05, <a href="https://link.springer.com/article/10.1007/s11263-024-02141-4">ChangeStar2</a> got accepted in-->
-<!--                IJCV.</p>-->
-<!--            <p>2023.10, <a href="https://zenodo.org/record/8404754">Urban Vehicle Segmentation (UV6K) dataset</a> is-->
-<!--                publicly available. Use it in your study now!</p>-->
-<!--            <p>2023.07, One paper is accepted by ICCV 2023.</p>-->
-<!--            <p>2023.07, One paper is accepted by IEEE TPAMI.</p>-->
-<!--            <p>2023.06, Awarded with Li Xiaowen Remote Sensing Young Scholar Award.</p>-->
-            <!--            <p>2022.12, Awarded with the 16th Wuhan University Top Ten Academic Stars.</p>-->
-            <!--            <p>2022.10, Awarded with the 2022 Graduate Academic Innovation Outstanding Prize.</p>-->
-            <!--            <p>2021.12, Awarded with "Wang Zhizhuo Innovation Talent" Outstanding Prize.</p>-->
-            <!--            <p>2021.10, One paper is accepted by NeurIPS 2021 Datasets and Benchmarks.</p>-->
-            <!--            <p>2021.10, One paper is accepted by ISPRS P&RS.</p>-->
-            <!--            <p>2021.08, One paper is accepted by RSE.</p>-->
-            <!--            <p>2021.07, One paper is accepted by ICCV 2021.</p>-->
-            <!--            <p>2021.07, I win the 5th place in the Overhead Geopose Challenge hosted by NGA.</p>-->
-            <!--            <p>2021.03, Our team win the 4th place in 2021 IEEE GRSS Data Fusion Contest, Track: Multitemporal Semantic-->
-            <!--                Change Detection.</p>-->
-            <!--            <p>2021.03, Our <a href="https://www.ingentaconnect.com/content/asprs/pers/2020/00000086/00000003/art00006">PE&RS-->
-            <!--                paper</a> wins the first place in the 2021 John I. Davidson President’s Award.-->
-            <!--            <p>2020.12, One paper is accepted by ISPRS P&RS.</p>-->
-            <!--            <p>2020.11, the <a href="https://github.com/Z-Zheng/FarSeg">source code</a> of FarSeg (CVPR 2020) has been-->
-            <!--                available.</p>-->
-            <!--            <p>2020.10, Awarded with the 2020 Graduate Academic Innovation Outstanding Prize.</p>-->
-            <!--            <p>2020.06, I win the top graduate award at SpaceNet 6 & EarthVision workshop challenge at CVPR 2020.</p>-->
-            <!--            <p>2020.05, the <a href="https://github.com/Z-Zheng/FreeNet">source code</a> of FPGA (TGRS 2020) has been-->
-            <!--                available.</p>-->
-            <!--            <p>2020.04, One paper is accepted by ISPRS P&RS.</p>-->
-            <!--            <p>2020.03, One paper is accepted by TGRS.</p>-->
-            <!--            <p>2020.02, One paper is accepted by CVPR 2020.</p>-->
-            <!--            &lt;!&ndash;            <p>2020.02, I achieve 4th overall in <a href="https://xview2.org/">xView2 Challenge</a>.</p>&ndash;&gt;-->
-            <!--            <p>2020.01, One paper is accepted by TGRS.</p>-->
-        </div>
-    </div>
-
-    <!--    paper-->
-    <div class="row">
-        <div class="col-md-12">
-            <h3>Selected Publication</h3>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-12">
-            <div class="d-flex flex-column">
-
-                <div class="pub-row">
-                    <div class="pub-bar"></div>
-                    <div class="pub-content">
-                        <p style="margin-left: 10px; line-height: 150%; margin-top: 8px; margin-bottom: 8px;">
-                            <i style="font-size: 15px">Dynamic, high-resolution poverty measurement in data-scarce
-                                environments</i><br>
-                            <span style="color: #000000"><b>Zhuo Zheng</b>, Timothy Wu, Richard Lee, David Newhouse, Talip Kilic, Marshall Burke, Stefano Ermon, David Lobell</span><br>
-                            <span class="tag-venue">JDE</span> Journal of Development Economics, 2025<br>
-                            SCI Q1 Top
-
-                            <span class="pub-actions">
-                                <a href="https://www.sciencedirect.com/science/article/pii/S0304387825002421"
-                                   class="pub-tag tag-paper">
-                                    <i class="fas fa-file-alt"></i> Paper
-                                </a>
-                            </span>
-                        </p>
-                    </div>
-                </div>
-
-                <div class="pub-row">
-                    <div class="pub-bar"></div>
-                    <div class="pub-content">
-                        <p style="margin-left: 10px; line-height: 150%; margin-top: 8px; margin-bottom: 8px;">
-                            <i style="font-size: 15px">Neural disaster simulation for transferable building damage
-                                assessment</i><br>
-                            <span style="color: #000000"><b>Zhuo Zheng</b>, Yanfei Zhong, Zijing Wan, Liangpei Zhang, Stefano Ermon</span><br>
-                            <span class="tag-venue">RSE</span> Remote Sensing of Environment, 2025<br>
-                            SCI Q1 Top, ranking it 1 out of 32 in Remote Sensing
-
-                            <span class="pub-actions">
-                                <a href="https://www.sciencedirect.com/science/article/pii/S0034425725003839"
-                                   class="pub-tag tag-paper">
-                                    <i class="fas fa-file-alt"></i> Paper
-                                </a>
-                                <a href="https://github.com/Z-Zheng/pytorch-change-models" class="pub-tag tag-code">
-                                    <i class="fab fa-github"></i> Code
-                                </a>
-                            </span>
-
-                            <span class="paper_highlight"><b>Highlight:</b> <b class="my_highlight">Neural Disaster Simulation (NeDS)</b> simulates disasters with customizable types and intensity levels and generates visually interpretable pseudo bitemporal damage samples to improve transferable building damage assessment.</span>
-                        </p>
-                    </div>
-                </div>
-
-                <div class="pub-row">
-                    <div class="pub-bar"></div>
-                    <div class="pub-content">
-                        <p style="margin-left: 10px; line-height: 150%; margin-top: 8px; margin-bottom: 8px;">
-                            <i style="font-size: 15px">DisasterM3: A Remote Sensing Vision-Language Dataset for Disaster Damage
-                                Assessment and Response</i><br>
-                            <span style="color: #000000">Junjue Wang*, Weihao Xuan*, Heli Qi, Zhihao Liu, Kunyi Liu, Yuhan Wu, Hongruixuan Chen, Jian Song, Junshi Xia, <b>Zhuo Zheng</b>, Naoto Yokoya</span><br>
-                            <span class="tag-venue">NeurIPS</span> 39th Annual Conference on Neural Information Processing Systems, 2025
-
-                            <span class="pub-actions">
-                                <a href="https://arxiv.org/abs/2505.21089" class="pub-tag tag-arxiv">
-                                    <i class="fas fa-file-pdf"></i> arXiv
-                                </a>
-                                <a href="https://github.com/Junjue-Wang/DisasterM3" class="pub-tag tag-data">
-                                    <i class="fas fa-database"></i> Dataset
-                                </a>
-                            </span>
-
-                            <span class="paper_highlight"><b>Highlight:</b> <b class="my_highlight">DisasterM3</b> includes 26,988 bi-temporal satellite images and 123k instruction pairs across 5 continents, which features 36 historical disaster events, 9 disaster-related visual perception and reasoning tasks, and Optical-SAR Observation data.</span>
-                        </p>
-                    </div>
-                </div>
-
-                <div class="pub-row">
-                    <div class="pub-bar"></div>
-                    <div class="pub-content">
-                        <p style="margin-left: 10px; line-height: 150%; margin-top: 8px; margin-bottom: 8px;">
-                            <i style="font-size: 15px">TEOChat: A Large Vision-Language Assistant for Temporal Earth Observation
-                                Data</i><br>
-                            <span style="color: #000000">Jeremy Andrew Irvin, Emily Ruoyu Liu, Joyce Chuyi Chen, Ines Dormoy, Jinyoung Kim, Samar Khanna, <b>Zhuo Zheng</b>, Stefano Ermom</span><br>
-                            <span class="tag-venue">ICLR</span> International Conference on Learning Representations, 2025
-
-                            <span class="pub-actions">
-                                <a href="https://arxiv.org/abs/2410.06234" class="pub-tag tag-arxiv">
-                                    <i class="fas fa-file-pdf"></i> arXiv
-                                </a>
-                                <a href="https://github.com/ermongroup/TEOChat" class="pub-tag tag-code">
-                                    <i class="fab fa-github"></i> Code
-                                </a>
-                                <a href="https://github.com/ermongroup/TEOChat" class="pub-tag tag-data">
-                                    <i class="fas fa-database"></i> TEOChatlas Dataset
-                                </a>
-                                <a href="https://huggingface.co/spaces/jirvin16/TEOChat" class="pub-tag tag-project">
-                                    <i class="fas fa-rocket"></i> Demo
-                                </a>
-                            </span>
-
-                            <span class="paper_highlight"><b>Highlight:</b> <b class="my_highlight">TEOChatlas</b>, the first temporal EO instruction-following dataset that has >500k instruction-following examples, spanning dozens of spatial and temporal reasoning tasks. <b
-                                    class="my_highlight">TEOChat</b> is the first VLM that can converse about temporal earth observation imagery.</span>
-                        </p>
-                    </div>
-                </div>
-
-                <div class="pub-row">
-                    <div class="pub-bar"></div>
-                    <div class="pub-content">
-                        <p style="margin-left: 10px; line-height: 150%; margin-top: 8px; margin-bottom: 8px;">
-                            <i style="font-size: 15px">Changen2: Multi-Temporal Remote Sensing Generative Change Foundation
-                                Model</i><br>
-                            <span style="color: #000000"><b>Zhuo Zheng</b>, Stefano Ermon, Dongjun Kim, Liangpei Zhang, Yanfei Zhong</span><br>
-                            <span class="tag-venue">TPAMI</span> IEEE Transactions on Pattern Analysis and Machine Intelligence, 2024<br>
-                            SCI Q1 Top
-
-                            <span class="pub-actions">
-                                <a href="https://ieeexplore.ieee.org/document/10713915" class="pub-tag tag-paper">
-                                    <i class="fas fa-file-alt"></i> Paper
-                                </a>
-                                <a href="https://arxiv.org/abs/2406.17998" class="pub-tag tag-arxiv">
-                                    <i class="fas fa-file-pdf"></i> arXiv
-                                </a>
-                                <a href="https://github.com/Z-Zheng/pytorch-change-models" class="pub-tag tag-code">
-                                    <i class="fab fa-github"></i> Code
-                                </a>
-                                <a href="https://huggingface.co/datasets/EVER-Z/Changen2-S1-15k" class="pub-tag tag-data">
-                                    <i class="fas fa-database"></i> Dataset (S1-15k)
-                                </a>
-                                <a href="https://huggingface.co/datasets/EVER-Z/Changen2-S9-27k" class="pub-tag tag-data">
-                                    <i class="fas fa-database"></i> Dataset (S9-27k)
-                                </a>
-                            </span>
-
-                            <span class="paper_highlight"><b>Highlight:</b> <b class="my_highlight">Generative Change Foundation Model</b>, Changen2 can be trained at scale using self-supervision, yielding change supervisory signals from unlabeled single-temporal images; The resulting task-specific foundation model possesses inherent zero-shot change detection capabilities and excellent transferability.</span>
-                            <span class="pub-tag" style="background: linear-gradient(135deg, #ff416c, #ff4b2b); opacity: 1;">
-                                <i class="fas fa-trophy"></i> ESI Highly Cited Paper
-                            </span>
-                        </p>
-                    </div>
-                </div>
-
-                <div class="pub-row">
-                    <div class="pub-bar"></div>
-                    <div class="pub-content">
-                        <p style="margin-left: 10px; line-height: 150%; margin-top: 8px; margin-bottom: 8px;">
-                            <i style="font-size: 15px">Segment Any Change</i><br>
-                            <span style="color: #000000"><b>Zhuo Zheng</b>, Yanfei Zhong, Liangpei Zhang, Stefano Ermon</span><br>
-                            <span class="tag-venue">NeurIPS</span> 38th Annual Conference on Neural Information Processing Systems, 2024
-
-                            <span class="pub-actions">
-                                <a href="https://arxiv.org/abs/2402.01188" class="pub-tag tag-arxiv">
-                                    <i class="fas fa-file-pdf"></i> arXiv
-                                </a>
-                                <a href="https://github.com/Z-Zheng/pytorch-change-models" class="pub-tag tag-code">
-                                    <i class="fab fa-github"></i> Code
-                                </a>
-                            </span>
-
-                            <span class="paper_highlight"><b>Highlight:</b> <b class="my_highlight">Zero-shot Change Detection</b> is introduced for the first time; Training-free Adaptation for Foundation models.</span>
-                        </p>
-                    </div>
-                </div>
-
-                <div class="pub-row">
-                    <div class="pub-bar"></div>
-                    <div class="pub-content">
-                        <p style="margin-left: 10px; line-height: 150%; margin-top: 8px; margin-bottom: 8px;">
-                            <i style="font-size: 15px">Towards transferable building damage assessment via unsupervised
-                                single-temporal change adaptation</i><br>
-                            <span style="color: #000000"><b>Zhuo Zheng</b>, Yanfei Zhong, Liangpei Zhang, Marshall Burke, David B. Lobell, Stefano Ermon</span><br>
-                            <span class="tag-venue">RSE</span> Remote Sensing of Environment, 2024<br>
-                            SCI Q1 Top, ranking it 1 out of 32 in Remote Sensing
-
-                            <span class="pub-actions">
-                                <a href="https://www.sciencedirect.com/science/article/pii/S0034425724004425"
-                                   class="pub-tag tag-paper">
-                                    <i class="fas fa-file-alt"></i> Paper
-                                </a>
-                            </span>
-
-                            <span class="paper_highlight"><b>Highlight:</b> <b class="my_highlight">Transferable building damage assessment</b>; Unsupervised single-temporal change adaptation (STCA) enables models to achieve adaptation with only target pre-disaster images.</span>
-                        </p>
-                    </div>
-                </div>
-
-                <div class="pub-row">
-                    <div class="pub-bar"></div>
-                    <div class="pub-content">
-                        <p style="margin-left: 10px; line-height: 150%; margin-top: 8px; margin-bottom: 8px;">
-                            <i style="font-size: 15px">Unifying Remote Sensing Change Detection via Deep Probabilistic Change
-                                Models: From Principles, Models to Applications</i><br>
-                            <span style="color: #000000"><b>Zhuo Zheng</b>, Yanfei Zhong, Ji Zhao, Ailong Ma, Liangpei Zhang</span><br>
-                            <span class="tag-venue">ISPRS P&RS</span> ISPRS Journal of Photogrammetry and Remote Sensing, 2024<br>
-                            SCI Q1 Top, ranking it 1 out of 50 in Geography, Physical
-
-                            <span class="pub-actions">
-                                <a href="https://www.sciencedirect.com/science/article/pii/S0924271624002624"
-                                   class="pub-tag tag-paper">
-                                    <i class="fas fa-file-alt"></i> Paper
-                                </a>
-                                <a href="https://github.com/Z-Zheng/pytorch-change-models" class="pub-tag tag-code">
-                                    <i class="fab fa-github"></i> Code
-                                </a>
-                            </span>
-
-                            <span class="paper_highlight"><b>Highlight:</b> Unified probabilistic change modeling: <b
-                                    class="my_highlight">Probabilistic Change Model (PCM)</b>; and strong model instance: <b
-                                    class="my_highlight">ChangeSparse</b>.</span>
-                        </p>
-                    </div>
-                </div>
-
-                <div class="pub-row">
-                    <div class="pub-bar"></div>
-                    <div class="pub-content">
-                        <p style="margin-left: 10px; line-height: 150%; margin-top: 8px; margin-bottom: 8px;">
-                            <i style="font-size: 15px">Single-Temporal Supervised Learning for Universal Remote Sensing Change
-                                Detection</i><br>
-                            <span style="color: #000000"><b>Zhuo Zheng</b>, Ailong Ma, Liangpei Zhang, Yanfei Zhong</span><br>
-                            <span class="tag-venue">IJCV</span> International Journal of Computer Vision, 2024<br>
-                            SCI Q1 Top
-
-                            <span class="pub-actions">
-                                <a href="https://link.springer.com/article/10.1007/s11263-024-02141-4" class="pub-tag tag-paper">
-                                    <i class="fas fa-file-alt"></i> Paper
-                                </a>
-                                <a href="https://github.com/Z-Zheng/pytorch-change-models" class="pub-tag tag-code">
-                                    <i class="fab fa-github"></i> Code
-                                </a>
-                            </span>
-
-                            <span class="paper_highlight"><b>Highlight:</b> <b class="my_highlight">ChangeStar2:</b> STAR with Faster and More Stable Convergence; Universal Remote Sensing Change Detection (object, semantic, class-agnostic, time-series change)</span>
-                        </p>
-                    </div>
-                </div>
-
-                <div class="pub-row">
-                    <div class="pub-bar"></div>
-                    <div class="pub-content">
-                        <p style="margin-left: 10px; line-height: 150%; margin-top: 8px; margin-bottom: 8px;">
-                            <i style="font-size: 15px">Scalable Multi-Temporal Remote Sensing Change Data Generation via
-                                Simulating Stochastic Change Process</i><br>
-                            <span style="color: #000000"><b>Zhuo Zheng</b>, Shiqi Tian, Ailong Ma, Liangpei Zhang, Yanfei Zhong</span><br>
-                            <span class="tag-venue">ICCV</span> International Conference on Computer Vision, 2023
-
-                            <span class="pub-actions">
-                                <a href="https://arxiv.org/pdf/2309.17031" class="pub-tag tag-arxiv">
-                                    <i class="fas fa-file-pdf"></i> arXiv
-                                </a>
-                                <a href="https://github.com/Z-Zheng/Changen" class="pub-tag tag-code">
-                                    <i class="fab fa-github"></i> Code
-                                </a>
-                            </span>
-
-                            <span class="paper_highlight"><b>Highlight:</b> <b class="my_highlight">New direction</b>: Generative Change Modeling; <b
-                                    class="my_highlight">Changen</b>, Change generator, enables object change generation with controllable object property and change event; Effective <b
-                                    class="my_highlight">synthetic change data pre-training</b>.</span>
-                            <span class="fa fa-star checked"></span> <span
-                                class="itemtitle"><b>The method has been included in</b> <a
-                                href="https://www.arcgis.com/home/item.html?id=a779106ce9eb4fc28de6d04d8edb893c">Esri ArcGIS</a>.</span>
-                        </p>
-                    </div>
-                </div>
-
-                <div class="pub-row">
-                    <div class="pub-bar"></div>
-                    <div class="pub-content">
-                        <p style="margin-left: 10px; line-height: 150%; margin-top: 8px; margin-bottom: 8px;">
-                            <i style="font-size: 15px">FarSeg++: Foreground-Aware Relation Network for Geospatial Object
-                                Segmentation in High Spatial Resolution Remote Sensing Imagery</i><br>
-                            <span style="color: #000000"><b>Zhuo Zheng</b>, Yanfei Zhong, Junjue Wang, Ailong Ma, Liangpei Zhang</span><br>
-                            <span class="tag-venue">TPAMI</span> IEEE Transactions on Pattern Analysis and Machine Intelligence, 2023<br>
-                            SCI Q1 Top
-
-                            <span class="pub-actions">
-                                <a href="https://ieeexplore.ieee.org/document/10188509" class="pub-tag tag-paper">
-                                    <i class="fas fa-file-alt"></i> Paper
-                                </a>
-                                <a href="https://github.com/Z-Zheng/FarSeg" class="pub-tag tag-code">
-                                    <i class="fab fa-github"></i> Code
-                                </a>
-                                <a href="https://zenodo.org/record/8404754" class="pub-tag tag-data">
-                                    <i class="fas fa-database"></i> UV6K Dataset
-                                </a>
-                            </span>
-                            <span class="fa fa-star checked"></span> <span
-                                class="itemtitle"><b>The method has been included in</b> <a
-                                href="https://www.arcgis.com/home/item.html?id=a779106ce9eb4fc28de6d04d8edb893c">Esri ArcGIS</a>.</span>
-                        </p>
-                    </div>
-                </div>
-
-                <div class="pub-row">
-                    <div class="pub-bar"></div>
-                    <div class="pub-content">
-                        <p style="margin-left: 10px; line-height: 150%; margin-top: 8px; margin-bottom: 8px;">
-                            <i style="font-size: 15px">ChangeMask: Deep Multi-task Encoder-Transformer-Decoder Architecture for
-                                Semantic Change Detection</i><br>
-                            <span style="color: #000000"><b>Zhuo Zheng</b>, Yanfei Zhong, Shiqi Tian, Ailong Ma, Liangpei Zhang</span><br>
-                            <span class="tag-venue">ISPRS P&RS</span> ISPRS Journal of Photogrammetry and Remote Sensing, 2022<br>
-                            SCI Q1 Top, ranking it 1 out of 50 in Geography, Physical
-
-                            <span class="pub-actions">
-                                <a href="https://www.sciencedirect.com/science/article/pii/S0924271621002835"
-                                   class="pub-tag tag-paper">
-                                    <i class="fas fa-file-alt"></i> Paper
-                                </a>
-                                <a href="https://github.com/Z-Zheng/pytorch-change-models" class="pub-tag tag-code">
-                                    <i class="fab fa-github"></i> Code
-                                </a>
-                                <a href="assets/changemask/SECOND/train.csv" class="pub-tag tag-data">
-                                    <i class="fas fa-database"></i> SECOND (Train, our split)
-                                </a>
-                                <a href="assets/changemask/SECOND/val.csv" class="pub-tag tag-data">
-                                    <i class="fas fa-database"></i> SECOND (Val, our split)
-                                </a>
-                            </span>
-
-                            <span class="paper_highlight"><b>Highlight:</b> <b class="my_highlight">Disentangled semantic and change representation</b> and <b
-                                    class="my_highlight">temporal symmetric transformer (TST)</b> for <b class="my_highlight">semantic change detection</b>.</span>
-                            <span class="pub-tag" style="background: linear-gradient(135deg, #ff416c, #ff4b2b); opacity: 1;">
-                                <i class="fas fa-trophy"></i> ESI Highly Cited Paper
-                            </span>
-                            <span class="pub-tag" style="background: linear-gradient(135deg, #ff416c, #ff4b2b); opacity: 1;">
-                                <i class="fas fa-fire-alt"></i> ISPRS P&RS Top Cited Paper
-                            </span>
-                        </p>
-                    </div>
-                </div>
-
-                <div class="pub-row">
-                    <div class="pub-bar"></div>
-                    <div class="pub-content">
-                        <p style="margin-left: 10px; line-height: 150%; margin-top: 8px; margin-bottom: 8px;">
-                            <i style="font-size: 15px">Building Damage Assessment for Rapid Disaster Response with a Deep
-                                Object-based Semantic Change Detection Framework: from natural disasters to man-made disasters</i><br>
-                            <span style="color: #000000"><b>Zhuo Zheng</b>, Yanfei Zhong, Junjue Wang, Ailong Ma, Liangpei Zhang</span><br>
-                            <span class="tag-venue">RSE</span> Remote Sensing of Environment, 2021<br>
-                            SCI Q1 Top, ranking it 1 out of 32 in Remote Sensing
-
-                            <span class="pub-actions">
-                                <a href="https://www.sciencedirect.com/science/article/pii/S0034425721003564"
-                                   class="pub-tag tag-paper">
-                                    <i class="fas fa-file-alt"></i> Paper
-                                </a>
-                                <a href="https://github.com/Z-Zheng/ChangeOS" class="pub-tag tag-code">
-                                    <i class="fab fa-github"></i> Code
-                                </a>
-                            </span>
-
-                            <span class="paper_highlight"><b>Highlight:</b> A <b class="my_highlight">deep object-based semantic change detection</b> method for <b
-                                    class="my_highlight">building damage assessment</b> in the context of <b class="my_highlight">disaster response</b>.</span>
-                            <span class="pub-tag" style="background: linear-gradient(135deg, #ff416c, #ff4b2b); opacity: 1;">
-                                <i class="fas fa-trophy"></i> ESI Highly Cited Paper
-                            </span>
-                            <span class="pub-tag" style="background: linear-gradient(135deg, #ff416c, #ff4b2b); opacity: 1;">
-                                <i class="fas fa-fire-alt"></i> RSE Top Cited Paper
-                            </span>
-                            <br>
-                            <span class="fa fa-star checked"></span> <b>Our solution is xView2 4th overall officially, which is a
-                            unique single-model solution among top-5.</b>
-                        </p>
-                    </div>
-                </div>
-
-                <div class="pub-row">
-                    <div class="pub-bar"></div>
-                    <div class="pub-content">
-                        <p style="margin-left: 10px; line-height: 150%; margin-top: 8px; margin-bottom: 8px;">
-                            <i style="font-size: 15px">Change is Everywhere: Single-Temporal Supervised Object Change Detection in
-                                Remote Sensing Imagery</i><br>
-                            <span style="color: #000000"><b>Zhuo Zheng</b>, Ailong Ma, Liangpei Zhang, Yanfei Zhong</span><br>
-                            <span class="tag-venue">ICCV</span> International Conference on Computer Vision, 2021
-
-                            <span class="pub-actions">
-                                <a href="https://arxiv.org/abs/2108.07002" class="pub-tag tag-arxiv">
-                                    <i class="fas fa-file-pdf"></i> arXiv
-                                </a>
-                                <a href="http://zhuozheng.top/changestar" class="pub-tag tag-project">
-                                    <i class="fas fa-globe"></i> Project
-                                </a>
-                                <a href="https://github.com/Z-Zheng/ChangeStar" class="pub-tag tag-code">
-                                    <i class="fab fa-github"></i> Code
-                                </a>
-                            </span>
-
-                            <span class="paper_highlight"><b>Highlight:</b> A <b
-                                    class="my_highlight">single-temporal supervised</b> learning algorithm and a plug-and-play change detection head: <b
-                                    class="my_highlight">ChangeMixin</b> for <b class="my_highlight">change detection.</b></span>
-                            <span class="fa fa-star checked"></span> <b>The method has been included in</b> <a
-                                href="https://github.com/microsoft/torchgeo">microsoft/torchgeo</a> and <a
-                                href="https://github.com/PaddlePaddle/PaddleRS">PaddlePaddle/PaddleRS</a> and <a
-                                href="https://www.arcgis.com/home/item.html?id=a779106ce9eb4fc28de6d04d8edb893c">Esri ArcGIS</a>.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="pub-row">
-                    <div class="pub-bar"></div>
-                    <div class="pub-content">
-                        <p style="margin-left: 10px; line-height: 150%; margin-top: 8px; margin-bottom: 8px;">
-                            <i style="font-size: 15px">LoveDA: A Remote Sensing Land-Cover Dataset for Domain Adaptive Semantic
-                                Segmentation</i><br>
-                            <span style="color: #000000">Junjue Wang<sup>*</sup>, <b>Zhuo Zheng</b><sup>*</sup>, Ailong Ma, Xiaoyan Lu, Yanfei Zhong (* Equal contribution)</span><br>
-                            <span class="tag-venue">NeurIPS</span> 35th Annual Conference on Neural Information Processing Systems, 2021
-
-                            <span class="pub-actions">
-                                <a href="https://arxiv.org/abs/2110.08733" class="pub-tag tag-arxiv">
-                                    <i class="fas fa-file-pdf"></i> arXiv
-                                </a>
-                                <a href="https://github.com/Junjue-Wang/LoveDA" class="pub-tag tag-data">
-                                    <i class="fas fa-database"></i> Dataset/Code
-                                </a>
-                            </span>
-                        </p>
-                    </div>
-                </div>
-
-                <div class="pub-row">
-                    <div class="pub-bar"></div>
-                    <div class="pub-content">
-                        <p style="margin-left: 10px; line-height: 150%; margin-top: 8px; margin-bottom: 8px;">
-                            <i style="font-size: 15px">Deep Multisensor Learning for Missing-Modality All-Weather Mapping</i><br>
-                            <span style="color: #000000"><b>Zhuo Zheng</b>, Ailong Ma, Liangpei Zhang, Yanfei Zhong</span><br>
-                            <span class="tag-venue">ISPRS P&RS</span> ISPRS Journal of Photogrammetry and Remote Sensing, 2021<br>
-                            SCI Q1 Top, ranking it 1 out of 50 in Geography, Physical
-
-                            <span class="pub-actions">
-                                <a href="https://www.sciencedirect.com/science/article/pii/S0924271620303476"
-                                   class="pub-tag tag-paper">
-                                    <i class="fas fa-file-alt"></i> Paper
-                                </a>
-                            </span>
-
-                            <span class="paper_highlight"><b>Highlight:</b> A <b class="my_highlight">registration-free</b> multi-modal/sensor learning algorithm via exploring <b
-                                    class="my_highlight">meta-modal/sensory representation</b> for <b class="my_highlight">all-weather mapping</b>.</span>
-                        </p>
-                    </div>
-                </div>
-
-                <div class="pub-row">
-                    <div class="pub-bar"></div>
-                    <div class="pub-content">
-                        <p style="margin-left: 10px; line-height: 150%; margin-top: 8px; margin-bottom: 8px;">
-                            <i style="font-size: 15px">Foreground-Aware Relation Network for Geospatial Object Segmentation in
-                                High Spatial Resolution Remote Sensing Imagery</i><br>
-                            <span style="color: #000000"><b>Zhuo Zheng</b>, Yanfei Zhong, Junjue Wang, Ailong Ma</span><br>
-                            <span class="tag-venue">CVPR</span> Computer Vision and Pattern Recognition, 2020
-
-                            <span class="pub-actions">
-                                <a href="https://arxiv.org/pdf/2011.09766.pdf" class="pub-tag tag-arxiv">
-                                    <i class="fas fa-file-pdf"></i> arXiv
-                                </a>
-                                <a href="https://github.com/Z-Zheng/FarSeg" class="pub-tag tag-code">
-                                    <i class="fab fa-github"></i> Code
-                                </a>
-                            </span>
-
-                            <span class="paper_highlight"><b>Highlight:</b> <b
-                                    class="my_highlight">Explicit foreground modeling</b> from the perspectives of <b
-                                    class="my_highlight">relation</b> and <b class="my_highlight">optimization</b> for real-time geospatial object segmentation.</span>
-                            <span class="fa fa-star checked"></span> <span
-                                class="itemtitle"><b>The method has been included in</b> <a
-                                href="https://github.com/microsoft/torchgeo"><i class="fab fa-github"></i> microsoft/torchgeo</a> and <a
-                                href="https://github.com/PaddlePaddle/PaddleRS"><i class="fab fa-github"></i> PaddlePaddle/PaddleRS</a> and <a
-                                href="https://www.arcgis.com/home/item.html?id=a779106ce9eb4fc28de6d04d8edb893c">Esri ArcGIS</a>.</span>
-                        </p>
-                    </div>
-                </div>
-
-                <div class="pub-row">
-                    <div class="pub-bar"></div>
-                    <div class="pub-content">
-                        <p style="margin-left: 10px; line-height: 150%; margin-top: 8px; margin-bottom: 8px;">
-                            <i style="font-size: 15px">FPGA: Fast Patch-Free Global Learning Framework for Fully End-to-End
-                                Hyperspectral Image Classification</i><br>
-                            <span style="color: #000000"><b>Zhuo Zheng</b>, Yanfei Zhong, Ailong Ma, Liangpei Zhang</span><br>
-                            <span class="tag-venue">TGRS</span> IEEE Transactions on Geoscience and Remote Sensing, 2020<br>
-                            SCI Q1 Top
-
-                            <span class="pub-actions">
-                                <a href="https://ieeexplore.ieee.org/document/9007624" class="pub-tag tag-paper">
-                                    <i class="fas fa-file-alt"></i> Paper
-                                </a>
-                                <a href="https://github.com/Z-Zheng/FreeNet" class="pub-tag tag-code">
-                                    <i class="fab fa-github"></i> Code
-                                </a>
-                            </span>
-
-                            <span class="paper_highlight"><b>Highlight:</b> <b class="my_highlight">Patch-free is all you need</b> towards faster and stronger hyperspectral image classification.</span>
-                            <span class="fa fa-star checked"></span> <span
-                                class="itemtitle"><b>The method has been included in</b> <a
-                                href="https://github.com/WHULuoJiaTeam/luojianet"><i class="fab fa-github"></i> WHULuoJiaTeam/luojianet</a>.</span><br>
-                            <span class="pub-tag" style="background: linear-gradient(135deg, #ff416c, #ff4b2b); opacity: 1;">
-                                <i class="fas fa-trophy"></i> ESI Highly Cited Paper
-                            </span>
-                        </p>
-                    </div>
-                </div>
-
-                <div class="pub-row">
-                    <div class="pub-bar"></div>
-                    <div class="pub-content">
-                        <p style="margin-left: 10px; line-height: 150%; margin-top: 8px; margin-bottom: 8px;">
-                            <i style="font-size: 15px">HyNet: Hyper-scale object detection network framework for multiple spatial
-                                resolution remote sensing imagery</i><br>
-                            <span style="color: #000000"><b>Zhuo Zheng</b>, Yanfei Zhong, Ailong Ma, Xiaobing Han, Ji Zhao, Yanfei Liu, Liangpei Zhang</span><br>
-                            <span class="tag-venue">ISPRS P&RS</span> ISPRS Journal of Photogrammetry and Remote Sensing, 2020<br>
-                            SCI Q1 Top, ranking it 1 out of 50 in Geography, Physical
-
-                            <span class="pub-actions">
-                                <a href="https://www.sciencedirect.com/science/article/pii/S0924271620301167"
-                                   class="pub-tag tag-paper">
-                                    <i class="fas fa-file-alt"></i> Paper
-                                </a>
-                            </span>
-
-                            <span class="paper_highlight"><b>Highlight:</b> <b class="my_highlight">Hyper-scale = Multi-scale &times; Multi-scale</b>, a new perspective of scale modeling at the convolutional groups. </span>
-                        </p>
-                    </div>
-                </div>
-
-                <div class="pub-row">
-                    <div class="pub-bar"></div>
-                    <div class="pub-content">
-                        <p style="margin-left: 10px; line-height: 150%; margin-top: 8px; margin-bottom: 8px;">
-                            <i style="font-size: 15px">COLOR: Cycling, Offline Learning, and Online Representation Framework for
-                                Airport and Airplane Detection Using GF-2 Satellite Images</i><br>
-                            <span style="color: #000000">Yanfei Zhong, <b>Zhuo Zheng<sup>*</sup></b>, Ailong Ma, Xiaoyan Lu, Liangpei Zhang &nbsp (* denotes the corresponding author)</span><br>
-                            <span class="tag-venue">TGRS</span> IEEE Transactions on Geoscience and Remote Sensing, 2020<br>
-                            SCI Q1 Top
-
-                            <span class="pub-actions">
-                                <a href="https://ieeexplore.ieee.org/document/9091107" class="pub-tag tag-paper">
-                                    <i class="fas fa-file-alt"></i> Paper
-                                </a>
-                            </span>
-
-                            <span class="paper_highlight"><b>Highlight:</b> <b
-                                    class="my_highlight">Evolvable model and dataset</b>: making your model and dataset both great again for new domain data.</span>
-                        </p>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-12">
-            <h3>Teaching</h3>
-            <div class="alert alert-dismissible">
-                <ul>
-                    <li><b class="itemtitle">Fall 2023/2024: Data for Sustainable Development (CS 325B)</b></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <!--    award-->
-    <div class="row">
-        <div class="col-md-12">
-            <h3>Honors and Awards</h3>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="alert alert-dismissible alert-warning">
-                <b class="itemtitle">2025 AI for Earthquake Response Challenge funded by ESA Φ-lab, Disasters Charter, and IEEE
-                    ESI TC, 1st Place (1/261)</b>
-                <br>
-                <a href="https://ai4eo.eu/portfolio/ai-for-earthquake-response/">announcement</a>
-            </div>
-            <div class="alert alert-dismissible alert-danger">
-                <b class="itemtitle">2025 Early Career Award, Remote Sensing Specialty Group (RSSG) of American Association of
-                    Geographers (AAG) </b><br>
-                <a href="http://www.aagrssg.org/early-career-award/">announcement</a>
-            </div>
-            <div class="alert alert-dismissible alert-danger">
-                <b class="itemtitle">2024 Graduate Academic Innovation Outstanding Prize, Wuhan
-                    University&nbsp(武汉大学“研究生学术创新奖”<b class="my_highlight">&nbsp特等奖&nbsp(研究生学术创新校长奖)</b>)</b><br>
-                <a href="https://gs.whu.edu.cn/content.jsp?urltype=news.NewsContentUrl&wbtreeid=1063&wbnewsid=101421">announcement</a>
-            </div>
-            <div class="alert alert-dismissible alert-danger">
-                <b class="itemtitle">2023 Li Xiaowen Remote Sensing Young Scholar Award
-                    &nbsp(李小文遥感科学青年奖)</b><br>
-                <a href="https://geo.bnu.edu.cn/xwzx/9ddb15a97da84d3aaf1d4d251b247f13.html">press</a>
-            </div>
-            <div class="alert alert-dismissible alert-danger">
-                <b class="itemtitle">16th Wuhan University Top Ten Academic Stars
-                    &nbsp(武汉大学第十六届研究生“十大学术之星”)</b><br>
-                <a href="https://ygb.whu.edu.cn/info/1086/20257.htm">announcement</a>
-            </div>
-            <div class="alert alert-dismissible alert-danger">
-                <b class="itemtitle">2022 Graduate Academic Innovation Outstanding Prize, Wuhan
-                    University&nbsp(武汉大学“研究生学术创新奖”<b class="my_highlight">&nbsp特等奖&nbsp(研究生学术创新校长奖)
-                        & “研究生英诺卓越奖学金”</b>)</b><br>
-                <a href="https://gs.whu.edu.cn/content.jsp?urltype=news.NewsContentUrl&wbtreeid=1057&wbnewsid=9971">announcement</a>
-            </div>
-            <div class="alert alert-dismissible alert-danger">
-                <b class="itemtitle">2020-2021 "Wang Zhizhuo Innovation Talent" Outstanding Prize &nbsp("王之卓创新人才奖"<b
-                        class="my_highlight">&nbsp特等奖</b>)</b><br>
-                <a href="http://rsgis.whu.edu.cn/info/1080/9862.htm">announcement</a>
-            </div>
-            <div class="alert alert-dismissible alert-info">
-                <b class="itemtitle">2021 National Scholarship for Graduate Student &nbsp(博士研究生国家奖学金)</b><br>
-                <a href="https://www.whu.edu.cn/info/1118/19369.htm">announcement</a>
-            </div>
-            <div class="alert alert-dismissible alert-warning">
-                <b class="itemtitle">Overhead Geopose Challenge, <b class="my_highlight">5th Place (5/444)</b></b><br>
-                <small>This challenge is hosted by the National Geospatial-Intelligence Agency (NGA)</small><br>
-                <b class="myname">Zhuo Zheng</b> (id: chuchu in the leaderboard)<br>
-                <a href="https://www.drivendata.org/competitions/78/overhead-geopose-challenge/">website</a><br>
-            </div>
-            <div class="alert alert-dismissible alert-warning">
-                <b class="itemtitle">2021 IEEE GRSS Data Fusion Contest, Track: Multitemporal Semantic Change Detection,
-                    <b
-                            class="my_highlight">4th Place</b></b><br>
-                <b class="myname">Zhuo Zheng</b>, Junjue Wang, Yinhe Liu, Shiqi Tian, Yanfei Zhong, Ailong Ma<br>
-                <a href="https://www.grss-ieee.org/community/technical-committees/2021-ieee-grss-data-fusion-contest-track-msd/">website</a>
-                &nbsp
-                <a href="https://www.grss-ieee.org/community/technical-committees/2021-ieee-grss-data-fusion-contest-results/">announcement</a>
-            </div>
-            <div class="alert alert-dismissible alert-info">
-                <b class="itemtitle">2021 John I. Davidson President’s Award<b
-                        class="my_highlight">, 1st Place</b></b><br>
-                <a href="https://www.asprs.org/awards-and-scholarships/award-winners/2021-award-winners.html">announcement</a>
-            </div>
-            <div class="alert alert-dismissible alert-danger">
-                <b class="itemtitle">2020 Graduate Academic Innovation Outstanding Prize, Wuhan
-                    University&nbsp(武汉大学“研究生学术创新奖”<b
-                            class="my_highlight">&nbsp特等奖&nbsp(研究生学术创新校长奖)</b>)</b><br>
-                <a href="https://gs.whu.edu.cn/info/1057/7261.htm">announcement</a>
-            </div>
-            <div class="alert alert-dismissible alert-warning">
-                <b class="itemtitle">SpaceNet 6 & EarthVision workshop challenge at CVPR 2020, <b
-                        class="my_highlight">Top Graduate Award</b></b><br>
-                <b class="myname">Zhuo Zheng</b>, Junjue Wang, Dingyuan Chen (Team name: __EVER__ in Topcoder)<br>
-                <a href="https://spacenet.ai/sn6-challenge/">website</a>
-                &nbsp
-                <a href="https://medium.com/the-downlinq/spacenet-6-announcing-the-winners-df817712b515">announcement</a>
-            </div>
-            <div class="alert alert-dismissible alert-warning">
-                <b class="itemtitle">xView2 Challenge, <b class="my_highlight">4th Place (4/3500+), overall</b></b><br>
-                <b class="myname">Zhuo Zheng</b>, Junjue Wang, Yanfei Zhong, Ailong Ma, Liangpei Zhang<br>
-                <a href="https://xview2.org/challenge">website</a>
-                &nbsp
-                <a href="https://github.com/DIUx-xView/xView2_fourth_place">code</a>
-            </div>
-            <div class="alert alert-dismissible alert-warning">
-                <b class="itemtitle">2019 IEEE GRSS Data Fusion Contest, Single-view Semantic 3D Challenge, <b
-                        class="my_highlight">2nd
-                    Place</b></b><br>
-                <b class="myname">Zhuo Zheng</b>, Yanfei Zhong, Junjue Wang<br>
-                <a href="http://www.grss-ieee.org/community/technical-committees/data-fusion/2019-ieee-grss-data-fusion-contest-results/">website</a>
-                &nbsp
-                <a href="https://ieeexplore.ieee.org/abstract/document/8897927">tech report</a>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <h3>Invited Talks</h3>
-            <div class="alert alert-dismissible alert-dark">
-                <ul>
-                    <li>
-                        <b class="itemtitle">多时相遥感生成式变化基础模型与应用</b><br>
-                        <h6>第八届地球空间大数据与云计算前沿大会, 2025.04.12</h6>
-                    </li>
-                    <li>
-                        <b class="itemtitle">高分辨率遥感时空数据的理解与生成</b><br>
-                        <h6>武汉大学, GeoScience Cafe #401, 2025.03.14</h6>
-                    </li>
-                    <li>
-                        <b class="itemtitle">Keynote Talk: Learning Change Representation from Single-Temporal Supervision</b><br>
-                        <h6>WACV 2025, GeoCV - The First Workshop on Computer Vision for Geospatial Image Analysis,
-                            2025.03.04</h6>
-                    </li>
-                    <li>
-                        <b class="itemtitle">Dynamic, high-resolution poverty measurement in data-scarce environments</b><br>
-                        <h6>International Seminar on Integrating Household Surveys with Diverse Data Sources, 2024.11.19</h6>
-                    </li>
-                    <li>
-                        <b class="itemtitle">Scalable Multi-Temporal Remote Sensing Change Data Generation via Simulating
-                            Stochastic
-                            Change Process</b><br>
-                        <h6>University of Georgia (UGA) GeoAI Talk Series I, 2024.02.29</h6>
-                    </li>
-                    <li>
-                        <b class="itemtitle">Change is Everywhere: Single-Temporal Supervised Object Change Detection in
-                            Remote Sensing Imagery</b><br>
-                        <h6>IEEE Geoscience and Remote Sensing Society (GRSS) Wuhan Student Chapter, 2023.02.24</h6>
-                    </li>
-                    <li>
-                        <b class="itemtitle">变化无处不在：单时相监督的遥感影像变化检测</b><br>
-                        <h6>中国图象图形学学会(CSIG) 第一期学生会员分享论坛, 2022.12.23</h6>
-                    </li>
-                    <li>
-                        <b class="itemtitle">Building Damage Assessment with Deep Object-based Semantic Change Detection
-                            Framework:
-                            From natural disasters to man-made disasters</b><br>
-                        <b class="my_highlight">Excellent Presentation Award</b>
-                        <h6>The 2021 International Graduate Workshop on GeoInformatics (IGWG2021), 2021.12.18</h6>
-                    </li>
-                    <li>
-                        <b class="itemtitle">面向地理目标的遥感视觉理解</b><br>
-                        <h6>武汉大学, GeoScience Cafe #281, 2020.11.27</h6>
-                    </li>
-                    <li>
-                        <b class="itemtitle">WE1.R7.3: Pop-Net: Encoder-Dual Decoder for Semantic Segmentation and
-                            Single-View Height Estimation</b><br>
-                        <h6>2019 IEEE Geoscience and Remote Sensing Symposium (IGARSS), IEEE GRSS Data Fusion Contest I,
-                            2019.07.31</h6>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <h3>Academic Service</h3>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="alert alert-dismissible alert-dark">
-                <h5><b>Editor</b></h5>
-                <ul>
-                    <li>Associate Editor, npj Geoinformatics</li>
-                </ul>
-                <h5><b>Journal Reviewer</b></h5>
-                <ul>
-                    <li>IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI)</li>
-                    <li>International Journal of Computer Vision (IJCV)</li>
-                    <li>Remote Sensing of Environment (RSE)</li>
-                    <li>ISPRS Journal of Photogrammetry and Remote Sensing (ISPRS P&RS)</li>
-                    <li>IEEE Transactions on Geoscience and Remote Sensing (TGRS)</li>
-                    <li>IEEE Transactions on Image Processing (TIP)</li>
-                    <li>IEEE Transactions on Neural Networks and Learning Systems (TNNLS)</li>
-                    <li>IEEE Transactions on Cybernetics (TCYB)</li>
-                    <li>IEEE Transactions on Circuits and Systems for Video Technology (TCSVT)</li>
-                    <li>IEEE Geoscience and Remote Sensing Letters (GRSL)</li>
-                    <li>IEEE Journal of Selected Topics in Applied Earth Observations and Remote Sensing (JSTARS)</li>
-                    <li>International Journal of Applied Earth Observation and Geoinformation (JAG)</li>
-                    <li>International Journal of Remote Sensing (IJRS)</li>
-                </ul>
-                <h5><b>Conference Reviewer</b></h5>
-                <ul>
-                    <li>ICML 2024-2025</li>
-                    <li>ICLR 2024-2025</li>
-                    <li>ICCV 2023-2025</li>
-                    <li>ECCV 2022-2024</li>
-                    <li>CVPR 2022-2026</li>
-                    <li>NeurIPS 2021, 2023, 2024</li>
-                </ul>
-                <h5><b>Technical Committee</b></h5>
-                <ul>
-                    <a href="https://www.grss-ieee.org/technical-committees/image-analysis-and-data-fusion/">
-                        <li>Co-Lead, WG-MIA (Machine/Deep Learning for Image Analysis), IEEE GRSS IADF</li>
-                    </a>
-                </ul>
-                <h5><b>Workshop Organizer</b></h5>
-                <ul>
-                    <a href="https://sustain-eo-ai.github.io/">
-                        <li>SEA: Sustainability with Earth Observation & AI workshop, ICCV 2025</li>
-                    </a>
-                    <a href="https://geoai.ornl.gov/cv4eo-wacv/">
-                        <li>The 3rd Workshop on Computer Vision for Earth Observation (CV4EO), WACV 2026</li>
-                    </a>
-                </ul>
-            </div>
-        </div>
-    </div>
-
-
-</div>
-<div style="text-align: center">
-    <a href="https://www.easycounter.com/">
-        <img src="https://www.easycounter.com/counter.php?zhuozheng"
-             border="0" alt="Web Counter"></a>
-    unique visitors,
-    <a href="https://www.easycounter.com/">
-        <img src="https://www.easycounter.com/counter.php?zhuozhengx"
-             border="0" alt="HTML Hit Counter"></a>
-    page views since March 2020
-    <br>
-</div>
+</main>
 
 <script>
-    const EXCLUDE_SEL = 'a, button, input, textarea, select, summary, [role="button"], [data-no-bg-toggle]';
-    let timer;
-    document.addEventListener('click', (e) => {
+(function () {
+    var EXCLUDE_SEL = 'a, button, input, textarea, select, summary, [role="button"], nav, .resource-tag, [data-no-toggle]';
+    document.addEventListener('click', function (e) {
         if (e.target.closest(EXCLUDE_SEL)) return;
-        document.body.classList.toggle('bg-show');
+        var root = document.documentElement;
+        root.setAttribute('data-silhouette', root.getAttribute('data-silhouette') === 'on' ? 'off' : 'on');
     });
+
+    var navLinks = document.getElementById('nav-links');
+    var indicator = document.getElementById('nav-indicator');
+    var items = Array.prototype.slice.call(navLinks.querySelectorAll('.nav-item'));
+    var sections = items.map(function (item) { return document.getElementById(item.dataset.target); });
+
+    function moveIndicator(item) {
+        if (!item) return;
+        indicator.style.left = item.offsetLeft + 'px';
+        indicator.style.width = item.offsetWidth + 'px';
+    }
+
+    function setActive(id) {
+        items.forEach(function (item) {
+            var active = item.dataset.target === id;
+            item.classList.toggle('is-active', active);
+            if (active) moveIndicator(item);
+        });
+    }
+
+    if ('IntersectionObserver' in window) {
+        var observer = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) setActive(entry.target.id);
+            });
+        }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+        sections.forEach(function (section) { if (section) observer.observe(section); });
+    }
+
+    window.addEventListener('resize', function () {
+        var current = items.filter(function (item) { return item.classList.contains('is-active'); })[0];
+        moveIndicator(current || items[0]);
+    });
+
+    moveIndicator(items[0]);
+})();
 </script>
 
 </body>
