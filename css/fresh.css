@@ -1,58 +1,105 @@
 /* ==========================================================================
-   CLEAR AIR — fresh design system for zhuozheng.top
-   Soft mist-white ground, airy spacing, rounded cards with gentle shadows.
-   Teal is the primary accent; a warm amber marks recognition only.
+   CLEAR AIR — light, airy design system for zhuozheng.top
+   Two palettes ship in this file. Switch with the data-theme attribute on
+   <html>:  data-theme="cardinal"  (default, Stanford red)
+            data-theme="gold"      (black & gold)
+   All colour lives in the theme blocks below; nothing else hardcodes a hue.
    ========================================================================== */
 
-:root {
-  /* ground */
-  --bg: #F7FAFB;
+/* ---- palette A: Stanford Cardinal (default) ---------------------------- */
+:root,
+[data-theme='cardinal'] {
+  --bg: #FAF9F8;
   --surface: #FFFFFF;
-  --surface-2: #F1F7F8;
+  --surface-2: #F6F3F2;
 
-  /* ink — measured contrast on --bg: 13.2:1 / 5.0:1 / 4.7:1 (all clear AA) */
-  --ink: #16303A;
-  --ink-2: #557080;
-  --ink-3: #5C7381;
+  --ink: #211C1C;
+  --ink-2: #6B5E5E;
+  --ink-3: #746666;
 
-  /* structure */
-  --line: #E3EDF0;
-  --line-2: #D2E1E6;
+  --line: #EBE5E4;
+  --line-2: #DCD3D1;
 
-  /* accents — text-safe: teal 5.7:1 on --bg and 5.3:1 on --teal-soft,
-     amber 5.3:1 on --bg and 4.9:1 on --amber-soft */
-  --teal: #0A6F6A;
-  --teal-soft: #E4F4F2;
-  --teal-edge: #A9DBD6;
-  --amber: #985A06;
-  --amber-soft: #FBF0DE;
-  --amber-edge: #EBCE9C;
+  /* Stanford Cardinal; --accent-bright is decorative only (never text) */
+  --accent: #8C1515;
+  --accent-bright: #B01B1B;
+  --accent-soft: #F8E8E7;
+  --accent-edge: #DEB2B1;
 
-  /* type */
+  /* recognition marker — deep bronze */
+  --mark: #7E5C0C;
+  --mark-soft: #FBF2DF;
+  --mark-edge: #E4CD97;
+
+  --shadow-tint: 33, 28, 28;
+  --accent-tint: 140, 21, 21;
+  --header-bg: rgba(250, 249, 248, 0.82);
+
+  --wash-1: rgba(140, 21, 21, 0.07);
+  --wash-2: rgba(126, 92, 12, 0.055);
+  --wash-3: rgba(33, 28, 28, 0.035);
+}
+
+/* ---- palette B: black & gold ------------------------------------------- */
+[data-theme='gold'] {
+  --bg: #FAF8F3;
+  --surface: #FFFFFF;
+  --surface-2: #F5F2E9;
+
+  --ink: #1B1813;
+  --ink-2: #605949;
+  --ink-3: #696153;
+
+  --line: #EAE4D6;
+  --line-2: #D9D0BC;
+
+  /* antique gold, darkened until it is legible as text; the true gold is
+     kept for decorative gradients only */
+  --accent: #7A5C0C;
+  --accent-bright: #C9A227;
+  --accent-soft: #FAF2DB;
+  --accent-edge: #DBC287;
+
+  /* recognition marker — the "black" half of black-and-gold */
+  --mark: #2A2520;
+  --mark-soft: #EFEBE2;
+  --mark-edge: #CBC3B3;
+
+  --shadow-tint: 27, 24, 19;
+  --accent-tint: 122, 92, 12;
+  --header-bg: rgba(250, 248, 243, 0.82);
+
+  --wash-1: rgba(201, 162, 39, 0.10);
+  --wash-2: rgba(27, 24, 19, 0.05);
+  --wash-3: rgba(122, 92, 12, 0.05);
+}
+
+/* ---- shared tokens ----------------------------------------------------- */
+:root {
   --font-display: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-mono: 'JetBrains Mono', 'IBM Plex Mono', Consolas, monospace;
 
-  /* spacing */
   --space-1: 4px;  --space-2: 8px;  --space-3: 12px; --space-4: 16px;
   --space-5: 24px; --space-6: 32px; --space-7: 48px; --space-8: 64px; --space-9: 96px;
 
-  /* shape */
   --r-sm: 6px;
   --r-md: 10px;
   --r-lg: 14px;
   --r-pill: 999px;
-
-  /* soft elevation — never harsh */
-  --shadow-1: 0 1px 2px rgba(22, 48, 58, 0.04), 0 1px 3px rgba(22, 48, 58, 0.03);
-  --shadow-2: 0 2px 4px rgba(22, 48, 58, 0.04), 0 10px 24px -14px rgba(22, 48, 58, 0.14);
-  --shadow-teal: 0 4px 14px -6px rgba(14, 140, 134, 0.24);
 
   --content-max: min(1360px, 93vw);
   --nav-height: 62px;
 
   --t-fast: 140ms ease;
   --t-med: 240ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* elevation follows the theme's ink so shadows never look grey-blue */
+:root {
+  --shadow-1: 0 1px 2px rgba(var(--shadow-tint), 0.05), 0 1px 3px rgba(var(--shadow-tint), 0.03);
+  --shadow-2: 0 2px 4px rgba(var(--shadow-tint), 0.05), 0 10px 24px -14px rgba(var(--shadow-tint), 0.16);
+  --shadow-accent: 0 4px 14px -6px rgba(var(--accent-tint), 0.26);
 }
 
 @media (max-width: 959px) { :root { --nav-height: 56px; } }
@@ -84,17 +131,17 @@ a { color: inherit; text-decoration: none; }
 a.inline-link {
   color: var(--ink);
   text-decoration: underline;
-  text-decoration-color: var(--teal-edge);
+  text-decoration-color: var(--accent-edge);
   text-decoration-thickness: 1.5px;
   text-underline-offset: 3px;
   transition: color var(--t-fast), text-decoration-color var(--t-fast);
 }
 a.inline-link:hover, a.inline-link:focus-visible {
-  color: var(--teal);
-  text-decoration-color: var(--teal);
+  color: var(--accent);
+  text-decoration-color: var(--accent);
 }
 
-:focus-visible { outline: 2px solid var(--teal); outline-offset: 3px; border-radius: 2px; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
 
 .tnum { font-variant-numeric: tabular-nums; }
 
@@ -104,8 +151,8 @@ a.inline-link:hover, a.inline-link:focus-visible {
 }
 
 /* --------------------------- airy background ---------------------------- */
-/* Two very diffuse colour washes keep the page feeling light rather than
-   plain — no texture, no noise. */
+/* Three very diffuse colour washes keep the page feeling light rather than
+   plain — no texture, no noise. Hues come from the active theme. */
 
 .bg-wash {
   position: fixed;
@@ -113,9 +160,9 @@ a.inline-link:hover, a.inline-link:focus-visible {
   z-index: -2;
   pointer-events: none;
   background:
-    radial-gradient(760px 460px at 12% -6%, rgba(14, 140, 134, 0.09), transparent 68%),
-    radial-gradient(680px 420px at 92% 2%, rgba(96, 165, 250, 0.08), transparent 70%),
-    radial-gradient(900px 560px at 60% 104%, rgba(178, 106, 8, 0.045), transparent 72%);
+    radial-gradient(760px 460px at 12% -6%, var(--wash-1), transparent 68%),
+    radial-gradient(680px 420px at 92% 2%, var(--wash-2), transparent 70%),
+    radial-gradient(900px 560px at 60% 104%, var(--wash-3), transparent 72%);
 }
 
 .avatar-watermark {
@@ -165,7 +212,7 @@ html[data-silhouette='on'] .avatar-watermark { opacity: 0.07; }
   top: 0;
   z-index: 100;
   height: var(--nav-height);
-  background: rgba(247, 250, 251, 0.82);
+  background: var(--header-bg);
   backdrop-filter: blur(14px) saturate(150%);
   -webkit-backdrop-filter: blur(14px) saturate(150%);
   border-bottom: 1px solid var(--line);
@@ -225,9 +272,9 @@ html[data-silhouette='on'] .avatar-watermark { opacity: 0.07; }
 .nav-item:hover { background: var(--surface); box-shadow: var(--shadow-1); }
 .nav-item:hover .nav-label { color: var(--ink); }
 
-.nav-item.is-active { background: var(--teal-soft); }
-.nav-item.is-active .nav-label { color: var(--teal); }
-.nav-item.is-active .nav-index { color: var(--teal); opacity: 0.75; }
+.nav-item.is-active { background: var(--accent-soft); }
+.nav-item.is-active .nav-label { color: var(--accent); }
+.nav-item.is-active .nav-index { color: var(--accent); opacity: 0.75; }
 
 /* the sliding underline is redundant next to the active pill */
 .nav-indicator { display: none; }
@@ -285,10 +332,10 @@ html[data-silhouette='on'] .avatar-watermark { opacity: 0.07; }
   transition: color var(--t-fast), border-color var(--t-fast), transform var(--t-fast), box-shadow var(--t-fast);
 }
 .social-row a:hover, .social-row a:focus-visible {
-  color: var(--teal);
-  border-color: var(--teal-edge);
+  color: var(--accent);
+  border-color: var(--accent-edge);
   transform: translateY(-2px);
-  box-shadow: var(--shadow-teal);
+  box-shadow: var(--shadow-accent);
 }
 
 .hero-intro { width: 100%; text-align: center; }
@@ -312,7 +359,7 @@ html[data-silhouette='on'] .avatar-watermark { opacity: 0.07; }
   width: 34px;
   height: 3px;
   border-radius: var(--r-pill);
-  background: linear-gradient(to right, var(--teal), var(--teal-edge));
+  background: linear-gradient(to right, var(--accent), var(--accent-bright));
   margin: var(--space-4) auto;
 }
 
@@ -334,13 +381,13 @@ html[data-silhouette='on'] .avatar-watermark { opacity: 0.07; }
   margin-top: var(--space-4);
   display: block;
   text-align: left;
-  background: var(--teal-soft);
-  border: 1px solid var(--teal-edge);
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-edge);
   border-radius: var(--r-md);
   padding: 11px var(--space-4);
   font-size: clamp(12.5px, 1.55vh, 14.5px);
   font-weight: 600;
-  color: var(--teal);
+  color: var(--accent);
 }
 
 .hero-email {
@@ -389,7 +436,7 @@ html[data-silhouette='on'] .avatar-watermark { opacity: 0.07; }
   padding: var(--space-5);
   transition: box-shadow var(--t-fast), border-color var(--t-fast);
 }
-.thread:hover { box-shadow: var(--shadow-2); border-color: var(--teal-edge); }
+.thread:hover { box-shadow: var(--shadow-2); border-color: var(--accent-edge); }
 
 .thread-head {
   display: flex;
@@ -405,8 +452,8 @@ html[data-silhouette='on'] .avatar-watermark { opacity: 0.07; }
   width: 26px;
   height: 26px;
   border-radius: 8px;
-  background: var(--teal-soft);
-  color: var(--teal);
+  background: var(--accent-soft);
+  color: var(--accent);
   font-family: var(--font-mono);
   font-size: 11px;
   font-weight: 500;
@@ -428,7 +475,7 @@ html[data-silhouette='on'] .avatar-watermark { opacity: 0.07; }
 .thread-claim strong {
   color: var(--ink);
   font-weight: 600;
-  background: linear-gradient(to top, var(--teal-soft) 42%, transparent 42%);
+  background: linear-gradient(to top, var(--accent-soft) 42%, transparent 42%);
 }
 
 .thread-works {
@@ -450,8 +497,8 @@ html[data-silhouette='on'] .avatar-watermark { opacity: 0.07; }
   transition: color var(--t-fast), border-color var(--t-fast), background var(--t-fast), transform var(--t-fast);
 }
 .work-chip:hover, .work-chip:focus-visible {
-  background: var(--teal-soft);
-  border-color: var(--teal-edge);
+  background: var(--accent-soft);
+  border-color: var(--accent-edge);
   transform: translateY(-1px);
 }
 
@@ -461,7 +508,7 @@ html[data-silhouette='on'] .avatar-watermark { opacity: 0.07; }
   font-weight: 600;
   color: var(--ink);
 }
-.work-chip:hover .work-name { color: var(--teal); }
+.work-chip:hover .work-name { color: var(--accent); }
 
 .work-venue {
   font-family: var(--font-mono);
@@ -470,7 +517,7 @@ html[data-silhouette='on'] .avatar-watermark { opacity: 0.07; }
   color: var(--ink-3);
 }
 
-.work-star { font-size: 9px; color: var(--amber); align-self: center; }
+.work-star { font-size: 9px; color: var(--mark); align-self: center; }
 
 /* one compact line of external evidence per thread */
 .thread-impact {
@@ -481,9 +528,9 @@ html[data-silhouette='on'] .avatar-watermark { opacity: 0.07; }
   line-height: 1.5;
   color: var(--ink-3);
 }
-.thread-impact > i { color: var(--teal); margin-right: 6px; font-size: 11px; }
+.thread-impact > i { color: var(--accent); margin-right: 6px; font-size: 11px; }
 
-.thread-tool .thread-idx { background: var(--amber-soft); color: var(--amber); }
+.thread-tool .thread-idx { background: var(--mark-soft); color: var(--mark); }
 .thread-tool .work-name i { margin-right: 5px; color: var(--ink-2); }
 
 /* --------------------------------- news --------------------------------- */
@@ -507,7 +554,7 @@ html[data-silhouette='on'] .avatar-watermark { opacity: 0.07; }
 .news-date {
   font-family: var(--font-mono);
   font-size: 11.5px;
-  color: var(--teal);
+  color: var(--accent);
   padding-top: 2px;
 }
 
@@ -517,7 +564,7 @@ html[data-silhouette='on'] .avatar-watermark { opacity: 0.07; }
   color: var(--ink-2);
 }
 .news-body strong { color: var(--ink); font-weight: 600; }
-.news-flag { color: var(--amber); font-size: 11px; margin-right: var(--space-2); }
+.news-flag { color: var(--mark); font-size: 11px; margin-right: var(--space-2); }
 
 /* ----------------------------- publications ----------------------------- */
 
@@ -556,11 +603,11 @@ html[data-silhouette='on'] .avatar-watermark { opacity: 0.07; }
   color: var(--ink-3);
 }
 
-/* rounded teal pill for the venue */
+/* rounded accent pill for the venue */
 .venue-badge {
   display: inline-block;
-  background: var(--teal-soft);
-  border: 1px solid var(--teal-edge);
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-edge);
   border-radius: var(--r-pill);
   padding: 2px 9px;
   font-family: var(--font-mono);
@@ -568,7 +615,7 @@ html[data-silhouette='on'] .avatar-watermark { opacity: 0.07; }
   font-weight: 500;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: var(--teal);
+  color: var(--accent);
 }
 
 .pub-title {
@@ -627,21 +674,21 @@ html[data-silhouette='on'] .avatar-watermark { opacity: 0.07; }
 }
 .resource-tag i { font-size: 10px; }
 .resource-tag:hover, .resource-tag:focus-visible {
-  color: var(--teal);
-  border-color: var(--teal-edge);
-  background: var(--teal-soft);
+  color: var(--accent);
+  border-color: var(--accent-edge);
+  background: var(--accent-soft);
 }
 
 .badge-row { margin-top: var(--space-2); display: flex; flex-wrap: wrap; gap: var(--space-2); }
 
-/* amber = recognition, the only warm signal */
+/* the recognition marker — distinct from the accent on purpose */
 .badge-fill {
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  background: var(--amber-soft);
-  border: 1px solid var(--amber-edge);
-  color: var(--amber);
+  background: var(--mark-soft);
+  border: 1px solid var(--mark-edge);
+  color: var(--mark);
   border-radius: var(--r-pill);
   padding: 2px 9px;
   font-family: var(--font-mono);
@@ -657,7 +704,7 @@ html[data-silhouette='on'] .avatar-watermark { opacity: 0.07; }
   line-height: 1.5;
   color: var(--ink-3);
 }
-.adopt-note > i, .result-note > i { color: var(--amber); margin-right: 5px; font-size: 10px; }
+.adopt-note > i, .result-note > i { color: var(--mark); margin-right: 5px; font-size: 10px; }
 .result-note strong { color: var(--ink-2); font-weight: 600; }
 
 /* ------------------------------- teaching ------------------------------- */
@@ -682,7 +729,7 @@ html[data-silhouette='on'] .avatar-watermark { opacity: 0.07; }
   content: '';
   width: 16px; height: 3px;
   border-radius: var(--r-pill);
-  background: linear-gradient(to right, var(--teal), var(--teal-edge));
+  background: linear-gradient(to right, var(--accent), var(--accent-bright));
   flex-shrink: 0;
 }
 .group-label span {
@@ -708,7 +755,7 @@ html[data-silhouette='on'] .avatar-watermark { opacity: 0.07; }
   transition: transform var(--t-fast), box-shadow var(--t-fast);
 }
 .award-row:hover { transform: translateY(-1px); box-shadow: var(--shadow-2); }
-.award-row > i { color: var(--teal); font-size: 13px; padding-top: 3px; }
+.award-row > i { color: var(--accent); font-size: 13px; padding-top: 3px; }
 
 .award-title {
   font-family: var(--font-display);
@@ -728,7 +775,7 @@ html[data-silhouette='on'] .avatar-watermark { opacity: 0.07; }
   color: var(--ink-2);
   transition: color var(--t-fast);
 }
-.award-links a:hover, .award-links a:focus-visible { color: var(--teal); }
+.award-links a:hover, .award-links a:focus-visible { color: var(--accent); }
 .award-links i { font-size: 9px; margin-right: 4px; }
 
 /* -------------------------------- talks --------------------------------- */
@@ -752,7 +799,7 @@ html[data-silhouette='on'] .avatar-watermark { opacity: 0.07; }
 .talk-date {
   font-family: var(--font-mono);
   font-size: 11.5px;
-  color: var(--teal);
+  color: var(--accent);
   padding-top: 2px;
 }
 .talk-venue { font-size: 12.5px; line-height: 1.4; color: var(--ink-3); }
@@ -802,4 +849,4 @@ html[data-silhouette='on'] .avatar-watermark { opacity: 0.07; }
   color: var(--ink-3);
 }
 .back-to-top { transition: color var(--t-fast); }
-.back-to-top:hover, .back-to-top:focus-visible { color: var(--teal); }
+.back-to-top:hover, .back-to-top:focus-visible { color: var(--accent); }
