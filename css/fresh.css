@@ -824,7 +824,6 @@ html[data-silhouette='on'] .avatar-watermark { opacity: 0.07; }
   color: var(--ink-2);
 }
 .service-runin .sep { color: var(--line-2); margin: 0 var(--space-2); }
-.service-runin .yr { font-family: var(--font-mono); font-size: 11.5px; color: var(--ink-3); }
 
 /* -------------------------------- footer -------------------------------- */
 
